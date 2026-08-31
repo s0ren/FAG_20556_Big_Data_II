@@ -1,3 +1,13 @@
+---
+title: "Hive setup"
+subtitle: "Opsætning af hive til brug i BagData 2, under wsl"
+Institute: TEC
+lang: da-DK
+
+order: 4
+draft: true
+---
+
 ### Download Hive
 
 I en browser, søg efter "hive download". Naviger frem til den nyeste, find de binære filer. \

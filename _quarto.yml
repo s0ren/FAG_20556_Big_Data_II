@@ -20,7 +20,8 @@ website:
         # - Labs/*.qmd
         # - Resources/*.qmd
     background: gray
-  draft-mode: unlinked 
+  # draft-mode: unlinked 
+  draft-mode: visible
   # drafts:
   #   - ./about.qmd
   #   - /playbook.md

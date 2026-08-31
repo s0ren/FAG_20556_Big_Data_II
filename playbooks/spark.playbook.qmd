@@ -33,7 +33,8 @@ I konsollen, brug `wget`:
 wget https://dlcdn.apache.org/spark/spark-z.z.z/spark-z.z.z-bin-without-hadoop.tgz
 ```
 Check sparkfilens størrelse og dato 
-```$ ls -l
+```
+$ ls -l
 total 1027928
 drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 -rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz
