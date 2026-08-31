@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="da" xml:lang="da"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="da-DK" xml:lang="da-DK"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Blink styret med `millis() – 17682 Iot og embeddede systemer, del 1</title>
+<title>Git prep – 20556 Big Data modeller og datamodellering</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -68,7 +103,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Søg"
   }
 }</script>
-<meta name="quarto:status" content="draft">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -77,14 +111,14 @@ ul.task-list li input[type="checkbox"] {
 <body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Udkast</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">17682 Iot og embeddede systemer, del 1</span>
+    <span class="navbar-title">20556 Big Data modeller og datamodellering</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Søg"></div>
@@ -104,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skift sidebjælke" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../opgaver/blink_med_millis.html">Opgaver</a></li><li class="breadcrumb-item"><a href="../opgaver/blink_med_millis.html">Blink styret med <code>millis()]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi9vcGdhdmVyL2JsaW5rX21lZF9taWxsaXMuaHRtbEJsaW5rLXN0eXJldC1tZWQtYG1pbGxpcygp"} [Home]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6SG9tZQ=="} [/index.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L2luZGV4Lmh0bWw="} [Opgaver]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWJyZWFkY3J1bWJzLU9wZ2F2ZXI="} [Blink styret med</code>millis()</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../playbooks/linux_prep.playbook.html">Playbooks</a></li><li class="breadcrumb-item"><a href="../playbooks/git.playbook.html">Git prep</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skift sidebjælke" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -122,13 +156,43 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Opgaver</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skift sektion">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Playbooks</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Skift sektion">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/linux_prep.playbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux prep</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/git.playbook.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Git prep</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/hadoop.playbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hadoop setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/spark.playbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spark setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/hive.playbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Download Hive</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -141,16 +205,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">På denne side</h2>
    
   <ul>
-  <li><a href="#det-dårlige-eksempel-vi-skal-forbedre" id="toc-det-dårlige-eksempel-vi-skal-forbedre" class="nav-link active" data-scroll-target="#det-dårlige-eksempel-vi-skal-forbedre">Det dårlige eksempel vi skal forbedre</a></li>
+  <li><a href="#git-repo-i-mit-home-dir" id="toc-git-repo-i-mit-home-dir" class="nav-link active" data-scroll-target="#git-repo-i-mit-home-dir">Git repo i mit home dir</a>
+  <ul class="collapse">
+  <li><a href="#skift-til-aka-home-dir" id="toc-skift-til-aka-home-dir" class="nav-link" data-scroll-target="#skift-til-aka-home-dir">skift til <code>~</code> (aka home dir)</a></li>
+  <li><a href="#opret-.gitignore" id="toc-opret-.gitignore" class="nav-link" data-scroll-target="#opret-.gitignore">Opret <code>.gitignore</code></a></li>
+  <li><a href="#initialiser-git-repo" id="toc-initialiser-git-repo" class="nav-link" data-scroll-target="#initialiser-git-repo">Initialiser git repo</a></li>
+  <li><a href="#tilføj-.gitignoretil-repoet" id="toc-tilføj-.gitignoretil-repoet" class="nav-link" data-scroll-target="#tilføj-.gitignoretil-repoet">Tilføj <code>.gitignore</code>til repoet</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../opgaver/blink_med_millis.html">Opgaver</a></li><li class="breadcrumb-item"><a href="../opgaver/blink_med_millis.html">Blink styret med <code>millis()]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi9vcGdhdmVyL2JsaW5rX21lZF9taWxsaXMuaHRtbEJsaW5rLXN0eXJldC1tZWQtYG1pbGxpcygp"} [Home]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6SG9tZQ=="} [/index.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L2luZGV4Lmh0bWw="} [Opgaver]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWJyZWFkY3J1bWJzLU9wZ2F2ZXI="} [Blink styret med</code>millis()</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../playbooks/linux_prep.playbook.html">Playbooks</a></li><li class="breadcrumb-item"><a href="../playbooks/git.playbook.html">Git prep</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Blink styret med `millis()</h1>
+<h1 class="title">Git prep</h1>
+<p class="subtitle lead">Forbered git</p>
 </div>
 
 
@@ -167,51 +238,36 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>For at blinke mellem to lysdioder, bliver det besværligt at bruge <code>delay()</code>. Så her skal vi kigge på andre løsniger.</p>
-<section id="det-dårlige-eksempel-vi-skal-forbedre" class="level2">
-<h2 class="anchored" data-anchor-id="det-dårlige-eksempel-vi-skal-forbedre">Det dårlige eksempel vi skal forbedre</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="..\assets/Pot_2_LEDer_ligeledninger_bb.svg" class="img-fluid figure-img" alt="Opstilling til at blinke varieret"></p>
-<figcaption>Opstilling til at blinke varieret</figcaption>
-</figure>
-</div>
-<p>Her ses et eksempel hvor den gule LED lyser længst, når potentiometret er drejet længst m,od venstre, og den grønne når pot’en er drejet mod højre:</p>
-<pre class="{cpp}"><code>#include &lt;Arduino.h&gt;
-
-#define POT_PIN 14
-
-void setup() {
-  pinMode(POT_PIN, INPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-
-  Serial.begin(115200);
-  delay(500); // Wait for half second before starting Serial communication
-  Serial.println("Analog Read Example");
-}
-
-void loop() {
-  int potValue = analogRead(POT_PIN);
-  Serial.print("Analog pot read: " + String(potValue) + ", ");
-  delay(100);
-
-  digitalWrite(4, HIGH);
-  Serial.print("Yellow on for " + String(potValue / 10) + " ms, ");
-  delay(potValue / 10); 
-  digitalWrite(4, LOW);
-
-  digitalWrite(5, HIGH);
-  Serial.println("Green on for " + String((4095 - potValue) / 10) + " ms");
-  delay((4095 - potValue) / 10); 
-  digitalWrite(5, LOW);
-}</code></pre>
-<p>Vi kan starte med bare at blinke med en af LEDerne.</p>
-<p>I stedet for at bruge <code>delay()</code>, kan vi lave et loop hvor vi hele tiden aflæser <code>millis()</code>, som er antallet at millisekunder siden programmet startede.</p>
-<p>I en anden variabel husker vi hvornår vi sidst skiftede tilstand.</p>
-<p>Inde i loop, laver vi en <code>if-</code>betinmgelse, som checker om der er gået det antal milisekunder vi ønsker, inden næste skift. Hvis der <em>er</em> skifter vi slukket -&gt; tændt eller omvendt, og <em>husker</em> at nulsstille hvornår vi sidst skiftede.</p>
+<section id="git-repo-i-mit-home-dir" class="level2">
+<h2 class="anchored" data-anchor-id="git-repo-i-mit-home-dir">Git repo i mit home dir</h2>
+<p>Jeg laver et git repo i mit hjemme dir, så alle ændinger kan gemmes. <strong>Men</strong> der kommer hurtigt for mange filer, derfor laver jeg også en <code>.gitignore</code></p>
+<section id="skift-til-aka-home-dir" class="level3">
+<h3 class="anchored" data-anchor-id="skift-til-aka-home-dir">skift til <code>~</code> (aka home dir)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="opret-.gitignore" class="level3">
+<h3 class="anchored" data-anchor-id="opret-.gitignore">Opret <code>.gitignore</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"*"</span> <span class="op">&gt;&gt;</span> .gitignore</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Så skal der gerne være en <code>.gitignore</code> med bare</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="initialiser-git-repo" class="level3">
+<h3 class="anchored" data-anchor-id="initialiser-git-repo">Initialiser git repo</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-m</span> main</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Konfig navn og email</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"John Doe"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email johndoe@example.com</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tilføj-.gitignoretil-repoet" class="level3">
+<h3 class="anchored" data-anchor-id="tilføj-.gitignoretil-repoet">Tilføj <code>.gitignore</code>til repoet</h3>
+<p>Nu kan man tilfæje filer til git repoet, en ad gangen, uden at få overfyldt <code>git status</code>, eller git panelet i VSCode.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-f</span> .gitignore</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Så kan man lave commits på den fil, enten i VSCode git panel eller i shell:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> first .gitignore</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

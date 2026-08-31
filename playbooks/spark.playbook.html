@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="da" xml:lang="da"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="da-DK" xml:lang="da-DK"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Oled display – 17682 Iot og embeddede systemer, del 1</title>
+<title>Spark setup – 20556 Big Data modeller og datamodellering</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,7 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Søg"
   }
 }</script>
-<meta name="quarto:status" content="draft">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -112,14 +111,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Udkast</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">17682 Iot og embeddede systemer, del 1</span>
+    <span class="navbar-title">20556 Big Data modeller og datamodellering</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Søg"></div>
@@ -139,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skift sidebjælke" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Features/index.html">Features</a></li><li class="breadcrumb-item"><a href="../Features/Oled.html">Oled display</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../playbooks/linux_prep.playbook.html">Playbooks</a></li><li class="breadcrumb-item"><a href="../playbooks/spark.playbook.html">Spark setup</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skift sidebjælke" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -157,13 +156,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Opgaver</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skift sektion">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Playbooks</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Skift sektion">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/linux_prep.playbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux prep</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/git.playbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git prep</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/hadoop.playbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hadoop setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/spark.playbook.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Spark setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../playbooks/hive.playbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Download Hive</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -176,26 +205,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">På denne side</h2>
    
   <ul>
-  <li><a href="#demo-af-oled-display" id="toc-demo-af-oled-display" class="nav-link active" data-scroll-target="#demo-af-oled-display">Demo af OLED display</a>
-  <ul class="collapse">
-  <li><a href="#baggrund" id="toc-baggrund" class="nav-link" data-scroll-target="#baggrund">Baggrund</a></li>
-  <li><a href="#c-driver-og-eksempel" id="toc-c-driver-og-eksempel" class="nav-link" data-scroll-target="#c-driver-og-eksempel">C# driver og eksempel</a></li>
-  <li><a href="#demo-projekt" id="toc-demo-projekt" class="nav-link" data-scroll-target="#demo-projekt">Demo projekt</a>
-  <ul class="collapse">
-  <li><a href="#opstilling" id="toc-opstilling" class="nav-link" data-scroll-target="#opstilling">Opstilling</a></li>
-  <li><a href="#pakker-assemblies-nuget" id="toc-pakker-assemblies-nuget" class="nav-link" data-scroll-target="#pakker-assemblies-nuget">Pakker, Assemblies, Nuget</a></li>
-  <li><a href="#kode" id="toc-kode" class="nav-link" data-scroll-target="#kode">Kode</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#start-med-at-skifte-til" id="toc-start-med-at-skifte-til" class="nav-link active" data-scroll-target="#start-med-at-skifte-til">Start med at skifte til ~</a></li>
+  <li><a href="#spark-download" id="toc-spark-download" class="nav-link" data-scroll-target="#spark-download">Spark download</a></li>
+  <li><a href="#udpak" id="toc-udpak" class="nav-link" data-scroll-target="#udpak">Udpak</a></li>
+  <li><a href="#rediger-.bashrc" id="toc-rediger-.bashrc" class="nav-link" data-scroll-target="#rediger-.bashrc">Rediger <code>.bashrc</code></a></li>
+  <li><a href="#kopier-sperk-env.sh" id="toc-kopier-sperk-env.sh" class="nav-link" data-scroll-target="#kopier-sperk-env.sh">Kopier <code>sperk-env.sh</code></a></li>
+  <li><a href="#rediger-spark-env.sh" id="toc-rediger-spark-env.sh" class="nav-link" data-scroll-target="#rediger-spark-env.sh">Rediger <code>spark-env.sh</code></a></li>
+  <li><a href="#start-spark" id="toc-start-spark" class="nav-link" data-scroll-target="#start-spark">Start Spark</a></li>
+  <li><a href="#start-op-stop" id="toc-start-op-stop" class="nav-link" data-scroll-target="#start-op-stop">Start op stop</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Features/index.html">Features</a></li><li class="breadcrumb-item"><a href="../Features/Oled.html">Oled display</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../playbooks/linux_prep.playbook.html">Playbooks</a></li><li class="breadcrumb-item"><a href="../playbooks/spark.playbook.html">Spark setup</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Oled display</h1>
+<h1 class="title">Spark setup</h1>
+<p class="subtitle lead">Opsætning af hadoop til brug i BagData 2, under wsl</p>
 </div>
 
 
@@ -212,151 +239,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="demo-af-oled-display" class="level1">
-<h1>Demo af OLED display</h1>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><video src="../assets/VID20251104151015.mp4" class="img-fluid" controls=""><a href="../assets/VID20251104151015.mp4">Video</a></video></p>
-<figcaption>video demo</figcaption>
-</figure>
-</div>
-<section id="baggrund" class="level2">
-<h2 class="anchored" data-anchor-id="baggrund">Baggrund</h2>
-<p>TEC har nogle billige “kompatible” OLED displays som er nogenlunde kompatible med AdaFruits tilsvarende. Vi har fået fat i nogen fra producenten <a href="https://www.diymore.cc/collections/esp8266/products/diymore-0-91-inch-iic-i2c-oled-lcd-12832-128x32-display-diy-module-ssd1306-driver-ic-dc-3-3v-5v-stm32-for-arduino-pic">DIYmore</a>.</p>
-<p><img src="images/paste-1.png" class="img-fluid" style="width: 200px;"></p>
-<p><a href="https://www.adafruit.com/product/3527">AdaFruits produkt</a> og endnu en <a href="https://www.adafruit.com/product/931?srsltid=AfmBOopNlWpeU-medEm65WhmlH9KXTj31XmXUW8f5xtKAyO0ymAkrQ33">udgave af SSD1306</a></p>
-<p>De kan altså bruge driverne, som AdaFruit har udviklet til SSD1306, til denne hardware også.</p>
-<p><a href="https://github.com/adafruit/Adafruit_SSD1306">AdaFruits driver til SSD1306 findes her</a></p>
-<p>Man kan kigge lidt til Random Nerd Tutorials <a href="https://randomnerdtutorials.com/esp32-ssd1306-oled-display-arduino-ide/">ESP32 OLED Display with Arduino IDE</a>, som har en vejledning til ESP32, dog med Arduino framework og et 128x64 pixels display.<br>
-Mens forbindelserne er næsten de samme. har jeg dog haft hæld med nogle andre pins. Desuden er vores displays 128x32 pixels.</p>
-<!-- ![opstilling med ESP32 og OLED](https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2019/05/ESP8266_oled_display_wiring.png?quality=100&strip=all&ssl=1){width="400"} -->
+<section id="start-med-at-skifte-til" class="level3">
+<h3 class="anchored" data-anchor-id="start-med-at-skifte-til">Start med at skifte til ~</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>check</p>
+<pre><code>***:~$ cd ~
+***:~$ pwd
+/home/[user]</code></pre>
 </section>
-<section id="c-driver-og-eksempel" class="level2">
-<h2 class="anchored" data-anchor-id="c-driver-og-eksempel">C# driver og eksempel</h2>
-<p>For at bruge OLED displayet sammen med nanoFramework og C#, kan vi bruge device-driveren dss13xx, og dette kode eksemplet. For at bekræfte at det virker, har jeg implementeret og afprøvet med … som er i mit egent git repo på GitHub.</p>
-<p>Det der mangler, i de officielle vejledninger er en konkret opstilling, og et billede eller digram af hvor dan det hele forbindes. Man kan let blive i tvivl om hvor mange ben der “bør” være på displayet, og hvor de skal tilsluttes. Det gør at der er mange valg og dermed fejl muligheder.</p>
-</section>
-<section id="demo-projekt" class="level2">
-<h2 class="anchored" data-anchor-id="demo-projekt">Demo projekt</h2>
-<section id="opstilling" class="level3">
-<h3 class="anchored" data-anchor-id="opstilling">Opstilling</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../assets/esp32_doit_OLED_bb.png" class="img-fluid figure-img"></p>
-<figcaption>frizing med OLED</figcaption>
-</figure>
-</div>
-<table class="caption-top table">
-<caption>Tilslutninger</caption>
-<thead>
-<tr class="header">
-<th>ESP32-DEVKIT-V1</th>
-<th>OLED display</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>SDA</td>
-<td>D21</td>
-<td>Data</td>
-</tr>
-<tr class="even">
-<td>SCL</td>
-<td>D22</td>
-<td>Clock</td>
-</tr>
-<tr class="odd">
-<td>VCC</td>
-<td>3v3</td>
-<td>Forsyningsspænding (3,3V)</td>
-</tr>
-<tr class="even">
-<td>GND</td>
-<td>GND</td>
-<td>Jord, stel, nul, minus etc</td>
-</tr>
-</tbody>
-</table>
-<p>Jeg vælger at følge kodeeksemplet, og sætte <em>Data</em> og <em>Clock</em> til hhv. <em>D21</em> og <em>D22</em>. Hvis man kigger på <a href="../assets/ESP32-DOIT-DEV-KIT-v1-pinout-mischianti.png">Michanti’s ESP32-DOIT-DEV-KIT-V1</a>, kan man se at port 21 og 22 er markeret lyssebly felter, hvor der står hhv. [SDA] og [SCL]. Desværre stemmer det ikke godt overens med tabellen i <a href="https://docs.nanoframework.net/content/esp32/esp32_pin_out.html">nanoFrameworks “ESP32 pinout”</a>?</p>
-</section>
-<section id="pakker-assemblies-nuget" class="level3">
-<h3 class="anchored" data-anchor-id="pakker-assemblies-nuget">Pakker, Assemblies, Nuget</h3>
-<p>Med Project -&gt; Manage Nuget Packages kan du sørge for at det nødvendige pakker er til stede. Du kan også se pakkerne og ders oprindelse i filen <code>packages.config</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;?xml</span><span class="ot"> version=</span><span class="st">"1.0"</span><span class="ot"> encoding=</span><span class="st">"utf-8"</span><span class="fu">?&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">packages</span>&gt;</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.CoreLibrary"</span><span class="ot"> version=</span><span class="st">"1.17.11"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.Hardware.Esp32"</span><span class="ot"> version=</span><span class="st">"1.6.34"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.Iot.Device.Ssd13xx"</span><span class="ot"> version=</span><span class="st">"1.3.721"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.Runtime.Events"</span><span class="ot"> version=</span><span class="st">"1.11.32"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.System.Device.Gpio"</span><span class="ot"> version=</span><span class="st">"1.1.57"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.System.Device.I2c"</span><span class="ot"> version=</span><span class="st">"1.1.29"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.System.Math"</span><span class="ot"> version=</span><span class="st">"1.5.116"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">packages</span>&gt;</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Bemærk</strong>: I sourcen herunder, refereres <em>også</em> til namespace’et <code>Iot.Device.Ssd13xx.Samples</code>, men det er <strong><em>ikke</em></strong> et assembly eller en NuGet pakke, men derimod defineret i to filer, som ligger med i projektet; <code>BasicFont.cs</code> og <code>DoubleByteFont.cs</code>.</p>
-</section>
-<section id="kode" class="level3">
-<h3 class="anchored" data-anchor-id="kode">Kode</h3>
-<p>I demoen initialiseres pin 21 og pin 22, og SSD1306 driveren.<br>
-Selve OLED driveren fungerer sådan at man</p>
+<section id="spark-download" class="level3">
+<h3 class="anchored" data-anchor-id="spark-download">Spark download</h3>
 <ul>
-<li>renser displayet (med <code>ClearScreen()</code>)</li>
-<li>tegner eller skriver noget på display’et (egentlig tegner “bare” i en buffer)<br>
-Her et f.eks. kald til <code>device.DrawString(2, 2, "nF IOT!", 2)</code></li>
-<li>det man har tegnet eller skrevet, vises på displayet, ved kald til <code>Display()</code>.</li>
+<li>Åben en browser og søg på “spark download”.</li>
+<li>vælg den nyeste udgave af spark</li>
+<li>vælg “Prebuilt with user-provided Apache Hadoop”</li>
+<li>klick på linket “xxx.tgz”, neden for</li>
+<li>på linket “xxx.tgz” filen, højre klik og “kopier link adresse”</li>
 </ul>
-<p><strong>Bemærk</strong>: Det er vigtigt at filerne <strong>BasicFont.cs</strong> og <strong>DoubleByteFont.cs</strong> er med, for de definerer namespacet <code>Iot.Device.Ssd13xx.Samples</code> og Class <code>BasicFont</code> og <code>DoubleByteFont</code>. Uden en font kan man ikke skrive tekst og så virker eksemplet ikke.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cs code-with-copy"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Licensed to the .NET Foundation under one or more agreements.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// The .NET Foundation licenses this file to you under the MIT license.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> Iot<span class="op">.</span><span class="fu">Device</span><span class="op">.</span><span class="fu">Ssd13xx</span><span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> Iot<span class="op">.</span><span class="fu">Device</span><span class="op">.</span><span class="fu">Ssd13xx</span><span class="op">.</span><span class="fu">Samples</span><span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> nanoFramework<span class="op">.</span><span class="fu">Hardware</span><span class="op">.</span><span class="fu">Esp32</span><span class="op">;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> System<span class="op">.</span><span class="fu">Device</span><span class="op">.</span><span class="fu">I2c</span><span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> System<span class="op">.</span><span class="fu">Diagnostics</span><span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> System<span class="op">.</span><span class="fu">Threading</span><span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Debug<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span><span class="st">"Hello Ssd1306 Sample!"</span><span class="op">);</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">//////////////////////////////////////////////////////////////////////</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">// when connecting to an ESP32 device, need to configure the I2C GPIOs</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">// used for the bus, for example</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Configuration<span class="op">.</span><span class="fu">SetPinFunction</span><span class="op">(</span><span class="dv">21</span><span class="op">,</span> DeviceFunction<span class="op">.</span><span class="fu">I2C1_DATA</span><span class="op">);</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>Configuration<span class="op">.</span><span class="fu">SetPinFunction</span><span class="op">(</span><span class="dv">22</span><span class="op">,</span> DeviceFunction<span class="op">.</span><span class="fu">I2C1_CLOCK</span><span class="op">);</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">//////////////////////////////////////////////////////////////////////</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> Ssd1306 device <span class="op">=</span> <span class="kw">new</span> <span class="fu">Ssd1306</span><span class="op">(</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    I2cDevice<span class="op">.</span><span class="fu">Create</span><span class="op">(</span><span class="kw">new</span> <span class="fu">I2cConnectionSettings</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> Ssd1306<span class="op">.</span><span class="fu">DefaultI2cAddress</span><span class="op">)),</span> </span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    Ssd13xx<span class="op">.</span><span class="fu">DisplayResolution</span><span class="op">.</span><span class="fu">OLED128x32</span><span class="op">);</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">ClearScreen</span><span class="op">();</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">Font</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">BasicFont</span><span class="op">();</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">DrawString</span><span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="st">"nF IOT!"</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span><span class="co">//large size 2 font</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">DrawString</span><span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">32</span><span class="op">,</span> <span class="st">"nanoFramework"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">true</span><span class="op">);</span><span class="co">//centered text</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">Display</span><span class="op">();</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>Thread<span class="op">.</span><span class="fu">Sleep</span><span class="op">(</span><span class="dv">200</span><span class="op">);</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">ClearScreen</span><span class="op">();</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">Font</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">BasicFont</span><span class="op">();</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">50</span><span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> line <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    Debug<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>$<span class="st">"1, line++, $</span><span class="sc">\"</span><span class="st">i: {i}</span><span class="sc">\"</span><span class="st">, 1"</span><span class="op">);</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    device<span class="op">.</span><span class="fu">Write</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> line<span class="op">++,</span> $<span class="st">"i: {i}"</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    device<span class="op">.</span><span class="fu">Write</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> line<span class="op">++,</span> <span class="st">"Hest!"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">true</span><span class="op">);</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    device<span class="op">.</span><span class="fu">Display</span><span class="op">();</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    Thread<span class="op">.</span><span class="fu">Sleep</span><span class="op">(</span><span class="dv">500</span><span class="op">);</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>Debug<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span><span class="st">"End of Ssd1306 Sample!"</span><span class="op">);</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>Thread<span class="op">.</span><span class="fu">Sleep</span><span class="op">(</span>Timeout<span class="op">.</span><span class="fu">Infinite</span><span class="op">);</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Hele demo-koden findes på <a href="https://github.com/s0ren/intro_til-IOT_med-CS/tree/master/OLED_z" class="uri">https://github.com/s0ren/intro_til-IOT_med-CS/tree/master/OLED_z</a><br>
-Eksemplet er stærkt inspireret af: <a href="https://github.com/nanoframework/nanoFramework.IoT.Device/tree/develop/devices/Ssd13xx/samples" class="uri">https://github.com/nanoframework/nanoFramework.IoT.Device/tree/develop/devices/Ssd13xx/samples</a><br>
-</p>
+<p>I konsollen, brug <code>wget</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dlcdn.apache.org/spark/spark-z.z.z/spark-z.z.z-bin-without-hadoop.tgz</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check sparkfilens størrelse og dato <code>$ ls -l total 1027928 drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData -rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz -rw-r--r-- 1 smag smag 471301088 Jul 11 18:36 spark-4.2.0-bin-without-hadoop.tgz</code></p>
+</section>
+<section id="udpak" class="level3">
+<h3 class="anchored" data-anchor-id="udpak">Udpak</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xvzf spark-z.z.z-bin-without-hadoop.tgz <span class="at">-C</span> BigData/</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>check</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> BigData/</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span> 8</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 13 smag smag 4096 Aug 31 16:39 hadoop-3.5.0</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 13 smag smag 4096 Jul 11 18:25 spark-4.2.0-bin-without-hadoop</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rediger-.bashrc" class="level3">
+<h3 class="anchored" data-anchor-id="rediger-.bashrc">Rediger <code>.bashrc</code></h3>
+<p>Tilføj nederst:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>/BigData/spark-z.z.z-bin-without-hadoop</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/sbin:<span class="va">$PATH</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Husk at opdatere environment ved at køre <code>source ~/.bashrc</code>!</p>
+</section>
+<section id="kopier-sperk-env.sh" class="level3">
+<h3 class="anchored" data-anchor-id="kopier-sperk-env.sh">Kopier <code>sperk-env.sh</code></h3>
+<p>I <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf</code> skal <code>spark-env.sh.template</code> kopieres til <code>spark-env.sh</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh.template BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rediger-spark-env.sh" class="level3">
+<h3 class="anchored" data-anchor-id="rediger-spark-env.sh">Rediger <code>spark-env.sh</code></h3>
+</section>
+<section id="start-spark" class="level3">
+<h3 class="anchored" data-anchor-id="start-spark">Start Spark</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-master.sh</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">start-worker.sh</span> spark://localhost:7077</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check ved at køre et job:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">spark-submit</span> <span class="at">--master</span> spark://localhost:7077 BigData/spark-z.z.z-bin-without-hadoop/examples/src/main/python/wordcount.py /user/smag/README.txt</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>I mappen <code>spark-z.z.z-bin-without-hadoop/examples/src/main/python</code> kan man finde nogle eksempler.<br>
+Wordcount regnes for at være “hello world” i Big Data. Det tæller hyppigheden af de ord der i en tekstfil.</p>
+</section>
+<section id="start-op-stop" class="level2">
+<h2 class="anchored" data-anchor-id="start-op-stop">Start op stop</h2>
+<p>Hvis man vil starte og stoppe spark med de medfølgende <code>start-all.sh</code>og <code>stop-all.sh</code> skal man duplikere følgende (bare uden <code>export</code>) fra <code>.bashrc</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="va">HADOOP_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>]/BigData/hadoop-x.x.x</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="va">HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="op">=</span><span class="va">$HADOOP_HOME</span>/lib/native</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$HADOOP_HOME</span>/sbin:<span class="va">$HADOOP_HOME</span>/bin</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="va">HADOOP_OPTS</span><span class="op">=</span><span class="st">"-Djava.library.path=</span><span class="va">$HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="st">"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="va">SPARK_DIST_CLASSPATH</span><span class="op">=</span><span class="va">$(</span><span class="ex">hadoop</span> classpath<span class="va">)</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="va">SPARK_HOME</span><span class="op">=</span>/home/smag/BigData/spark-z.z.z-bin-without-hadoop</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Desværre er der navnesammenfald mellem <em>hadoops</em> og <em>sparks</em> udgaver af <code>start-all.sh</code>og <code>stop-all.sh</code>. Så de skal kaldes med 3fuld sti, hvis man vil være sikker.</p>
+<p>Start og stop hadoop</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">BigData/hadoop-x.x.x/sbin/start-all.sh</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">BigData/hadoop-x.x.x/sbin/stop-all.sh</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Start og stop spark</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">BigData/spark-z.z.z-bin-without-hadoop/sbin/start-all.sh</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">BigData/spark-z.z.z-bin-without-hadoop/sbin/stop-all.sh</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,3 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/linux_prep.playbook.html</loc>
+    <lastmod>2026-08-31T14:15:04.849Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hadoop.playbook.html</loc>
+    <lastmod>2026-08-31T16:44:30.117Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/git.playbook.html</loc>
+    <lastmod>2026-08-31T16:42:14.989Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hive.playbook.html</loc>
+    <lastmod>2026-08-31T17:24:03.612Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/spark.playbook.html</loc>
+    <lastmod>2026-08-31T16:44:15.532Z</lastmod>
+  </url>
 </urlset>
