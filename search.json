@@ -36,6 +36,13 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Big Data H3",
+    "section": "",
+    "text": "Playbooks\n\nwsl\nlinux prep\nVS code og git\ninstall hadoop"
+  },
+  {
     "objectID": "playbooks/git.playbook.html",
     "href": "playbooks/git.playbook.html",
     "title": "Git prep",
