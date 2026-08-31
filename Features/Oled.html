@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="da" xml:lang="da"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Oled display – 17682 Iot og embeddede systemer, del 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f4817736c54c4935f643e29cf6b6cc1a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ingen resultater",
+    "search-matching-documents-text": "Matchende dokumenter",
+    "search-copy-link-title": "Kopier link for at søge",
+    "search-hide-matches-text": "Skjul yderligere resultater",
+    "search-more-match-text": "andet resultat i dette dokument",
+    "search-more-matches-text": "andre resultater i dette dokument",
+    "search-clear-button-title": "Ryd",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Fortryd",
+    "search-submit-button-title": "Indsend",
+    "search-label": "Søg"
+  }
+}</script>
+<meta name="quarto:status" content="draft">
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Udkast</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">17682 Iot og embeddede systemer, del 1</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Søg"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Skift navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skift sidebjælke" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Features/index.html">Features</a></li><li class="breadcrumb-item"><a href="../Features/Oled.html">Oled display</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skift sidebjælke" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Opgaver</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skift sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">På denne side</h2>
+   
+  <ul>
+  <li><a href="#demo-af-oled-display" id="toc-demo-af-oled-display" class="nav-link active" data-scroll-target="#demo-af-oled-display">Demo af OLED display</a>
+  <ul class="collapse">
+  <li><a href="#baggrund" id="toc-baggrund" class="nav-link" data-scroll-target="#baggrund">Baggrund</a></li>
+  <li><a href="#c-driver-og-eksempel" id="toc-c-driver-og-eksempel" class="nav-link" data-scroll-target="#c-driver-og-eksempel">C# driver og eksempel</a></li>
+  <li><a href="#demo-projekt" id="toc-demo-projekt" class="nav-link" data-scroll-target="#demo-projekt">Demo projekt</a>
+  <ul class="collapse">
+  <li><a href="#opstilling" id="toc-opstilling" class="nav-link" data-scroll-target="#opstilling">Opstilling</a></li>
+  <li><a href="#pakker-assemblies-nuget" id="toc-pakker-assemblies-nuget" class="nav-link" data-scroll-target="#pakker-assemblies-nuget">Pakker, Assemblies, Nuget</a></li>
+  <li><a href="#kode" id="toc-kode" class="nav-link" data-scroll-target="#kode">Kode</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Features/index.html">Features</a></li><li class="breadcrumb-item"><a href="../Features/Oled.html">Oled display</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Oled display</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="demo-af-oled-display" class="level1">
+<h1>Demo af OLED display</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><video src="../assets/VID20251104151015.mp4" class="img-fluid" controls=""><a href="../assets/VID20251104151015.mp4">Video</a></video></p>
+<figcaption>video demo</figcaption>
+</figure>
+</div>
+<section id="baggrund" class="level2">
+<h2 class="anchored" data-anchor-id="baggrund">Baggrund</h2>
+<p>TEC har nogle billige “kompatible” OLED displays som er nogenlunde kompatible med AdaFruits tilsvarende. Vi har fået fat i nogen fra producenten <a href="https://www.diymore.cc/collections/esp8266/products/diymore-0-91-inch-iic-i2c-oled-lcd-12832-128x32-display-diy-module-ssd1306-driver-ic-dc-3-3v-5v-stm32-for-arduino-pic">DIYmore</a>.</p>
+<p><img src="images/paste-1.png" class="img-fluid" style="width: 200px;"></p>
+<p><a href="https://www.adafruit.com/product/3527">AdaFruits produkt</a> og endnu en <a href="https://www.adafruit.com/product/931?srsltid=AfmBOopNlWpeU-medEm65WhmlH9KXTj31XmXUW8f5xtKAyO0ymAkrQ33">udgave af SSD1306</a></p>
+<p>De kan altså bruge driverne, som AdaFruit har udviklet til SSD1306, til denne hardware også.</p>
+<p><a href="https://github.com/adafruit/Adafruit_SSD1306">AdaFruits driver til SSD1306 findes her</a></p>
+<p>Man kan kigge lidt til Random Nerd Tutorials <a href="https://randomnerdtutorials.com/esp32-ssd1306-oled-display-arduino-ide/">ESP32 OLED Display with Arduino IDE</a>, som har en vejledning til ESP32, dog med Arduino framework og et 128x64 pixels display.<br>
+Mens forbindelserne er næsten de samme. har jeg dog haft hæld med nogle andre pins. Desuden er vores displays 128x32 pixels.</p>
+<!-- ![opstilling med ESP32 og OLED](https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2019/05/ESP8266_oled_display_wiring.png?quality=100&strip=all&ssl=1){width="400"} -->
+</section>
+<section id="c-driver-og-eksempel" class="level2">
+<h2 class="anchored" data-anchor-id="c-driver-og-eksempel">C# driver og eksempel</h2>
+<p>For at bruge OLED displayet sammen med nanoFramework og C#, kan vi bruge device-driveren dss13xx, og dette kode eksemplet. For at bekræfte at det virker, har jeg implementeret og afprøvet med … som er i mit egent git repo på GitHub.</p>
+<p>Det der mangler, i de officielle vejledninger er en konkret opstilling, og et billede eller digram af hvor dan det hele forbindes. Man kan let blive i tvivl om hvor mange ben der “bør” være på displayet, og hvor de skal tilsluttes. Det gør at der er mange valg og dermed fejl muligheder.</p>
+</section>
+<section id="demo-projekt" class="level2">
+<h2 class="anchored" data-anchor-id="demo-projekt">Demo projekt</h2>
+<section id="opstilling" class="level3">
+<h3 class="anchored" data-anchor-id="opstilling">Opstilling</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/esp32_doit_OLED_bb.png" class="img-fluid figure-img"></p>
+<figcaption>frizing med OLED</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<caption>Tilslutninger</caption>
+<thead>
+<tr class="header">
+<th>ESP32-DEVKIT-V1</th>
+<th>OLED display</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SDA</td>
+<td>D21</td>
+<td>Data</td>
+</tr>
+<tr class="even">
+<td>SCL</td>
+<td>D22</td>
+<td>Clock</td>
+</tr>
+<tr class="odd">
+<td>VCC</td>
+<td>3v3</td>
+<td>Forsyningsspænding (3,3V)</td>
+</tr>
+<tr class="even">
+<td>GND</td>
+<td>GND</td>
+<td>Jord, stel, nul, minus etc</td>
+</tr>
+</tbody>
+</table>
+<p>Jeg vælger at følge kodeeksemplet, og sætte <em>Data</em> og <em>Clock</em> til hhv. <em>D21</em> og <em>D22</em>. Hvis man kigger på <a href="../assets/ESP32-DOIT-DEV-KIT-v1-pinout-mischianti.png">Michanti’s ESP32-DOIT-DEV-KIT-V1</a>, kan man se at port 21 og 22 er markeret lyssebly felter, hvor der står hhv. [SDA] og [SCL]. Desværre stemmer det ikke godt overens med tabellen i <a href="https://docs.nanoframework.net/content/esp32/esp32_pin_out.html">nanoFrameworks “ESP32 pinout”</a>?</p>
+</section>
+<section id="pakker-assemblies-nuget" class="level3">
+<h3 class="anchored" data-anchor-id="pakker-assemblies-nuget">Pakker, Assemblies, Nuget</h3>
+<p>Med Project -&gt; Manage Nuget Packages kan du sørge for at det nødvendige pakker er til stede. Du kan også se pakkerne og ders oprindelse i filen <code>packages.config</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;?xml</span><span class="ot"> version=</span><span class="st">"1.0"</span><span class="ot"> encoding=</span><span class="st">"utf-8"</span><span class="fu">?&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">packages</span>&gt;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.CoreLibrary"</span><span class="ot"> version=</span><span class="st">"1.17.11"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.Hardware.Esp32"</span><span class="ot"> version=</span><span class="st">"1.6.34"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.Iot.Device.Ssd13xx"</span><span class="ot"> version=</span><span class="st">"1.3.721"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.Runtime.Events"</span><span class="ot"> version=</span><span class="st">"1.11.32"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.System.Device.Gpio"</span><span class="ot"> version=</span><span class="st">"1.1.57"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.System.Device.I2c"</span><span class="ot"> version=</span><span class="st">"1.1.29"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">package</span><span class="ot"> id=</span><span class="st">"nanoFramework.System.Math"</span><span class="ot"> version=</span><span class="st">"1.5.116"</span><span class="ot"> targetFramework=</span><span class="st">"netnano1.0"</span> /&gt;</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">packages</span>&gt;</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Bemærk</strong>: I sourcen herunder, refereres <em>også</em> til namespace’et <code>Iot.Device.Ssd13xx.Samples</code>, men det er <strong><em>ikke</em></strong> et assembly eller en NuGet pakke, men derimod defineret i to filer, som ligger med i projektet; <code>BasicFont.cs</code> og <code>DoubleByteFont.cs</code>.</p>
+</section>
+<section id="kode" class="level3">
+<h3 class="anchored" data-anchor-id="kode">Kode</h3>
+<p>I demoen initialiseres pin 21 og pin 22, og SSD1306 driveren.<br>
+Selve OLED driveren fungerer sådan at man</p>
+<ul>
+<li>renser displayet (med <code>ClearScreen()</code>)</li>
+<li>tegner eller skriver noget på display’et (egentlig tegner “bare” i en buffer)<br>
+Her et f.eks. kald til <code>device.DrawString(2, 2, "nF IOT!", 2)</code></li>
+<li>det man har tegnet eller skrevet, vises på displayet, ved kald til <code>Display()</code>.</li>
+</ul>
+<p><strong>Bemærk</strong>: Det er vigtigt at filerne <strong>BasicFont.cs</strong> og <strong>DoubleByteFont.cs</strong> er med, for de definerer namespacet <code>Iot.Device.Ssd13xx.Samples</code> og Class <code>BasicFont</code> og <code>DoubleByteFont</code>. Uden en font kan man ikke skrive tekst og så virker eksemplet ikke.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cs code-with-copy"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Licensed to the .NET Foundation under one or more agreements.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// The .NET Foundation licenses this file to you under the MIT license.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> Iot<span class="op">.</span><span class="fu">Device</span><span class="op">.</span><span class="fu">Ssd13xx</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> Iot<span class="op">.</span><span class="fu">Device</span><span class="op">.</span><span class="fu">Ssd13xx</span><span class="op">.</span><span class="fu">Samples</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> nanoFramework<span class="op">.</span><span class="fu">Hardware</span><span class="op">.</span><span class="fu">Esp32</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> System<span class="op">.</span><span class="fu">Device</span><span class="op">.</span><span class="fu">I2c</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> System<span class="op">.</span><span class="fu">Diagnostics</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> System<span class="op">.</span><span class="fu">Threading</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Debug<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span><span class="st">"Hello Ssd1306 Sample!"</span><span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">//////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">// when connecting to an ESP32 device, need to configure the I2C GPIOs</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">// used for the bus, for example</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Configuration<span class="op">.</span><span class="fu">SetPinFunction</span><span class="op">(</span><span class="dv">21</span><span class="op">,</span> DeviceFunction<span class="op">.</span><span class="fu">I2C1_DATA</span><span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>Configuration<span class="op">.</span><span class="fu">SetPinFunction</span><span class="op">(</span><span class="dv">22</span><span class="op">,</span> DeviceFunction<span class="op">.</span><span class="fu">I2C1_CLOCK</span><span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">//////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> Ssd1306 device <span class="op">=</span> <span class="kw">new</span> <span class="fu">Ssd1306</span><span class="op">(</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    I2cDevice<span class="op">.</span><span class="fu">Create</span><span class="op">(</span><span class="kw">new</span> <span class="fu">I2cConnectionSettings</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> Ssd1306<span class="op">.</span><span class="fu">DefaultI2cAddress</span><span class="op">)),</span> </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    Ssd13xx<span class="op">.</span><span class="fu">DisplayResolution</span><span class="op">.</span><span class="fu">OLED128x32</span><span class="op">);</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">ClearScreen</span><span class="op">();</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">Font</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">BasicFont</span><span class="op">();</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">DrawString</span><span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="st">"nF IOT!"</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span><span class="co">//large size 2 font</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">DrawString</span><span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">32</span><span class="op">,</span> <span class="st">"nanoFramework"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">true</span><span class="op">);</span><span class="co">//centered text</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">Display</span><span class="op">();</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>Thread<span class="op">.</span><span class="fu">Sleep</span><span class="op">(</span><span class="dv">200</span><span class="op">);</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">ClearScreen</span><span class="op">();</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>device<span class="op">.</span><span class="fu">Font</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">BasicFont</span><span class="op">();</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">50</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> line <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    Debug<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>$<span class="st">"1, line++, $</span><span class="sc">\"</span><span class="st">i: {i}</span><span class="sc">\"</span><span class="st">, 1"</span><span class="op">);</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    device<span class="op">.</span><span class="fu">Write</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> line<span class="op">++,</span> $<span class="st">"i: {i}"</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    device<span class="op">.</span><span class="fu">Write</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> line<span class="op">++,</span> <span class="st">"Hest!"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">true</span><span class="op">);</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    device<span class="op">.</span><span class="fu">Display</span><span class="op">();</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    Thread<span class="op">.</span><span class="fu">Sleep</span><span class="op">(</span><span class="dv">500</span><span class="op">);</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>Debug<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span><span class="st">"End of Ssd1306 Sample!"</span><span class="op">);</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>Thread<span class="op">.</span><span class="fu">Sleep</span><span class="op">(</span>Timeout<span class="op">.</span><span class="fu">Infinite</span><span class="op">);</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Hele demo-koden findes på <a href="https://github.com/s0ren/intro_til-IOT_med-CS/tree/master/OLED_z" class="uri">https://github.com/s0ren/intro_til-IOT_med-CS/tree/master/OLED_z</a><br>
+Eksemplet er stærkt inspireret af: <a href="https://github.com/nanoframework/nanoFramework.IoT.Device/tree/develop/devices/Ssd13xx/samples" class="uri">https://github.com/nanoframework/nanoFramework.IoT.Device/tree/develop/devices/Ssd13xx/samples</a><br>
+</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopieret!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopieret!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/s0ren\.github\.io\/FAG_20556_Big_Data_II\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

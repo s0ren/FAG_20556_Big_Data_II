@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="da-DK" xml:lang="da-DK"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="smag@tec.dk">
+
+<title>Projektopgave – 17682 Iot og embeddede systemer, del 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f4817736c54c4935f643e29cf6b6cc1a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ingen resultater",
+    "search-matching-documents-text": "Matchende dokumenter",
+    "search-copy-link-title": "Kopier link for at søge",
+    "search-hide-matches-text": "Skjul yderligere resultater",
+    "search-more-match-text": "andet resultat i dette dokument",
+    "search-more-matches-text": "andre resultater i dette dokument",
+    "search-clear-button-title": "Ryd",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Fortryd",
+    "search-submit-button-title": "Indsend",
+    "search-label": "Søg"
+  }
+}</script>
+<meta name="quarto:status" content="draft">
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Udkast</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">17682 Iot og embeddede systemer, del 1</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Søg"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Skift navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skift sidebjælke" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projektopgave/index.html">Projektopgave</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skift sidebjælke" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Opgaver</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skift sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">På denne side</h2>
+   
+  <ul>
+  <li><a href="#lignende-produkter-på-markedet" id="toc-lignende-produkter-på-markedet" class="nav-link active" data-scroll-target="#lignende-produkter-på-markedet"><span class="header-section-number">1</span> Lignende produkter på markedet</a></li>
+  <li><a href="#sec-opbygning_og_virkemåde" id="toc-sec-opbygning_og_virkemåde" class="nav-link" data-scroll-target="#sec-opbygning_og_virkemåde"><span class="header-section-number">2</span> Opbygning og virkemåde</a>
+  <ul class="collapse">
+  <li><a href="#fysisk-opbygning" id="toc-fysisk-opbygning" class="nav-link" data-scroll-target="#fysisk-opbygning"><span class="header-section-number">2.1</span> Fysisk opbygning</a></li>
+  <li><a href="#virkemåde" id="toc-virkemåde" class="nav-link" data-scroll-target="#virkemåde"><span class="header-section-number">2.2</span> Virkemåde</a></li>
+  </ul></li>
+  <li><a href="#sec-Web_kontrolpanel" id="toc-sec-Web_kontrolpanel" class="nav-link" data-scroll-target="#sec-Web_kontrolpanel"><span class="header-section-number">3</span> Web kontrolpanel</a></li>
+  <li><a href="#sec-Web_graf" id="toc-sec-Web_graf" class="nav-link" data-scroll-target="#sec-Web_graf"><span class="header-section-number">4</span> Web graf</a></li>
+  <li><a href="#sec-Web_Net_konfiguration" id="toc-sec-Web_Net_konfiguration" class="nav-link" data-scroll-target="#sec-Web_Net_konfiguration"><span class="header-section-number">5</span> Web Net konfiguration</a></li>
+  <li><a href="#sec-datalogning" id="toc-sec-datalogning" class="nav-link" data-scroll-target="#sec-datalogning"><span class="header-section-number">6</span> Datalogning</a></li>
+  <li><a href="#sec-Dokumentation" id="toc-sec-Dokumentation" class="nav-link" data-scroll-target="#sec-Dokumentation"><span class="header-section-number">7</span> Dokumentation</a>
+  <ul class="collapse">
+  <li><a href="#slutbrugervejledning" id="toc-slutbrugervejledning" class="nav-link" data-scroll-target="#slutbrugervejledning"><span class="header-section-number">7.1</span> Slutbrugervejledning</a></li>
+  <li><a href="#operatørvejledning" id="toc-operatørvejledning" class="nav-link" data-scroll-target="#operatørvejledning"><span class="header-section-number">7.2</span> Operatørvejledning</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Andre formater</h2><ul><li><a href="projektopgave-termostat-nov25.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Projektopgave</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Forfatter</div>
+  <div class="quarto-title-meta-heading">Tilknytning</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Søren Magnusson </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            programmeringsspecialet, datateknikker
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Udgivet</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">10. november 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Ændret</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">11. november 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Opgaven er at lave et apparat som fungerer som termostat-konsol <span class="citation" data-cites="noauthor_termostat_2024">(<a href="#ref-noauthor_termostat_2024" role="doc-biblioref"><span>“Termostat”</span> 2024</a>)</span>.</p>
+<ul>
+<li>Den skal kunne betjenes fysisk, og via et webinterface.</li>
+<li>Man skal kunne konfigurere netværksindstillinger med start, eller efter behov.</li>
+<li>Apparatet skal kunne overføre målte data og statusoplysninger, via internettet. Fortrinsvis til en mqtt-service.</li>
+<li>Den skal kunne fungere så optimalt som muligt (og rimeligt) uden direkte strømforsing fra 230V lysnet.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="..\assets/Projektopave_Fysisk_Apparat.jpg" class="img-fluid figure-img" width="437"></p>
+<figcaption>fysisk apparat</figcaption>
+</figure>
+</div>
+<section id="lignende-produkter-på-markedet" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="lignende-produkter-på-markedet"><span class="header-section-number">1</span> Lignende produkter på markedet</h2>
+<p>Der findes allerede en del pudukter på markedet, både industrielle og til homeautomation. Her er et par eksempler:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 55%">
+<col style="width: 44%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><img src="images/paste-1.png" class="img-fluid" width="200"></td>
+<td><img src="images/paste-2.png" class="img-fluid" width="239"></td>
+</tr>
+<tr class="even">
+<td><span class="citation" data-cites="netatmo_smart_2025">(<a href="#ref-netatmo_smart_2025" role="doc-biblioref">Netatmo 2025</a>)</span></td>
+<td><span class="citation" data-cites="tado_smart_2025">(<a href="#ref-tado_smart_2025" role="doc-biblioref">Tado 2025</a>)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Du behøver slet ikke implemetere alle features som de kommercielle produkter har.</p>
+</section>
+<section id="sec-opbygning_og_virkemåde" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sec-opbygning_og_virkemåde"><span class="header-section-number">2</span> Opbygning og virkemåde</h2>
+<section id="fysisk-opbygning" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="fysisk-opbygning"><span class="header-section-number">2.1</span> Fysisk opbygning</h3>
+<p>Apparatet skal have en fast tilsluttet temperatursensor. Her vil jeg anbefale DS18b20. Apparatet skal have et fysisk bruger interface bestående af et OLED display et antal lysdioder. Til at modtage instrukser fra brugeren, skal apparatet nogle knapper. deuden skal apparatet bruge sit indbyggede wifi til web interface og data-afrapportering.</p>
+<ul>
+<li>en ESP32</li>
+<li>en temepratursensor (DS18B20)</li>
+<li>et OLED display (128x32 pixels)</li>
+<li>tre lysdioder (rød, grøn og blå)</li>
+<li>tre knapper</li>
+<li>et sammensat breadbord (med plads til en ESP32)</li>
+<li>små jumper ledninger, passende antal og farver</li>
+<li>modstande, 220 ohm til lysdioder, 4,7 k ohm til pulldown på knapper</li>
+</ul>
+</section>
+<section id="virkemåde" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="virkemåde"><span class="header-section-number">2.2</span> Virkemåde</h3>
+<p><strong>Temperatursensoren</strong> måler temepraturen i lokalet, med passende tidsinterval.</p>
+<p>Den målte temperatur findes syndsynligvis som værdien i en variabel, men det er også nødvendigt at gemme temperatur-målingerne, så apparatet har en historik over tidligere målinger.</p>
+<p>De historiske data dels skal bruges til at lave web-grafen (Se <a href="#sec-Web_graf" class="quarto-xref">Sektion&nbsp;4</a>) . Og til at overføre til en datalogger via internettet (se <a href="#sec-datalogning" class="quarto-xref">Sektion&nbsp;6</a>).</p>
+<p>Det er nødvendigt at gemme de målte temperaturer, en et tidsstempel (hvornår temperaturen er målt), på det indbyggede filsystem. Det er sikkert også smart at gemme oplysninger om systemets ovrige status, samtidig (f.eks. ønsket temperatur … etc)</p>
+<p>På <strong>OLED displayet</strong> skal både vises</p>
+<ul>
+<li>den aktuelle temperatur, målt med den tilsluttede temperatursensor.</li>
+</ul>
+<p>Desuden skal OLED displayet vise</p>
+<ul>
+<li>den ønskede temperatur. Altså det termostaten er indstillet til.</li>
+</ul>
+<p>og et display hvor man kan se den aktuelle temeperatur, og den ønskede temperatur, som er forindstillet.</p>
+<p>To af <strong>kanpperne</strong> skal bruges til at brugeren kan forhøje den ønskede temperatur, eller sænke den.</p>
+<p>En <strong>knap</strong> markeres med <code>+</code> så den bruges til at øge ønsket temperatur. Hver gang der trykkes på knappen, øges med et trin.</p>
+<p>En anden <strong>knap</strong> markeres med <code>-</code>og bruges til at sænke tempereturen, lige som <code>+</code>, bare nedad.</p>
+<p>Overvej (og beskriv) hvor stort et trin instilligen skal skifte med for hvert trýk. Skal det være 0,1 grad, 0,5 1,0 eller hvad giver mening. Noter en faglig fornuftigt vurdering. Skift eventuelt mening efter afprøvning, og overvej sammenhængen med toleranceværdien for hvornår apparatet går i varme-og køle-tilstand.</p>
+<p><strong>Lysdioderne</strong> skal markere:</p>
+<ul>
+<li><strong><em>rød</em></strong> lyser når temperaturen er under den ønskede, og en fiktiv varmekilde er i gang</li>
+<li><strong><em>grøn</em></strong> lyser når temperaturren er OK</li>
+<li><strong><em>blå</em></strong> lyser når temperaturen er under det ønskede, og et fiktivt kølesystem er i gang.</li>
+</ul>
+<p>Her skal der være en global værdi for en telerance-margien, som gør at den <strong><em>rød</em></strong> og <strong><em>blå</em></strong> først aktiveres når temperaturen er hhv. et stykke under og et stykke over den ønskede forvalgte temperatur.</p>
+<p>Den sidste <strong>knap</strong>, skal bruges til <strong><code>reset</code></strong> og <strong><code>wakeup</code></strong>. Se afsnittet Net konfiguration <a href="#sec-Web_Net_konfiguration" class="quarto-xref">Sektion&nbsp;5</a>.</p>
+<p>Når brugeren <strong><em>trykker i et antal sekunder</em></strong> du vælger (f.eks. 10 sekunder), kan man starte AP-setup-mode, på apparatet. Se næste afsnit.</p>
+<p>Det er nyttigt hvis netværksfunktionerne er gået i udu, eller man bare ved at der skal skiftes indstillinger.</p>
+<p>Når brugeren trykker kortvarigt, vækkes apparatet, hvis det har været i <em>deep-sleep</em>. Så vil de normale web-funktioner være tilgængeligt i antal minutter. Du vælger hvor mange minutter. Under test er et kortere tidrum nyttigt, så det er lettere at afprøve uden for lange ventetider, med med tid nok til at afprøve funktionalitet..</p>
+</section>
+</section>
+<section id="sec-Web_kontrolpanel" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sec-Web_kontrolpanel"><span class="header-section-number">3</span> Web kontrolpanel</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/Projektopgave_web_panel.jpg" class="img-fluid figure-img" width="274"></p>
+<figcaption>Web kontrolpanel</figcaption>
+</figure>
+</div>
+<p>Når apparatet er i normal drift, skal det køre en webside, med de samme indstillingsmuligheder som på det fysiske apparat.</p>
+<p>Der skal vises</p>
+<ul>
+<li>den aktuelle temeperatur</li>
+<li>den ønskde teperatur</li>
+<li>UI-elementer (prikker eller lign) der ligner og har sammenfunktion som lysdioderne på apparatet (rød, grøn, blå)</li>
+<li>Knapper for <code>+</code> og <code>-</code>.</li>
+<li>link til grafsiden</li>
+<li>desuden en knap eller link til at skifte til <strong>Net konfiguration</strong></li>
+<li>måske også en mulighed for at udsætte deep-sleep?</li>
+</ul>
+<p><strong>Bemærk:</strong> De sidste to elementer er <em>ikke</em> med på skitsen ovenfor.</p>
+</section>
+<section id="sec-Web_graf" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="sec-Web_graf"><span class="header-section-number">4</span> Web graf</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/Projektopgave_web_statistik.jpg" class="img-fluid figure-img" width="221"></p>
+<figcaption>Web graf</figcaption>
+</figure>
+</div>
+<p>På denne side vises en graf over temperaturer.</p>
+<ul>
+<li>Brugeren kan skifte mellem visning af døgn, uge eller måned.</li>
+<li>Et døgn regnes fra midnat til midnat, eller fra midnat til <em>nu</em>.</li>
+<li>En uge regnes fra mandag kl 00.00 til søndag kl 23.50.</li>
+<li>En måned er fra den første til sidste dag i måneden.</li>
+<li>Brugeren kan bladre tilbage, i dage uger, og måneder.</li>
+</ul>
+<p><strong>Bemærk:</strong> Det kan være nødvendigt at udstyre apparatet med genererede demo-data, for at afprøve og demonstrere bladring.</p>
+</section>
+<section id="sec-Web_Net_konfiguration" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="sec-Web_Net_konfiguration"><span class="header-section-number">5</span> Web Net konfiguration</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/Projektopgave_netconfig.jpg" class="img-fluid figure-img" width="343"></p>
+<figcaption>web netconfig</figcaption>
+</figure>
+</div>
+<p>Når apparatet skal installeres hos en kunde, og vi forestiller os at det pakkes ud fra æsken, har det ingen gyldige indstillinger for hvilket WiFi netværk der skal anvendes.<br>
+Derfor skal apparatet starte i en tilstand hvor apparatet selv fungerer som et WiFi accesspoint (AP-mode). Operatøren, eller brugeren, hvis det er samme person, kan tilslutte en enhed (mobil, tablet, PC eller anden computer), og browse ind på en side hvor det er muligt at indstille oplysninger, som</p>
+<ul>
+<li>WiFi SSID
+<ul>
+<li>WiFi password/nøgle</li>
+</ul></li>
+<li>Url på datalogger
+<ul>
+<li>brugernavn på dataloggeren</li>
+<li>password på dataloggeren</li>
+</ul></li>
+<li>og en UI-knap til at gemme oplysningerne</li>
+</ul>
+<p>Når indstillingerne er gemt på apparatet, genstartes det med de nye indstillinger.</p>
+<p>Hvis apparatet ikke kan opnå forbindelse til det WiFi SSID, som er angivet, inden for at skykke tid (f.eks. 30 sekunder. Beskriv og begrund), går apparatet tilbage til AP-mode og viser konfigurationssiden.<br>
+Ellers, hvis apparatet forbindes til WiFi, vises den tildelte ip-adresse på OLED displayet i et stykke tid (beskriv og begrund).</p>
+<p>På denne side skal operatøren ogsa have mulighed for at indstille</p>
+<ul>
+<li>url til datalogger
+<ul>
+<li>brugernavn på datalogger</li>
+<li>password på datalogger.</li>
+</ul></li>
+</ul>
+<p>Disse skal også gemmes til senerebrug. Evt i en fil på det indbyggede filsystem.</p>
+</section>
+<section id="sec-datalogning" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="sec-datalogning"><span class="header-section-number">6</span> Datalogning</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/Projektopgave_datalogning.jpg" class="img-fluid figure-img" width="300"></p>
+<figcaption>Datalogning</figcaption>
+</figure>
+</div>
+<p>Datalogning er at gemme historiske data. Logning af data skal foregå lokalt, på filsystemet, og til en server vi en internet forbindelse.</p>
+<p>Det er vigtigt for datakvaliteten, at apparatet gemmer data lokalt, så det er måligt at overføre manglende data, hvis serveren er utilgængelig i perioder. Når forbindelsen til serveren er tilbage, kan de data som ikke blev overført, sendes til serveren. Apparatet skal altså have en funktionalitet til at registrere, hvilke data, som er overført, og hvilker som ikke er.</p>
+<p>Historiske data er <em>ikke</em> data fra forrige århundrede eller de puniske krige, men bare data der er et par minutter gamle. Eller fra i går, i forregårs eller en uge gamle eller en måned gamle.<br>
+Fordi vi <em>ikke</em> målinger fra tidpunkter tidligere end starten på projektet, kommer du nok til at opfinde nogen, vi kan se det hele fungere. Det siger sig selv (håber jeg), at sådan nogen historiske data vi bruger under udviklingen, <em>ikke</em> skal distribueres med i et endeligt produkt. Kan du håndtere en forskel på det?</p>
+<p>Det er meget IoT’ish at bruge en Message Brooker som f.eks. (= en server som understøtter MQTT-protokollen). Men det kan være et REST-API eller en direkte forbindelse til en relationsdatabse eller så et S3 filobjekt på skyen. Eller … du kan sikker finde mange flere muligheder.</p>
+<p>Så snart vores egen MQTT-server er i drift, kan du benytte den.</p>
+</section>
+<section id="sec-Dokumentation" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="sec-Dokumentation"><span class="header-section-number">7</span> Dokumentation</h2>
+<p>Til projektopgaven hører noget dokumentation.</p>
+<p>Du skal lave to brugervejledninger, men ikke en fuld rapport.</p>
+<p>Den ene er en vejledning til slutbrugeren, den anden er en vejledning til den person der skal opsætte og installere apparatet.</p>
+<section id="slutbrugervejledning" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="slutbrugervejledning"><span class="header-section-number">7.1</span> Slutbrugervejledning</h3>
+<p>Slutbrugeren kunne f.eks. være min mor, hvis hun havde fået det her apparat sat op der hjemme.</p>
+<p>Hun skal forstå hvad hun kan se på displayet, og trykke på det to knapper, <code>+</code> og <code>-</code>.<br>
+Eventuelt også på hendes smartphone. Min mor har ikke en smartphone, men det har min far, han kan bare ikke finde ud af at bruge den :-)</p>
+<p>Denne vejledning fylder en halv til en hel side. Der må gerne være et billede, så slutbrugeren kan se hvad der er der forklares.</p>
+</section>
+<section id="operatørvejledning" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="operatørvejledning"><span class="header-section-number">7.2</span> Operatørvejledning</h3>
+<p>Der skal også være en vejledning til operatøren. Det er den person som pakker apparatet ud, og installerer det på netværket. Der skal være en forklaring på hvordan netværk konfigureres og hvad konfigurationsoplysningerne gør.</p>
+<p>Der skal også være et fritzing-diagram som viser opbygningen, enten med fritzing <span class="citation" data-cites="gonmei_gggonmeifritzing_2025">(<a href="#ref-gonmei_gggonmeifritzing_2025" role="doc-biblioref">Gonmei 2025</a>)</span> eller et alternativ, f.eks. wokwi <span class="citation" data-cites="wokwi_wokwi_2025">(<a href="#ref-wokwi_wokwi_2025" role="doc-biblioref">Wokwi 2025</a>)</span>.</p>
+<p>Desuden skal der være en forklaring på hvilke data som overføres til dataloggeren.</p>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referencer</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-gonmei_gggonmeifritzing_2025" class="csl-entry" role="listitem">
+Gonmei, Gaithaingam. 2025. <span>“<span>GGgonmei</span>/Fritzing”</span>. <a href="https://github.com/GGgonmei/Fritzing">https://github.com/GGgonmei/Fritzing</a>.
+</div>
+<div id="ref-netatmo_smart_2025" class="csl-entry" role="listitem">
+Netatmo. 2025. <span>“Smart og tilsluttet termostat. Netatmo”</span>. 9. november 2025. <a href="https://www.netatmo.com/da-dk/smart-thermostat">https://www.netatmo.com/da-dk/smart-thermostat</a>.
+</div>
+<div id="ref-tado_smart_2025" class="csl-entry" role="listitem">
+Tado. 2025. <span>“Smart Heating with Tado° Smart Thermostat X Kit. Tado° Shop”</span>. 2025. <a href="https://shop.tado.com/en-row/products/smart-thermostat-x-starter-kit-1">https://shop.tado.com/en-row/products/smart-thermostat-x-starter-kit-1</a>.
+</div>
+<div id="ref-noauthor_termostat_2024" class="csl-entry" role="listitem">
+<span>“Termostat”</span>. 2024. I <em>Wikipedia, den frie encyklopædi</em>. <a href="https://da.wikipedia.org/w/index.php?title=Termostat&amp;oldid=11908053">https://da.wikipedia.org/w/index.php?title=Termostat&amp;oldid=11908053</a>.
+</div>
+<div id="ref-wokwi_wokwi_2025" class="csl-entry" role="listitem">
+Wokwi. 2025. <span>“Wokwi - World’s Most Advanced <span>ESP</span>32 Simulator. Wokwi”</span>. 2025. <a href="https://wokwi.com/">https://wokwi.com/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopieret!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopieret!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/s0ren\.github\.io\/FAG_20556_Big_Data_II\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
