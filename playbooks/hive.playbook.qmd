@@ -1,0 +1,92 @@
+### Download Hive
+
+I en browser, søg efter "hive download". Naviger frem til den nyeste, find de binære filer. \
+Netop nu er version 4.2.1 den seneste.
+
+Download med `wget`
+```bash
+wget https://dlcdn.apache.org/hive/hive-q.q.q/apache-hive-q.q.q-bin.tar.gz
+```
+
+### udpak
+```bash
+tar xvzf apache-hive-q.q.q-bin.tar.gz -C BigData
+```
+
+### Redier hive-miljø i `.bashrc`
+```bash
+export HIVE_HOME="/home/[user]/BigData/apache-hive-q.q.q-bin"
+export PATH=$PATH:$HIVE_HOME/bin
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/Hadoop
+```
+Bemærk `[user]` er _din_ user, `q.q.q` er den version du har downloaded.
+__Husk__: `source .bashrc`
+
+### Kopier hive konfigurationsfil 
+```bash
+cp BigData/apache-hive-4.2.1-bin/conf/hive-default.xml.template BigData/apache-hive-4.2.1-bin/conf/hive-site.xml
+```
+`q.q.q` bla bla
+
+### Gør Hive til proxy for hadoop
+
+Rediger `$HadoopHome/etc/Hadoop/core-site.xml`
+
+Tilføj:
+```bash
+<property>
+    <name>hadoop.proxyuser.[user].groups</name>
+    <value>*</value>
+</property>
+<property>
+    <name>hadoop.proxyuser.[user].hosts</name>
+    <value>*</value>
+</property>
+<property>
+    <name>hadoop.proxyuser.server.hosts</name>
+    <value>*</value>
+</property>
+<property>
+    <name>hadoop.proxyuser.server.groups</name>
+    <value>*</value>
+</property>
+```
+
+### Genstart hadoop
+```bash
+$HADOOP_HOME/sbin/stop-all.sh 
+$HADOOP_HOME/sbin/start-all.sh 
+```
+
+### Opret mapper og set rettighedder INDE i HDFS
+```bash
+hdfs dfs -mkdir /tmp
+hdfs dfs -mkdir /user
+hdfs dfs -mkdir /user/hive
+hdfs dfs -mkdir /user/hive/warehouse
+```
+
+```bash
+hdfs dfs -chmod g+w /tmp
+hdfs dfs -chmod g+w /user/hive/warehouse
+```
+
+### Opdater hives mappe indstillinger i `hive-site.xml`
+Rediger `$HIVE_HOME/conf/hive-site.xml`
+Find disse propperties og opdater deres værdier:
+```xml
+<property>
+      <name>hive.metastore.warehouse.dir</name>
+      <value>/user/hive/warehouse</value>
+</property>
+<property>
+      <name>hive.downloaded.resources.dir</name>
+      <value>/tmp/${user.name}_resources</value>
+      <description></description>
+</property>
+<property>
+      <name>hive.exec.local.scratchdir</name>
+      <value>/tmp/${user.name}</value>
+      <description>Local scratch space for Hive jobs</description>
+</property>
+```

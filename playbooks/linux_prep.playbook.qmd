@@ -1,0 +1,102 @@
+---
+title: "Linux prep"
+subtitle: "Forbered linux (Ubuntu i WSL)"
+Institute: TEC
+lang: da-DK
+
+order: 1
+
+# draft: true
+---
+
+### Start Distro'en
+
+```cmd
+PS C:\Users\smag> wsl -d BigData_u36
+```
+
+Så skulle jeg gerne se noget som:
+
+```bash
+smag@TEC-8230-LA0037:/mnt/c/Users/smag$
+```
+
+Se også [[wsl_playbook.qmd]]
+
+Når WSL er startet med Ubuntu distroen, vil jeg gerne have sat de nødvendige ting op.
+
+Skift til den lokale wsl-brugers lokale hjemme mappe. 
+
+```bash
+cd ~
+```
+
+### Opdater distroens pakker:
+
+```bash 
+sudo apt update
+sudo apt upgrade -y
+```
+
+
+### Installer java
+```bash
+sudo apt install openjdk-21-jdk
+```
+
+Hvis du vil bekræfte at den er installeret korrekt
+```bash
+java --version
+```
+```
+openjdk 21.0.12 2026-07-21
+OpenJDK Runtime Environment (build 21.0.12+8-1-26.04-Ubuntu)
+OpenJDK 64-Bit Server VM (build 21.0.12+8-1-26.04-Ubuntu, mixed mode, sharing)
+```
+
+Der skal lige være sikres at java kan findes i systemts environment
+Rediger `~/.bashrc` (hust at `~/` bare betyder i home dir)
+__Rul ned til bunden__, og tilføj dette:
+```bash
+## [dit-bruger-navn]
+## Java
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+```
+
+Hver gan du endrer i `~/.bashrc`, skal den genindlæset med 
+```bash
+source ~/.bashrc
+```
+
+### Installer ssh
+```bash
+sudo apt install openssh-server openssh-client -y
+sudo systemctl enable ssh
+sudo systemctl start ssh
+```
+
+Generer certifikat
+(tryk enter på spøgsmålene for at godkende defaults)
+```bash
+ssh-keygen -t rsa
+```
+
+Kopier offentlige nøgle til authorized keys:
+```bash
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+Test
+Man skal kunne åbne en forbindelse med ssh til localhost uden password
+```bash
+ssh localhost
+```
+
+Første gang skal man muligvis bekræfte men ellers... 
+
+og (hvis der konforbindelse, luk ssh forbindelsen med
+```bash
+exit
+```
+en gang!

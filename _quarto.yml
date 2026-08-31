@@ -1,12 +1,13 @@
 project:
-  title: "17682 Iot og embeddede systemer, del 1"
+  title: "20556 Big Data modeller og datamodellering"
+  # subtitle: "Andet fag af to"
   output-dir: output
   type: website
   
   
 
 website:
-  # title: "17682 Iot og embeddede systemer, del 1"
+  # title: "20556 Big Data modeller og datamodellering"
   navbar:
     left:
       - href: index.qmd

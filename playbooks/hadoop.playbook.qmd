@@ -1,0 +1,230 @@
+---
+title: "Hadoop setup"
+subtitle: "Opsætning af hadoop til brug i BagData 2, under wsl"
+Institute: TEC
+lang: da-DK
+
+order: 3
+
+# draft: true
+---
+
+### Download hadoop
+
+- Åben en browser og søg på "hadoop download".
+- find den nyeste udgave af hadoop
+- åbn linket "binary"
+- på linket til "x.tar.gz" filen, højre klik og "kopier link adresse"
+
+Nu kan du paste linket i din command shell, så du giver linket som parameter til `wget`:
+```bash
+wget https://dlcdn.apache.org/hadoop/common/hadoop-x.x.x/hadoop-x.x.x.tar.gz
+```
+
+Når den er færdig, kør 
+```bash
+ls -l
+```
+
+```
+$ ls -l
+total 567660
+-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz
+```
+
+### Udpak hadoop
+
+Først skal vi have en mappe (folder, directory etc) til alle BigData-tingene:
+```
+mkdir ~/BigData
+``` 
+```
+$ ls -l
+total 567668
+drwxr-xr-x 2 smag smag      4096 Aug 31 16:02 BigData
+-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz
+```
+
+Så udpakker vi:
+```bash
+tar xvzf hadoop-3.5.0.tar.gz -C ~/BigData/
+```
+check:
+```
+$ ls -l BigData/
+total 4
+drwxr-xr-x 11 smag smag 4096 Mar 24 18:31 hadoop-3.5.0
+```
+
+## Opsæt Hadoop
+
+### Mere env i `.bashrc`
+Genbesøg `~/.bashrc` og tijføj i bunden:
+```bash
+
+## Hadoop
+export HADOOP_HOME=/home/[user]/BigData/hadoop-x.x.x
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export HADOOP_YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_COMMON_LIB_NATIVE_DIR"
+```
+Hvor `[user]` erstattes med din wsl-linux-bruger, og `x.x.x` med hadoop-versionen, du har downloaded.
+
+__Husk:__ 
+```bash
+source ~/.bashrc
+```
+
+### `hadoop-env.sh`
+Rediger `~/BigData/hadoop-x.x.x/etc/hadoop/hadoop-env.sh`
+Åben filen i VSCode og søg efter `# export JAVA_HOME=` f.eks med søge-funktionen __Ctrl__-f ca linje 54.
+Lav en ny linje under den og tilføj 
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+```
+
+### Opret mapper til filsystemet hdfs
+```bash
+mkdir -p BigData/hadoop-x.x.x/hdfs/{namenode,datanode}
+```
+check:
+```
+$ ls -l $HADOOP_HOME/hdfs
+total 8
+drwxr-xr-x 2 smag smag 4096 Aug 31 16:21 datanode
+drwxr-xr-x 2 smag smag 4096 Aug 31 16:21 namenode
+```
+
+
+### Formater namenode
+```bash
+hdfs namenode -format
+```
+Der kommer en masse output. Det meste er af typen _INFO_ som:
+```
+2026-08-31 16:43:19,714 INFO namenode.NameNode: registered UNIX signal handlers for [TERM, HUP, INT]
+2026-08-31 16:43:19,795 INFO namenode.NameNode: createNameNode [-format]
+```
+Kig efter _WARNING_ og _ERROR_
+SKal slutte med 
+```
+2026-08-31 16:43:20,709 INFO namenode.NameNode: SHUTDOWN_MSG: 
+/************************************************************
+SHUTDOWN_MSG: Shutting down NameNode at TEC-8230-LA0037/127.0.1.1
+************************************************************/
+```
+Det er "normalt".
+
+
+### Rediger `~/BigData/hadoop-x.x.x/etc/hadoop/core-site.xml` 
+Tilføj inde i `<configuration>...</configuration>`:
+```xml
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+        <description>The default file system URI</description>
+    </property>
+```
+
+### Rediger `~/BigData/hadoop-x.x.x/etc/hadoop/hdfs-site.xml`
+Tilføj inde i `<configuration>...</configuration>`:
+```xml
+   <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///home/smag/BigData/hadoop-x.x.x/hdfs/namenode</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///home/smag/BigData/hadoop-x.x.x/hdfs/datanode</value>
+  </property>
+```
+__Husk__ at `x.x.x` skal ændres!
+
+### Start HDFS
+```bash 
+start-all.sh
+```
+Der skulle være path til scriptet, ellers ligger det i `/home/[user]/BigData/hadoop-x.x.x/sbin/start-all.sh`, men så er der enten noget galt med `.bashrc` eller du har glemt at genindlæse den. \
+__Husk__: `[user]` og `x.x.x`skal ændres
+
+### Check hvilke Hadoop daemons som startede
+```bash
+jps
+```
+
+```bash
+$ jps
+40594 NodeManager
+40162 SecondaryNameNode
+39906 DataNode
+40436 ResourceManager
+39736 NameNode
+41038 Jps
+```
+Alle 5 (fem) daemons (+Jps) skal køre, hvis _ikke_ er der en fejl et sted i konfigurationerne ovenfor.
+
+### Afprøv HFS funtioner
+
+Man skal kunne se indhold i mapper på HDFS (men der er ikke noget endnu, så mere neden for)
+```bash
+hdfs dfs -ls /
+```
+
+Lav nogen mapper. \
+Man skal af en eller anden grund oprette `/user`, og derunder en til brugeren, for at det virker "godt".
+```bash
+	   hdfs dfs -mkdir /user
+	   hdfs dfs -mkdir /user/[user] #([user] DIT brugernavn)
+
+	   hdfs dfs -ls /user/ 
+```
+```
+$ hdfs dfs -ls /user/ 
+Found 1 items
+drwxr-xr-x   - smag supergroup          0 2026-08-31 16:54 /user/smag
+```
+
+Put en fil op i HDFS:
+```bash
+hdfs dfs -put BigData/hadoop-x.x.x/README.txt /user/[user]	  
+```
+```bash
+$ hdfs dfs -ls /user/smag
+Found 1 items
+-rw-r--r--   1 smag supergroup        175 2026-04-19 21:11 /user/smag/README.txt
+```
+
+List hele filen med `-cat`
+```
+$ hdfs dfs -cat /user/smag/README.txt
+For the latest information about Hadoop, please visit our website at:
+
+   http://hadoop.apache.org/
+
+and our wiki, at:
+
+   https://cwiki.apache.org/confluence/display/HADOOP/
+```
+
+Hvis du kan se indholdet filen, __så virker det__!
+Prøv også lige at genstarte _wsl_ og genstarte _hadoop_
+```bash 
+sudo reboot now
+```
+
+og lidt senere ...
+```bash
+start-all.sh
+hdfs dfs -cat /user/[user]/README.txt
+```

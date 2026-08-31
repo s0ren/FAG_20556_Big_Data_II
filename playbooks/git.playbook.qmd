@@ -1,0 +1,57 @@
+---
+title: "Git prep"
+subtitle: "Forbered git"
+Institute: TEC
+lang: da-DK
+
+order: 2
+
+# draft: true
+---
+
+## Git repo i mit home dir
+
+Jeg laver et git repo i mit hjemme dir, så alle ændinger kan gemmes.
+__Men__ der kommer hurtigt for mange filer, derfor laver jeg også en `.gitignore`
+
+### skift til `~` (aka home dir)
+```bash
+cd ~
+```
+
+### Opret `.gitignore`
+```bash
+echo "*" >> .gitignore
+```
+
+Så skal der gerne være en `.gitignore` med bare
+```bash
+*
+```
+
+### Initialiser git repo
+```bash
+git init
+```
+
+```bash
+git branch -m main
+```
+
+Konfig navn og email
+```bash
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+```
+
+### Tilføj `.gitignore`til repoet
+
+Nu kan man tilfæje filer til git repoet, en ad gangen, uden at få overfyldt `git status`, eller git panelet i VSCode.
+```bash
+git add -f .gitignore
+```
+
+Så kan man lave commits på den fil, enten i VSCode git panel eller i shell:
+```bash
+git commit -m first .gitignore
+```
