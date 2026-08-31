@@ -1,0 +1,53 @@
+---
+title: "Blink styret med `millis()"
+format: html
+draft: true
+---
+
+For at blinke mellem to lysdioder, bliver det besværligt at bruge `delay()`. Så her skal vi kigge på andre løsniger.
+
+## Det dårlige eksempel vi skal forbedre
+
+![Opstilling til at blinke varieret](/assets/Pot_2_LEDer_ligeledninger_bb.svg){fig-alt="Opstilling til at blinke varieret"}
+
+Her ses et eksempel hvor den gule LED lyser længst, når potentiometret er drejet længst m,od venstre, og den grønne når pot'en er drejet mod højre:
+
+```{cpp}
+#include <Arduino.h>
+
+#define POT_PIN 14
+
+void setup() {
+  pinMode(POT_PIN, INPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+
+  Serial.begin(115200);
+  delay(500); // Wait for half second before starting Serial communication
+  Serial.println("Analog Read Example");
+}
+
+void loop() {
+  int potValue = analogRead(POT_PIN);
+  Serial.print("Analog pot read: " + String(potValue) + ", ");
+  delay(100);
+
+  digitalWrite(4, HIGH);
+  Serial.print("Yellow on for " + String(potValue / 10) + " ms, ");
+  delay(potValue / 10); 
+  digitalWrite(4, LOW);
+
+  digitalWrite(5, HIGH);
+  Serial.println("Green on for " + String((4095 - potValue) / 10) + " ms");
+  delay((4095 - potValue) / 10); 
+  digitalWrite(5, LOW);
+}
+```
+
+Vi kan starte med bare at blinke med en af LEDerne.
+
+I stedet for at bruge `delay()`, kan vi lave et loop hvor vi hele tiden aflæser `millis()`, som er antallet at millisekunder siden programmet startede.
+
+I en anden variabel husker vi hvornår vi sidst skiftede tilstand.
+
+Inde i loop, laver vi en `if-`betinmgelse, som checker om der er gået det antal milisekunder vi ønsker, inden næste skift. Hvis der *er* skifter vi slukket -\> tændt eller omvendt, og *husker* at nulsstille hvornår vi sidst skiftede.
