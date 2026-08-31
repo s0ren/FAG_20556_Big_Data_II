@@ -60,18 +60,6 @@
     ]
   },
   {
-    "objectID": "playbooks/hive.playbook.html",
-    "href": "playbooks/hive.playbook.html",
-    "title": "20556 Big Data modeller og datamodellering",
-    "section": "",
-    "text": "Download Hive\nI en browser, søg efter “hive download”. Naviger frem til den nyeste, find de binære filer.\nNetop nu er version 4.2.1 den seneste.\nDownload med wget\nwget https://dlcdn.apache.org/hive/hive-q.q.q/apache-hive-q.q.q-bin.tar.gz\n\n\nudpak\ntar xvzf apache-hive-q.q.q-bin.tar.gz -C BigData\n\n\nRedier hive-miljø i .bashrc\nexport HIVE_HOME=\"/home/[user]/BigData/apache-hive-q.q.q-bin\"\nexport PATH=$PATH:$HIVE_HOME/bin\nexport HADOOP_CONF_DIR=$HADOOP_HOME/etc/Hadoop\nBemærk [user] er din user, q.q.q er den version du har downloaded. Husk: source .bashrc\n\n\nKopier hive konfigurationsfil\ncp BigData/apache-hive-4.2.1-bin/conf/hive-default.xml.template BigData/apache-hive-4.2.1-bin/conf/hive-site.xml\nq.q.q bla bla\n\n\nGør Hive til proxy for hadoop\nRediger $HadoopHome/etc/Hadoop/core-site.xml\nTilføj:\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.[user].groups&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.[user].hosts&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.server.hosts&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.server.groups&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n\n\nGenstart hadoop\n$HADOOP_HOME/sbin/stop-all.sh \n$HADOOP_HOME/sbin/start-all.sh \n\n\nOpret mapper og set rettighedder INDE i HDFS\nhdfs dfs -mkdir /tmp\nhdfs dfs -mkdir /user\nhdfs dfs -mkdir /user/hive\nhdfs dfs -mkdir /user/hive/warehouse\nhdfs dfs -chmod g+w /tmp\nhdfs dfs -chmod g+w /user/hive/warehouse\n\n\nOpdater hives mappe indstillinger i hive-site.xml\nRediger $HIVE_HOME/conf/hive-site.xml Find disse propperties og opdater deres værdier:\n&lt;property&gt;\n      &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;\n      &lt;value&gt;/user/hive/warehouse&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n      &lt;name&gt;hive.downloaded.resources.dir&lt;/name&gt;\n      &lt;value&gt;/tmp/${user.name}_resources&lt;/value&gt;\n      &lt;description&gt;&lt;/description&gt;\n&lt;/property&gt;\n&lt;property&gt;\n      &lt;name&gt;hive.exec.local.scratchdir&lt;/name&gt;\n      &lt;value&gt;/tmp/${user.name}&lt;/value&gt;\n      &lt;description&gt;Local scratch space for Hive jobs&lt;/description&gt;\n&lt;/property&gt;",
-    "crumbs": [
-      "Home",
-      "Playbooks",
-      "Download Hive"
-    ]
-  },
-  {
     "objectID": "playbooks/spark.playbook.html",
     "href": "playbooks/spark.playbook.html",
     "title": "Spark setup",
