@@ -313,7 +313,7 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 </section>
 <section id="rediger-spark-env.sh" class="level3">
 <h3 class="anchored" data-anchor-id="rediger-spark-env.sh">Rediger <code>spark-env.sh</code></h3>
-<p>Åben filen `~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh Tilføj nederst:</p>
+<p>Åben filen <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</code> Tilføj nederst:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">SPARK_MASTER_HOST</span><span class="op">=</span>0.0.0.0</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="start-spark" class="level3">
@@ -341,7 +341,7 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 </section>
 <section id="start-og-stop-all" class="level2">
 <h2 class="anchored" data-anchor-id="start-og-stop-all">Start og stop all</h2>
-<p>Hvis man vil starte og stoppe spark med de medfølgende <code>start-all.sh</code>og <code>stop-all.sh</code> skal man duplikere følgende (bare uden <code>export</code>) fra <code>.bashrc</code>:</p>
+<p>Hvis man vil starte og stoppe spark med de medfølgende <code>start-all.sh</code>og <code>stop-all.sh</code> skal man duplikere følgende (bare uden <code>export</code>) fra <code>.bashrc</code> over i bunden af <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="va">HADOOP_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>]/BigData/hadoop-x.x.x</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="va">HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="op">=</span><span class="va">$HADOOP_HOME</span>/lib/native</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$HADOOP_HOME</span>/sbin:<span class="va">$HADOOP_HOME</span>/bin</span>
