@@ -4,7 +4,7 @@
     "href": "readme.html",
     "title": "20556 Big Data modeller og datamodellering",
     "section": "",
-    "text": "Det her site er lavet med Quarto.\nFilstrukturen, mapper mv er kopieret fra Iot, så hvis der er noget der ligner det skal detrettes\nSourcefilerne til denne dokumentation ligger på GitHub: https://github.com/s0ren/FAG_17682_IoT_I.git De færdige sider publiceres på https://s0ren.github.io/FAG_17682_IoT_I/",
+    "text": "Det her site er lavet med Quarto.\nFilstrukturen, mapper mv er kopieret fra Iot, så hvis der er noget der ligner det skal detrettes",
     "crumbs": [
       "Home",
       "Readme"
@@ -157,11 +157,11 @@
     ]
   },
   {
-    "objectID": "playbooks/spark.playbook.html#start-op-stop",
-    "href": "playbooks/spark.playbook.html#start-op-stop",
+    "objectID": "playbooks/spark.playbook.html#start-og-stop-all",
+    "href": "playbooks/spark.playbook.html#start-og-stop-all",
     "title": "Spark setup",
-    "section": "Start op stop",
-    "text": "Start op stop\nHvis man vil starte og stoppe spark med de medfølgende start-all.shog stop-all.sh skal man duplikere følgende (bare uden export) fra .bashrc:\nHADOOP_HOME=/home/[user]]/BigData/hadoop-x.x.x\nHADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native\nPATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin\nHADOOP_OPTS=\"-Djava.library.path=$HADOOP_COMMON_LIB_NATIVE_DIR\"\n\nSPARK_DIST_CLASSPATH=$(hadoop classpath)\nSPARK_HOME=/home/smag/BigData/spark-z.z.z-bin-without-hadoop\nDesværre er der navnesammenfald mellem hadoops og sparks udgaver af start-all.shog stop-all.sh. Så de skal kaldes med 3fuld sti, hvis man vil være sikker.\nStart og stop hadoop\nBigData/hadoop-x.x.x/sbin/start-all.sh\nBigData/hadoop-x.x.x/sbin/stop-all.sh\nStart og stop spark\nBigData/spark-z.z.z-bin-without-hadoop/sbin/start-all.sh\nBigData/spark-z.z.z-bin-without-hadoop/sbin/stop-all.sh",
+    "section": "Start og stop all",
+    "text": "Start og stop all\nHvis man vil starte og stoppe spark med de medfølgende start-all.shog stop-all.sh skal man duplikere følgende (bare uden export) fra .bashrc:\nHADOOP_HOME=/home/[user]]/BigData/hadoop-x.x.x\nHADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native\nPATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin\nHADOOP_OPTS=\"-Djava.library.path=$HADOOP_COMMON_LIB_NATIVE_DIR\"\n\nSPARK_DIST_CLASSPATH=$(hadoop classpath)\nSPARK_HOME=/home/smag/BigData/spark-z.z.z-bin-without-hadoop\nDesværre er der navnesammenfald mellem hadoops og sparks udgaver af start-all.shog stop-all.sh. Så de skal kaldes med 3fuld sti, hvis man vil være sikker.\nStart og stop hadoop\nBigData/hadoop-x.x.x/sbin/start-all.sh\nBigData/hadoop-x.x.x/sbin/stop-all.sh\nStart og stop spark\nBigData/spark-z.z.z-bin-without-hadoop/sbin/start-all.sh\nBigData/spark-z.z.z-bin-without-hadoop/sbin/stop-all.sh",
     "crumbs": [
       "Home",
       "Playbooks",
