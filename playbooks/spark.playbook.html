@@ -300,9 +300,10 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 <h3 class="anchored" data-anchor-id="rediger-.bashrc">Rediger <code>.bashrc</code></h3>
 <p>Tilføj nederst:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>/BigData/spark-z.z.z-bin-without-hadoop</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/sbin:<span class="va">$PATH</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_DIST_CLASSPATH</span><span class="op">=</span><span class="va">$(</span><span class="ex">hadoop</span> classpath<span class="va">)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>/BigData/spark-z.z.z-bin-without-hadoop</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/sbin:<span class="va">$PATH</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Husk at opdatere environment ved at køre <code>source ~/.bashrc</code>!</p>
 </section>
 <section id="kopier-spark-env.sh" class="level3">
