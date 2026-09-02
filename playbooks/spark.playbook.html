@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="smag@tec.dk">
 
 <title>Spark setup – 20556 Big Data modeller og datamodellering</title>
 <style>
@@ -217,6 +218,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Vejledninger</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skift sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Vejledninger/Programmering med pyspark.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programmering med PySpark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -227,16 +245,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">På denne side</h2>
    
   <ul>
-  <li><a href="#start-med-at-skifte-til" id="toc-start-med-at-skifte-til" class="nav-link active" data-scroll-target="#start-med-at-skifte-til">Start med at skifte til ~</a></li>
-  <li><a href="#spark-download" id="toc-spark-download" class="nav-link" data-scroll-target="#spark-download">Spark download</a></li>
-  <li><a href="#udpak" id="toc-udpak" class="nav-link" data-scroll-target="#udpak">Udpak</a></li>
-  <li><a href="#rediger-.bashrc" id="toc-rediger-.bashrc" class="nav-link" data-scroll-target="#rediger-.bashrc">Rediger <code>.bashrc</code></a></li>
-  <li><a href="#kopier-spark-env.sh" id="toc-kopier-spark-env.sh" class="nav-link" data-scroll-target="#kopier-spark-env.sh">Kopier <code>spark-env.sh</code></a></li>
-  <li><a href="#rediger-spark-env.sh" id="toc-rediger-spark-env.sh" class="nav-link" data-scroll-target="#rediger-spark-env.sh">Rediger <code>spark-env.sh</code></a></li>
-  <li><a href="#start-spark" id="toc-start-spark" class="nav-link" data-scroll-target="#start-spark">Start Spark</a></li>
-  <li><a href="#start-og-stop-all" id="toc-start-og-stop-all" class="nav-link" data-scroll-target="#start-og-stop-all">Start og stop all</a></li>
+  <li><a href="#playbook" id="toc-playbook" class="nav-link active" data-scroll-target="#playbook"><span class="header-section-number">1</span> Playbook</a>
+  <ul class="collapse">
+  <li><a href="#start-med-at-skifte-til" id="toc-start-med-at-skifte-til" class="nav-link" data-scroll-target="#start-med-at-skifte-til"><span class="header-section-number">1.1</span> Start med at skifte til ~</a></li>
+  <li><a href="#spark-download" id="toc-spark-download" class="nav-link" data-scroll-target="#spark-download"><span class="header-section-number">1.2</span> Spark download</a></li>
+  <li><a href="#udpak" id="toc-udpak" class="nav-link" data-scroll-target="#udpak"><span class="header-section-number">1.3</span> Udpak</a></li>
+  <li><a href="#rediger-.bashrc" id="toc-rediger-.bashrc" class="nav-link" data-scroll-target="#rediger-.bashrc"><span class="header-section-number">1.4</span> Rediger <code>.bashrc</code></a></li>
+  <li><a href="#kopier-spark-env.sh" id="toc-kopier-spark-env.sh" class="nav-link" data-scroll-target="#kopier-spark-env.sh"><span class="header-section-number">1.5</span> Kopier <code>spark-env.sh</code></a></li>
+  <li><a href="#rediger-spark-env.sh" id="toc-rediger-spark-env.sh" class="nav-link" data-scroll-target="#rediger-spark-env.sh"><span class="header-section-number">1.6</span> Rediger <code>spark-env.sh</code></a></li>
+  <li><a href="#start-spark" id="toc-start-spark" class="nav-link" data-scroll-target="#start-spark"><span class="header-section-number">1.7</span> Start Spark</a></li>
+  </ul></li>
+  <li><a href="#start-og-stop-all" id="toc-start-og-stop-all" class="nav-link" data-scroll-target="#start-og-stop-all"><span class="header-section-number">2</span> Start og stop all</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Andre formater</h2><ul><li><a href="Spark_setup.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="Spark_setup_slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -244,15 +265,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../playbooks/linux_prep.playbook.html">Playbooks</a></li><li class="breadcrumb-item"><a href="../playbooks/spark.playbook.html">Spark setup</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Spark setup</h1>
-<p class="subtitle lead">Opsætning af hadoop til brug i BagData 2, under wsl</p>
+<p class="subtitle lead">Opsætning af Spark til brug i BagData 2, under wsl</p>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Forfatter</div>
+  <div class="quarto-title-meta-heading">Tilknytning</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Søren Magnusson </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            programmeringsspecialet, datateknikker
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
+    <div>
+    <div class="quarto-title-meta-heading">Udgivet</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">1. september 2026</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Ændret</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">1. september 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -261,16 +307,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="start-med-at-skifte-til" class="level3">
-<h3 class="anchored" data-anchor-id="start-med-at-skifte-til">Start med at skifte til ~</h3>
+<section id="playbook" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="playbook"><span class="header-section-number">1</span> Playbook</h2>
+<section id="start-med-at-skifte-til" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="start-med-at-skifte-til"><span class="header-section-number">1.1</span> Start med at skifte til ~</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>check</p>
 <pre><code>***:~$ cd ~
 ***:~$ pwd
 /home/[user]</code></pre>
 </section>
-<section id="spark-download" class="level3">
-<h3 class="anchored" data-anchor-id="spark-download">Spark download</h3>
+<section id="spark-download" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="spark-download"><span class="header-section-number">1.2</span> Spark download</h3>
 <ul>
 <li>Åben en browser og søg på “spark download”.</li>
 <li>vælg den nyeste udgave af spark</li>
@@ -287,8 +335,8 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 -rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz
 -rw-r--r-- 1 smag smag 471301088 Jul 11 18:36 spark-4.2.0-bin-without-hadoop.tgz</code></pre>
 </section>
-<section id="udpak" class="level3">
-<h3 class="anchored" data-anchor-id="udpak">Udpak</h3>
+<section id="udpak" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="udpak"><span class="header-section-number">1.3</span> Udpak</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xvzf spark-z.z.z-bin-without-hadoop.tgz <span class="at">-C</span> BigData/</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>check</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> BigData/</span>
@@ -296,8 +344,8 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 13 smag smag 4096 Aug 31 16:39 hadoop-3.5.0</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 13 smag smag 4096 Jul 11 18:25 spark-4.2.0-bin-without-hadoop</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="rediger-.bashrc" class="level3">
-<h3 class="anchored" data-anchor-id="rediger-.bashrc">Rediger <code>.bashrc</code></h3>
+<section id="rediger-.bashrc" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="rediger-.bashrc"><span class="header-section-number">1.4</span> Rediger <code>.bashrc</code></h3>
 <p>Tilføj nederst:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_DIST_CLASSPATH</span><span class="op">=</span><span class="va">$(</span><span class="ex">hadoop</span> classpath<span class="va">)</span></span>
@@ -306,18 +354,18 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/sbin:<span class="va">$PATH</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Husk at opdatere environment ved at køre <code>source ~/.bashrc</code>!</p>
 </section>
-<section id="kopier-spark-env.sh" class="level3">
-<h3 class="anchored" data-anchor-id="kopier-spark-env.sh">Kopier <code>spark-env.sh</code></h3>
+<section id="kopier-spark-env.sh" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="kopier-spark-env.sh"><span class="header-section-number">1.5</span> Kopier <code>spark-env.sh</code></h3>
 <p>I <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf</code> skal <code>spark-env.sh.template</code> kopieres til <code>spark-env.sh</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh.template BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="rediger-spark-env.sh" class="level3">
-<h3 class="anchored" data-anchor-id="rediger-spark-env.sh">Rediger <code>spark-env.sh</code></h3>
+<section id="rediger-spark-env.sh" class="level3" data-number="1.6">
+<h3 data-number="1.6" class="anchored" data-anchor-id="rediger-spark-env.sh"><span class="header-section-number">1.6</span> Rediger <code>spark-env.sh</code></h3>
 <p>Åben filen <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</code> Tilføj nederst:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">SPARK_MASTER_HOST</span><span class="op">=</span>0.0.0.0</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="start-spark" class="level3">
-<h3 class="anchored" data-anchor-id="start-spark">Start Spark</h3>
+<section id="start-spark" class="level3" data-number="1.7">
+<h3 data-number="1.7" class="anchored" data-anchor-id="start-spark"><span class="header-section-number">1.7</span> Start Spark</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-master.sh</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">start-worker.sh</span> spark://localhost:7077</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Check ved at køre et job:</p>
@@ -339,9 +387,11 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 <p>I mappen <code>spark-z.z.z-bin-without-hadoop/examples/src/main/python</code> kan man finde nogle eksempler.<br>
 </p>
 </section>
-<section id="start-og-stop-all" class="level2">
-<h2 class="anchored" data-anchor-id="start-og-stop-all">Start og stop all</h2>
-<p>Hvis man vil starte og stoppe spark med de medfølgende <code>start-all.sh</code>og <code>stop-all.sh</code> skal man duplikere følgende (bare uden <code>export</code>) fra <code>.bashrc</code> over i bunden af <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</code>:</p>
+</section>
+<section id="start-og-stop-all" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="start-og-stop-all"><span class="header-section-number">2</span> Start og stop all</h2>
+<p>Spark har to medfølgende scripts, der starter og stopper spark master og worker mv; , <code>start-all.sh</code> og <code>stop-all.sh</code>. De kører udenfor brugerens miljø, som vi har opsat i <code>.bashrc</code>.</p>
+<p>Derfor skal man duplikere de relevante linjer fra <code>.bashrc</code> over i bunden af <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="va">HADOOP_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>]/BigData/hadoop-x.x.x</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="va">HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="op">=</span><span class="va">$HADOOP_HOME</span>/lib/native</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$HADOOP_HOME</span>/sbin:<span class="va">$HADOOP_HOME</span>/bin</span>
@@ -349,7 +399,10 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="va">SPARK_DIST_CLASSPATH</span><span class="op">=</span><span class="va">$(</span><span class="ex">hadoop</span> classpath<span class="va">)</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="va">SPARK_HOME</span><span class="op">=</span>/home/smag/BigData/spark-z.z.z-bin-without-hadoop</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Desværre er der navnesammenfald mellem <em>hadoops</em> og <em>sparks</em> udgaver af <code>start-all.sh</code>og <code>stop-all.sh</code>. Så de skal kaldes med 3fuld sti, hvis man vil være sikker.</p>
+<p><strong>Bemærk</strong>: <code>[user]</code> og <code>x.x.x</code> skal erstattes med din bruger og hadoop-versionen, du har downloaded.<br>
+Desuden behøver der ikke stå <code>export</code> foran variablerne, da de <em>kun</em> skal bruges i det script, der starter og stopper spark.</p>
+<p>Desværre er der navnesammenfald mellem <em>hadoops</em> og <em>sparks</em> udgaver af <code>start-all.sh</code>og <code>stop-all.sh</code>. Så de skal kaldes med fuld sti, hvis man vil være sikker.<br>
+Man sikkert lave et nyt script der starter og stopper både hadoop og spark…</p>
 <p>Start og stop hadoop</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">BigData/hadoop-x.x.x/sbin/start-all.sh</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">BigData/hadoop-x.x.x/sbin/stop-all.sh</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>

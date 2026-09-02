@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="smag@tec.dk">
 
 <title>Hadoop setup – 20556 Big Data modeller og datamodellering</title>
 <style>
@@ -217,6 +218,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Vejledninger</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skift sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Vejledninger/Programmering med pyspark.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programmering med PySpark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -227,22 +245,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">På denne side</h2>
    
   <ul>
-  <li><a href="#download-hadoop" id="toc-download-hadoop" class="nav-link active" data-scroll-target="#download-hadoop">Download hadoop</a></li>
-  <li><a href="#udpak-hadoop" id="toc-udpak-hadoop" class="nav-link" data-scroll-target="#udpak-hadoop">Udpak hadoop</a></li>
-  <li><a href="#opsæt-hadoop" id="toc-opsæt-hadoop" class="nav-link" data-scroll-target="#opsæt-hadoop">Opsæt Hadoop</a>
+  <li><a href="#download-hadoop" id="toc-download-hadoop" class="nav-link active" data-scroll-target="#download-hadoop"><span class="header-section-number">0.1</span> Download hadoop</a></li>
+  <li><a href="#udpak-hadoop" id="toc-udpak-hadoop" class="nav-link" data-scroll-target="#udpak-hadoop"><span class="header-section-number">0.2</span> Udpak hadoop</a></li>
+  <li><a href="#opsæt-hadoop" id="toc-opsæt-hadoop" class="nav-link" data-scroll-target="#opsæt-hadoop"><span class="header-section-number">1</span> Opsæt Hadoop</a>
   <ul class="collapse">
-  <li><a href="#mere-env-i-.bashrc" id="toc-mere-env-i-.bashrc" class="nav-link" data-scroll-target="#mere-env-i-.bashrc">Mere env i <code>.bashrc</code></a></li>
-  <li><a href="#hadoop-env.sh" id="toc-hadoop-env.sh" class="nav-link" data-scroll-target="#hadoop-env.sh"><code>hadoop-env.sh</code></a></li>
-  <li><a href="#opret-mapper-til-filsystemet-hdfs" id="toc-opret-mapper-til-filsystemet-hdfs" class="nav-link" data-scroll-target="#opret-mapper-til-filsystemet-hdfs">Opret mapper til filsystemet hdfs</a></li>
-  <li><a href="#formater-namenode" id="toc-formater-namenode" class="nav-link" data-scroll-target="#formater-namenode">Formater namenode</a></li>
-  <li><a href="#rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml" id="toc-rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml" class="nav-link" data-scroll-target="#rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml">Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/core-site.xml</code></a></li>
-  <li><a href="#rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml" id="toc-rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml" class="nav-link" data-scroll-target="#rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml">Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/hdfs-site.xml</code></a></li>
-  <li><a href="#start-hdfs" id="toc-start-hdfs" class="nav-link" data-scroll-target="#start-hdfs">Start HDFS</a></li>
-  <li><a href="#check-hvilke-hadoop-daemons-som-startede" id="toc-check-hvilke-hadoop-daemons-som-startede" class="nav-link" data-scroll-target="#check-hvilke-hadoop-daemons-som-startede">Check hvilke Hadoop daemons som startede</a></li>
-  <li><a href="#afprøv-hfs-funtioner" id="toc-afprøv-hfs-funtioner" class="nav-link" data-scroll-target="#afprøv-hfs-funtioner">Afprøv HFS funtioner</a></li>
+  <li><a href="#mere-env-i-.bashrc" id="toc-mere-env-i-.bashrc" class="nav-link" data-scroll-target="#mere-env-i-.bashrc"><span class="header-section-number">1.1</span> Mere env i <code>.bashrc</code></a></li>
+  <li><a href="#hadoop-env.sh" id="toc-hadoop-env.sh" class="nav-link" data-scroll-target="#hadoop-env.sh"><span class="header-section-number">1.2</span> <code>hadoop-env.sh</code></a></li>
+  <li><a href="#opret-mapper-til-filsystemet-hdfs" id="toc-opret-mapper-til-filsystemet-hdfs" class="nav-link" data-scroll-target="#opret-mapper-til-filsystemet-hdfs"><span class="header-section-number">1.3</span> Opret mapper til filsystemet hdfs</a></li>
+  <li><a href="#formater-namenode" id="toc-formater-namenode" class="nav-link" data-scroll-target="#formater-namenode"><span class="header-section-number">1.4</span> Formater namenode</a></li>
+  <li><a href="#rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml" id="toc-rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml" class="nav-link" data-scroll-target="#rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml"><span class="header-section-number">1.5</span> Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/core-site.xml</code></a></li>
+  <li><a href="#rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml" id="toc-rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml" class="nav-link" data-scroll-target="#rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml"><span class="header-section-number">1.6</span> Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/hdfs-site.xml</code></a></li>
+  <li><a href="#start-hdfs" id="toc-start-hdfs" class="nav-link" data-scroll-target="#start-hdfs"><span class="header-section-number">1.7</span> Start HDFS</a></li>
+  <li><a href="#check-hvilke-hadoop-daemons-som-startede" id="toc-check-hvilke-hadoop-daemons-som-startede" class="nav-link" data-scroll-target="#check-hvilke-hadoop-daemons-som-startede"><span class="header-section-number">1.8</span> Check hvilke Hadoop daemons som startede</a></li>
+  <li><a href="#afprøv-hfs-funtioner" id="toc-afprøv-hfs-funtioner" class="nav-link" data-scroll-target="#afprøv-hfs-funtioner"><span class="header-section-number">1.9</span> Afprøv HFS funtioner</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Andre formater</h2><ul><li><a href="Hadoop_setup.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="Hadoop_setup_slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -254,11 +272,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Forfatter</div>
+  <div class="quarto-title-meta-heading">Tilknytning</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Søren Magnusson </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            programmeringsspecialet, datateknikker
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
+    <div>
+    <div class="quarto-title-meta-heading">Udgivet</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">1. september 2026</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Ændret</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">1. september 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -267,8 +310,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="download-hadoop" class="level3">
-<h3 class="anchored" data-anchor-id="download-hadoop">Download hadoop</h3>
+<section id="download-hadoop" class="level3" data-number="0.1">
+<h3 data-number="0.1" class="anchored" data-anchor-id="download-hadoop"><span class="header-section-number">0.1</span> Download hadoop</h3>
 <ul>
 <li>Åben en browser og søg på “hadoop download”.</li>
 <li>find den nyeste udgave af hadoop</li>
@@ -283,8 +326,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 total 567660
 -rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz</code></pre>
 </section>
-<section id="udpak-hadoop" class="level3">
-<h3 class="anchored" data-anchor-id="udpak-hadoop">Udpak hadoop</h3>
+<section id="udpak-hadoop" class="level3" data-number="0.2">
+<h3 data-number="0.2" class="anchored" data-anchor-id="udpak-hadoop"><span class="header-section-number">0.2</span> Udpak hadoop</h3>
 <p>Først skal vi have en mappe (folder, directory etc) til alle BigData-tingene:</p>
 <pre><code>mkdir ~/BigData</code></pre>
 <pre><code>$ ls -l
@@ -298,10 +341,10 @@ drwxr-xr-x 2 smag smag      4096 Aug 31 16:02 BigData
 total 4
 drwxr-xr-x 11 smag smag 4096 Mar 24 18:31 hadoop-3.5.0</code></pre>
 </section>
-<section id="opsæt-hadoop" class="level2">
-<h2 class="anchored" data-anchor-id="opsæt-hadoop">Opsæt Hadoop</h2>
-<section id="mere-env-i-.bashrc" class="level3">
-<h3 class="anchored" data-anchor-id="mere-env-i-.bashrc">Mere env i <code>.bashrc</code></h3>
+<section id="opsæt-hadoop" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="opsæt-hadoop"><span class="header-section-number">1</span> Opsæt Hadoop</h2>
+<section id="mere-env-i-.bashrc" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="mere-env-i-.bashrc"><span class="header-section-number">1.1</span> Mere env i <code>.bashrc</code></h3>
 <p>Genbesøg <code>~/.bashrc</code> og tijføj i bunden:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Hadoop</span></span>
@@ -318,13 +361,13 @@ drwxr-xr-x 11 smag smag 4096 Mar 24 18:31 hadoop-3.5.0</code></pre>
 <p><strong>Husk:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="hadoop-env.sh" class="level3">
-<h3 class="anchored" data-anchor-id="hadoop-env.sh"><code>hadoop-env.sh</code></h3>
+<section id="hadoop-env.sh" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="hadoop-env.sh"><span class="header-section-number">1.2</span> <code>hadoop-env.sh</code></h3>
 <p>Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/hadoop-env.sh</code> Åben filen i VSCode og søg efter <code># export JAVA_HOME=</code> f.eks med søge-funktionen <strong>Ctrl</strong>-f ca linje 54. Lav en ny linje under den og tilføj</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">JAVA_HOME</span><span class="op">=</span>/usr/lib/jvm/java-21-openjdk-amd64</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="opret-mapper-til-filsystemet-hdfs" class="level3">
-<h3 class="anchored" data-anchor-id="opret-mapper-til-filsystemet-hdfs">Opret mapper til filsystemet hdfs</h3>
+<section id="opret-mapper-til-filsystemet-hdfs" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="opret-mapper-til-filsystemet-hdfs"><span class="header-section-number">1.3</span> Opret mapper til filsystemet hdfs</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> BigData/hadoop-x.x.x/hdfs/<span class="dt">{namenode</span><span class="op">,</span><span class="dt">datanode}</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>check:</p>
 <pre><code>$ ls -l $HADOOP_HOME/hdfs
@@ -332,8 +375,8 @@ total 8
 drwxr-xr-x 2 smag smag 4096 Aug 31 16:21 datanode
 drwxr-xr-x 2 smag smag 4096 Aug 31 16:21 namenode</code></pre>
 </section>
-<section id="formater-namenode" class="level3">
-<h3 class="anchored" data-anchor-id="formater-namenode">Formater namenode</h3>
+<section id="formater-namenode" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="formater-namenode"><span class="header-section-number">1.4</span> Formater namenode</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hdfs</span> namenode <span class="at">-format</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Der kommer en masse output. Det meste er af typen <em>INFO</em> som:</p>
 <pre><code>2026-08-31 16:43:19,714 INFO namenode.NameNode: registered UNIX signal handlers for [TERM, HUP, INT]
@@ -345,8 +388,8 @@ SHUTDOWN_MSG: Shutting down NameNode at TEC-8230-LA0037/127.0.1.1
 ************************************************************/</code></pre>
 <p>Det er “normalt”.</p>
 </section>
-<section id="rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml" class="level3">
-<h3 class="anchored" data-anchor-id="rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml">Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/core-site.xml</code></h3>
+<section id="rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml"><span class="header-section-number">1.5</span> Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/core-site.xml</code></h3>
 <p>Tilføj inde i <code>&lt;configuration&gt;...&lt;/configuration&gt;</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">property</span>&gt;</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">name</span>&gt;fs.defaultFS&lt;/<span class="kw">name</span>&gt;</span>
@@ -354,8 +397,8 @@ SHUTDOWN_MSG: Shutting down NameNode at TEC-8230-LA0037/127.0.1.1
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">description</span>&gt;The default file system URI&lt;/<span class="kw">description</span>&gt;</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">property</span>&gt;</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml" class="level3">
-<h3 class="anchored" data-anchor-id="rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml">Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/hdfs-site.xml</code></h3>
+<section id="rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml" class="level3" data-number="1.6">
+<h3 data-number="1.6" class="anchored" data-anchor-id="rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml"><span class="header-section-number">1.6</span> Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/hdfs-site.xml</code></h3>
 <p>Tilføj inde i <code>&lt;configuration&gt;...&lt;/configuration&gt;</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">property</span>&gt;</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">name</span>&gt;dfs.replication&lt;/<span class="kw">name</span>&gt;</span>
@@ -373,14 +416,14 @@ SHUTDOWN_MSG: Shutting down NameNode at TEC-8230-LA0037/127.0.1.1
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">property</span>&gt;</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Husk</strong> at <code>x.x.x</code> skal ændres!</p>
 </section>
-<section id="start-hdfs" class="level3">
-<h3 class="anchored" data-anchor-id="start-hdfs">Start HDFS</h3>
+<section id="start-hdfs" class="level3" data-number="1.7">
+<h3 data-number="1.7" class="anchored" data-anchor-id="start-hdfs"><span class="header-section-number">1.7</span> Start HDFS</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-all.sh</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Der skulle være path til scriptet, ellers ligger det i <code>/home/[user]/BigData/hadoop-x.x.x/sbin/start-all.sh</code>, men så er der enten noget galt med <code>.bashrc</code> eller du har glemt at genindlæse den.<br>
 <strong>Husk</strong>: <code>[user]</code> og <code>x.x.x</code>skal ændres</p>
 </section>
-<section id="check-hvilke-hadoop-daemons-som-startede" class="level3">
-<h3 class="anchored" data-anchor-id="check-hvilke-hadoop-daemons-som-startede">Check hvilke Hadoop daemons som startede</h3>
+<section id="check-hvilke-hadoop-daemons-som-startede" class="level3" data-number="1.8">
+<h3 data-number="1.8" class="anchored" data-anchor-id="check-hvilke-hadoop-daemons-som-startede"><span class="header-section-number">1.8</span> Check hvilke Hadoop daemons som startede</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jps</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> jps</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">40594</span> NodeManager</span>
@@ -391,8 +434,8 @@ SHUTDOWN_MSG: Shutting down NameNode at TEC-8230-LA0037/127.0.1.1
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="ex">41038</span> Jps</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Alle 5 (fem) daemons (+Jps) skal køre, hvis <em>ikke</em> er der en fejl et sted i konfigurationerne ovenfor.</p>
 </section>
-<section id="afprøv-hfs-funtioner" class="level3">
-<h3 class="anchored" data-anchor-id="afprøv-hfs-funtioner">Afprøv HFS funtioner</h3>
+<section id="afprøv-hfs-funtioner" class="level3" data-number="1.9">
+<h3 data-number="1.9" class="anchored" data-anchor-id="afprøv-hfs-funtioner"><span class="header-section-number">1.9</span> Afprøv HFS funtioner</h3>
 <p>Man skal kunne se indhold i mapper på HDFS (men der er ikke noget endnu, så mere neden for)</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hdfs</span> dfs <span class="at">-ls</span> /</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Lav nogen mapper.<br>

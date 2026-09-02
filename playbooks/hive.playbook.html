@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="smag@tec.dk">
 
 <title>Hive setup – 20556 Big Data modeller og datamodellering</title>
 <style>
@@ -218,6 +219,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Vejledninger</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skift sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Vejledninger/Programmering med pyspark.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programmering med PySpark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -228,16 +246,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">På denne side</h2>
    
   <ul>
-  <li><a href="#download-hive" id="toc-download-hive" class="nav-link active" data-scroll-target="#download-hive">Download Hive</a></li>
-  <li><a href="#udpak" id="toc-udpak" class="nav-link" data-scroll-target="#udpak">udpak</a></li>
-  <li><a href="#redier-hive-miljø-i-.bashrc" id="toc-redier-hive-miljø-i-.bashrc" class="nav-link" data-scroll-target="#redier-hive-miljø-i-.bashrc">Redier hive-miljø i <code>.bashrc</code></a></li>
-  <li><a href="#kopier-hive-konfigurationsfil" id="toc-kopier-hive-konfigurationsfil" class="nav-link" data-scroll-target="#kopier-hive-konfigurationsfil">Kopier hive konfigurationsfil</a></li>
-  <li><a href="#gør-hive-til-proxy-for-hadoop" id="toc-gør-hive-til-proxy-for-hadoop" class="nav-link" data-scroll-target="#gør-hive-til-proxy-for-hadoop">Gør Hive til proxy for hadoop</a></li>
-  <li><a href="#genstart-hadoop" id="toc-genstart-hadoop" class="nav-link" data-scroll-target="#genstart-hadoop">Genstart hadoop</a></li>
-  <li><a href="#opret-mapper-og-set-rettighedder-inde-i-hdfs" id="toc-opret-mapper-og-set-rettighedder-inde-i-hdfs" class="nav-link" data-scroll-target="#opret-mapper-og-set-rettighedder-inde-i-hdfs">Opret mapper og set rettighedder INDE i HDFS</a></li>
-  <li><a href="#opdater-hives-mappe-indstillinger-i-hive-site.xml" id="toc-opdater-hives-mappe-indstillinger-i-hive-site.xml" class="nav-link" data-scroll-target="#opdater-hives-mappe-indstillinger-i-hive-site.xml">Opdater hives mappe indstillinger i <code>hive-site.xml</code></a></li>
+  <li><a href="#download-hive" id="toc-download-hive" class="nav-link active" data-scroll-target="#download-hive"><span class="header-section-number">0.1</span> Download Hive</a></li>
+  <li><a href="#udpak" id="toc-udpak" class="nav-link" data-scroll-target="#udpak"><span class="header-section-number">0.2</span> udpak</a></li>
+  <li><a href="#redier-hive-miljø-i-.bashrc" id="toc-redier-hive-miljø-i-.bashrc" class="nav-link" data-scroll-target="#redier-hive-miljø-i-.bashrc"><span class="header-section-number">0.3</span> Redier hive-miljø i <code>.bashrc</code></a></li>
+  <li><a href="#kopier-hive-konfigurationsfil" id="toc-kopier-hive-konfigurationsfil" class="nav-link" data-scroll-target="#kopier-hive-konfigurationsfil"><span class="header-section-number">0.4</span> Kopier hive konfigurationsfil</a></li>
+  <li><a href="#gør-hive-til-proxy-for-hadoop" id="toc-gør-hive-til-proxy-for-hadoop" class="nav-link" data-scroll-target="#gør-hive-til-proxy-for-hadoop"><span class="header-section-number">0.5</span> Gør Hive til proxy for hadoop</a></li>
+  <li><a href="#genstart-hadoop" id="toc-genstart-hadoop" class="nav-link" data-scroll-target="#genstart-hadoop"><span class="header-section-number">0.6</span> Genstart hadoop</a></li>
+  <li><a href="#opret-mapper-og-set-rettighedder-inde-i-hdfs" id="toc-opret-mapper-og-set-rettighedder-inde-i-hdfs" class="nav-link" data-scroll-target="#opret-mapper-og-set-rettighedder-inde-i-hdfs"><span class="header-section-number">0.7</span> Opret mapper og set rettighedder INDE i HDFS</a></li>
+  <li><a href="#opdater-hives-mappe-indstillinger-i-hive-site.xml" id="toc-opdater-hives-mappe-indstillinger-i-hive-site.xml" class="nav-link" data-scroll-target="#opdater-hives-mappe-indstillinger-i-hive-site.xml"><span class="header-section-number">0.8</span> Opdater hives mappe indstillinger i <code>hive-site.xml</code></a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Andre formater</h2><ul><li><a href="Hive_setup.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="Hive_setup_slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -249,11 +267,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Forfatter</div>
+  <div class="quarto-title-meta-heading">Tilknytning</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Søren Magnusson </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            programmeringsspecialet, datateknikker
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
+    <div>
+    <div class="quarto-title-meta-heading">Udgivet</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">1. september 2026</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Ændret</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">1. september 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -262,31 +305,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="download-hive" class="level3">
-<h3 class="anchored" data-anchor-id="download-hive">Download Hive</h3>
+<section id="download-hive" class="level3" data-number="0.1">
+<h3 data-number="0.1" class="anchored" data-anchor-id="download-hive"><span class="header-section-number">0.1</span> Download Hive</h3>
 <p>I en browser, søg efter “hive download”. Naviger frem til den nyeste, find de binære filer.<br>
 Netop nu er version 4.2.1 den seneste.</p>
 <p>Download med <code>wget</code></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dlcdn.apache.org/hive/hive-q.q.q/apache-hive-q.q.q-bin.tar.gz</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="udpak" class="level3">
-<h3 class="anchored" data-anchor-id="udpak">udpak</h3>
+<section id="udpak" class="level3" data-number="0.2">
+<h3 data-number="0.2" class="anchored" data-anchor-id="udpak"><span class="header-section-number">0.2</span> udpak</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xvzf apache-hive-q.q.q-bin.tar.gz <span class="at">-C</span> BigData</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="redier-hive-miljø-i-.bashrc" class="level3">
-<h3 class="anchored" data-anchor-id="redier-hive-miljø-i-.bashrc">Redier hive-miljø i <code>.bashrc</code></h3>
+<section id="redier-hive-miljø-i-.bashrc" class="level3" data-number="0.3">
+<h3 data-number="0.3" class="anchored" data-anchor-id="redier-hive-miljø-i-.bashrc"><span class="header-section-number">0.3</span> Redier hive-miljø i <code>.bashrc</code></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HIVE_HOME</span><span class="op">=</span><span class="st">"/home/[user]/BigData/apache-hive-q.q.q-bin"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$HIVE_HOME</span>/bin</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HADOOP_CONF_DIR</span><span class="op">=</span><span class="va">$HADOOP_HOME</span>/etc/Hadoop</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Bemærk <code>[user]</code> er <em>din</em> user, <code>q.q.q</code> er den version du har downloaded. <strong>Husk</strong>: <code>source .bashrc</code></p>
 </section>
-<section id="kopier-hive-konfigurationsfil" class="level3">
-<h3 class="anchored" data-anchor-id="kopier-hive-konfigurationsfil">Kopier hive konfigurationsfil</h3>
+<section id="kopier-hive-konfigurationsfil" class="level3" data-number="0.4">
+<h3 data-number="0.4" class="anchored" data-anchor-id="kopier-hive-konfigurationsfil"><span class="header-section-number">0.4</span> Kopier hive konfigurationsfil</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> BigData/apache-hive-4.2.1-bin/conf/hive-default.xml.template BigData/apache-hive-4.2.1-bin/conf/hive-site.xml</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>q.q.q</code> bla bla</p>
 </section>
-<section id="gør-hive-til-proxy-for-hadoop" class="level3">
-<h3 class="anchored" data-anchor-id="gør-hive-til-proxy-for-hadoop">Gør Hive til proxy for hadoop</h3>
+<section id="gør-hive-til-proxy-for-hadoop" class="level3" data-number="0.5">
+<h3 data-number="0.5" class="anchored" data-anchor-id="gør-hive-til-proxy-for-hadoop"><span class="header-section-number">0.5</span> Gør Hive til proxy for hadoop</h3>
 <p>Rediger <code>$HadoopHome/etc/Hadoop/core-site.xml</code></p>
 <p>Tilføj:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>property<span class="op">&gt;</span></span>
@@ -306,13 +349,13 @@ Netop nu er version 4.2.1 den seneste.</p>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>value<span class="op">&gt;</span><span class="ex">*</span><span class="op">&lt;</span>/value<span class="op">&gt;</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/property<span class="op">&gt;</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="genstart-hadoop" class="level3">
-<h3 class="anchored" data-anchor-id="genstart-hadoop">Genstart hadoop</h3>
+<section id="genstart-hadoop" class="level3" data-number="0.6">
+<h3 data-number="0.6" class="anchored" data-anchor-id="genstart-hadoop"><span class="header-section-number">0.6</span> Genstart hadoop</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">$HADOOP_HOME</span><span class="ex">/sbin/stop-all.sh</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">$HADOOP_HOME</span><span class="ex">/sbin/start-all.sh</span> </span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="opret-mapper-og-set-rettighedder-inde-i-hdfs" class="level3">
-<h3 class="anchored" data-anchor-id="opret-mapper-og-set-rettighedder-inde-i-hdfs">Opret mapper og set rettighedder INDE i HDFS</h3>
+<section id="opret-mapper-og-set-rettighedder-inde-i-hdfs" class="level3" data-number="0.7">
+<h3 data-number="0.7" class="anchored" data-anchor-id="opret-mapper-og-set-rettighedder-inde-i-hdfs"><span class="header-section-number">0.7</span> Opret mapper og set rettighedder INDE i HDFS</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hdfs</span> dfs <span class="at">-mkdir</span> /tmp</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">hdfs</span> dfs <span class="at">-mkdir</span> /user</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">hdfs</span> dfs <span class="at">-mkdir</span> /user/hive</span>
@@ -320,8 +363,8 @@ Netop nu er version 4.2.1 den seneste.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hdfs</span> dfs <span class="at">-chmod</span> g+w /tmp</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">hdfs</span> dfs <span class="at">-chmod</span> g+w /user/hive/warehouse</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="opdater-hives-mappe-indstillinger-i-hive-site.xml" class="level3">
-<h3 class="anchored" data-anchor-id="opdater-hives-mappe-indstillinger-i-hive-site.xml">Opdater hives mappe indstillinger i <code>hive-site.xml</code></h3>
+<section id="opdater-hives-mappe-indstillinger-i-hive-site.xml" class="level3" data-number="0.8">
+<h3 data-number="0.8" class="anchored" data-anchor-id="opdater-hives-mappe-indstillinger-i-hive-site.xml"><span class="header-section-number">0.8</span> Opdater hives mappe indstillinger i <code>hive-site.xml</code></h3>
 <p>Rediger <code>$HIVE_HOME/conf/hive-site.xml</code> Find disse propperties og opdater deres værdier:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">property</span>&gt;</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">name</span>&gt;hive.metastore.warehouse.dir&lt;/<span class="kw">name</span>&gt;</span>
