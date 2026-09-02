@@ -1,13 +1,24 @@
 ---
 title: "Git prep"
 subtitle: "Forbered git"
-Institute: TEC
-lang: da-DK
 
-order: 2
+order: 3
+
+date: 2026-09-1
+date-modified: 2026-09-1
+
+author: Søren Magnusson
+author-meta: smag@tec.dk
+
+# Se også flere indstillinger i lokal ._quarto.yml
 
 # draft: true
 ---
+# Git med mange filer
+Her er et projekt hvor der er mange filer, men kun nogle få jeg ændrer, og som det giver mening at køre versionskontrol på. 
+
+Her i viser jeg form for løsning på den udfordring. \
+Det går mest ud på at __ignorere__.
 
 ## Git repo i mit home dir
 

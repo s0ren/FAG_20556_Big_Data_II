@@ -1,0 +1,33 @@
+author: Søren Magnusson
+author-meta: smag@tec.dk
+
+institute: programmeringsspecialet, datateknikker
+affiliation: TEC
+
+lang: da-DK
+
+format: 
+    html:
+        default
+    typst:
+        toc: true
+        text: PDF
+    revealjs: 
+        toc: false
+        output-ext: slide.html
+        slide-level: 3
+        smaller: true
+        scrollable: true
+        text: slides
+
+format-links:
+  - html
+  - format: revealjs
+    text: Slides
+    icon: file-slides
+  - format: typst
+    text: PDF
+    icon: file-pdf
+
+# bibliography: ../bib/IoT 1 nov 25/IoT 1 nov 25.bib
+number-sections: true

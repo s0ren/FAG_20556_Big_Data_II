@@ -2,40 +2,17 @@
 title: "Hive setup"
 subtitle: "Opsætning af hive til brug i BagData 2, under wsl"
 
-format: 
-    html:
-        default
-        # title: Hest
-    typst:
-        # title: Hive setup 
-        toc: true
-        output-file: Hive_setup.pdf
-    revealjs: 
-        toc: true
-        output-file: Hive_setup_slide.html
-        slide-level: 3
-        smaller: true
-        scrollable: true
-
-# bibliography: ../bib/IoT 1 nov 25/IoT 1 nov 25.bib
-number-sections: true
-
 date: 2026-09-1
 date-modified: 2026-09-1
 
 author: Søren Magnusson
 author-meta: smag@tec.dk
 
-institute: programmeringsspecialet, datateknikker
-affiliation: TEC
-
-lang: da-DK
-
 order: 4
 draft: true
 ---
 
-### Download Hive
+## Download Hive
 
 I en browser, søg efter "hive download". Naviger frem til den nyeste, find de binære filer. \
 Netop nu er version 4.2.1 den seneste.
@@ -49,6 +26,8 @@ wget https://dlcdn.apache.org/hive/hive-q.q.q/apache-hive-q.q.q-bin.tar.gz
 ```bash
 tar xvzf apache-hive-q.q.q-bin.tar.gz -C BigData
 ```
+
+## Opsætning
 
 ### Redier hive-miljø i `.bashrc`
 ```bash

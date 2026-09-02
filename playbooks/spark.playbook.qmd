@@ -4,34 +4,12 @@ subtitle: "Opsætning af Spark til brug i BagData 2, under wsl"
 
 order: 3
 
-format: 
-    html:
-        default
-        # title: Hest
-    typst:
-        # title: Spark setup 
-        toc: true
-        output-file: Spark_setup.pdf
-    revealjs: 
-        toc: true
-        output-file: Spark_setup_slide.html
-        slide-level: 3
-        smaller: true
-        scrollable: true
-
-# bibliography: ../bib/IoT 1 nov 25/IoT 1 nov 25.bib
-number-sections: true
-
 date: 2026-09-1
 date-modified: 2026-09-1
 
 author: Søren Magnusson
 author-meta: smag@tec.dk
 
-institute: programmeringsspecialet, datateknikker
-affiliation: TEC
-
-lang: da-DK
 # draft: true
 ---
 

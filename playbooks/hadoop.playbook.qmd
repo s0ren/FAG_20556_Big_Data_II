@@ -2,41 +2,19 @@
 title: "Hadoop setup"
 subtitle: "Opsætning af hadoop til brug i BagData 2, under wsl"
 
-format: 
-    html:
-        default
-        # title: Hest
-    typst:
-        # title: Hadoop setup 
-        toc: true
-        output-file: Hadoop_setup.pdf
-    revealjs: 
-        toc: true
-        output-file: Hadoop_setup_slide.html
-        slide-level: 3
-        smaller: true
-        scrollable: true
-
-# bibliography: ../bib/IoT 1 nov 25/IoT 1 nov 25.bib
-number-sections: true
-
 date: 2026-09-1
 date-modified: 2026-09-1
 
 author: Søren Magnusson
 author-meta: smag@tec.dk
 
-institute: programmeringsspecialet, datateknikker
-affiliation: TEC
-
-lang: da-DK
-
 order: 3
 
 # draft: true
 ---
 
-### Download hadoop
+
+## Download hadoop
 
 - Åben en browser og søg på "hadoop download".
 - find den nyeste udgave af hadoop
