@@ -9,31 +9,37 @@ order: 3
 # draft: true
 ---
 
+### Start med at skifte til \~
 
-### Start med at skifte til ~
-```bash
+``` bash
 cd ~
 ```
+
 check
-```
+
+```         
 ***:~$ cd ~
 ***:~$ pwd
 /home/[user]
 ```
+
 ### Spark download
 
-- Åben en browser og søg på "spark download".
-- vælg den nyeste udgave af spark
-- vælg "Prebuilt with user-provided Apache Hadoop"
-- klick på linket "xxx.tgz", neden for
-- på linket "xxx.tgz" filen, højre klik og "kopier link adresse"
+-   Åben en browser og søg på "spark download".
+-   vælg den nyeste udgave af spark
+-   vælg "Prebuilt with user-provided Apache Hadoop"
+-   klick på linket "xxx.tgz", neden for
+-   på linket "xxx.tgz" filen, højre klik og "kopier link adresse"
 
 I konsollen, brug `wget`:
-```bash
+
+``` bash
 wget https://dlcdn.apache.org/spark/spark-z.z.z/spark-z.z.z-bin-without-hadoop.tgz
 ```
-Check sparkfilens størrelse og dato 
-```
+
+Check sparkfilens størrelse og dato
+
+```         
 $ ls -l
 total 1027928
 drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
@@ -42,11 +48,14 @@ drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
 ```
 
 ### Udpak
-```bash
+
+``` bash
 tar xvzf spark-z.z.z-bin-without-hadoop.tgz -C BigData/
 ```
+
 check
-```bash
+
+``` bash
 $ ls -l BigData/
 total 8
 drwxr-xr-x 13 smag smag 4096 Aug 31 16:39 hadoop-3.5.0
@@ -54,9 +63,12 @@ drwxr-xr-x 13 smag smag 4096 Jul 11 18:25 spark-4.2.0-bin-without-hadoop
 ```
 
 ### Rediger `.bashrc`
+
 Tilføj nederst:
-```bash   
+
+``` bash
 # Spark
+export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 export SPARK_HOME=/home/[user]/BigData/spark-z.z.z-bin-without-hadoop
 export PATH=$SPARK_HOME/bin:$PATH
 export PATH=$SPARK_HOME/sbin:$PATH
@@ -64,31 +76,50 @@ export PATH=$SPARK_HOME/sbin:$PATH
 
 Husk at opdatere environment ved at køre `source ~/.bashrc`!
 
-### Kopier `sperk-env.sh`
+### Kopier `spark-env.sh`
+
 I `~/BigData/spark-z.z.z-bin-without-hadoop/conf` skal `spark-env.sh.template` kopieres til `spark-env.sh`:
-```bash
+
+``` bash
 cp BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh.template BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh
 ```
 
 ### Rediger `spark-env.sh`
+Åben filen `~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh`
+Tilføj nederst:
+```bash
+SPARK_MASTER_HOST=0.0.0.0
+```
 
 
 ### Start Spark
-```bash
+
+``` bash
 start-master.sh 
 start-worker.sh spark://localhost:7077
 ```
 
 Check ved at køre et job:
-```bash
+
+``` bash
 spark-submit --master spark://localhost:7077 BigData/spark-z.z.z-bin-without-hadoop/examples/src/main/python/wordcount.py /user/smag/README.txt
 ```
 
-I mappen `spark-z.z.z-bin-without-hadoop/examples/src/main/python` kan man finde nogle eksempler. \
+::: callout-tip
+## Hvis *wordcount* kører og viser en liste, så er du færdig!
+
+Med mindre du vil lidt mere...
+:::
+
 Wordcount regnes for at være "hello world" i Big Data. Det tæller hyppigheden af de ord der i en tekstfil.
 
-## Start op stop
-Hvis man vil starte og stoppe spark med de medfølgende `start-all.sh`og `stop-all.sh` skal man duplikere følgende (bare uden `export`) fra `.bashrc`:
+I mappen `spark-z.z.z-bin-without-hadoop/examples/src/main/python` kan man finde nogle eksempler.\
+
+
+## Start og stop all
+
+Hvis man vil starte og stoppe spark med de medfølgende `start-all.sh`og `stop-all.sh` skal man duplikere følgende (bare uden `export`) fra `.bashrc` over i bunden af `~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh`:
+
 ```bash
 HADOOP_HOME=/home/[user]]/BigData/hadoop-x.x.x
 HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
@@ -99,16 +130,18 @@ SPARK_DIST_CLASSPATH=$(hadoop classpath)
 SPARK_HOME=/home/smag/BigData/spark-z.z.z-bin-without-hadoop
 ```
 
-Desværre er der navnesammenfald mellem _hadoops_ og _sparks_ udgaver af `start-all.sh`og `stop-all.sh`. Så de skal kaldes med 3fuld sti, hvis man vil være sikker.
+Desværre er der navnesammenfald mellem *hadoops* og *sparks* udgaver af `start-all.sh`og `stop-all.sh`. Så de skal kaldes med 3fuld sti, hvis man vil være sikker.
 
 Start og stop hadoop
-```bash
+
+``` bash
 BigData/hadoop-x.x.x/sbin/start-all.sh
 BigData/hadoop-x.x.x/sbin/stop-all.sh
-``` 
+```
 
 Start og stop spark
-```bash
+
+``` bash
 BigData/spark-z.z.z-bin-without-hadoop/sbin/start-all.sh
 BigData/spark-z.z.z-bin-without-hadoop/sbin/stop-all.sh
-``` 
+```
