@@ -6,23 +6,27 @@
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/spark.playbook.html</loc>
-    <lastmod>2026-09-02T08:07:51.509Z</lastmod>
+    <lastmod>2026-09-02T11:39:36.450Z</lastmod>
   </url>
   <url>
-    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/Spark_setup_slide.html</loc>
-    <lastmod>2026-09-02T08:07:51.509Z</lastmod>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/spark.playbook.slide.html</loc>
+    <lastmod>2026-09-02T11:43:45.047Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hive.playbook.html</loc>
-    <lastmod>2026-09-02T08:08:26.246Z</lastmod>
+    <lastmod>2026-09-02T11:33:03.970Z</lastmod>
   </url>
   <url>
-    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/Hive_setup_slide.html</loc>
-    <lastmod>2026-09-02T08:08:26.246Z</lastmod>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hive.playbook.slide.html</loc>
+    <lastmod>2026-09-02T11:43:40.334Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/git.playbook.html</loc>
-    <lastmod>2026-08-31T16:42:14.989Z</lastmod>
+    <lastmod>2026-09-02T11:30:15.861Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/git.playbook.slide.html</loc>
+    <lastmod>2026-09-02T11:43:36.169Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/index.html</loc>
@@ -37,20 +41,20 @@
     <lastmod>2026-08-31T05:20:16.317Z</lastmod>
   </url>
   <url>
-    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/Hadoop_setup_slide.html</loc>
-    <lastmod>2026-09-02T08:09:05.455Z</lastmod>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hadoop.playbook.slide.html</loc>
+    <lastmod>2026-09-02T11:43:38.312Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hadoop.playbook.html</loc>
-    <lastmod>2026-09-02T08:09:05.455Z</lastmod>
+    <lastmod>2026-09-02T11:31:41.624Z</lastmod>
   </url>
   <url>
-    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/Linux_prep_slide.html</loc>
-    <lastmod>2026-09-02T08:08:13.385Z</lastmod>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/linux_prep.playbook.slide.html</loc>
+    <lastmod>2026-09-02T11:43:43.029Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/linux_prep.playbook.html</loc>
-    <lastmod>2026-09-02T08:08:13.385Z</lastmod>
+    <lastmod>2026-09-02T11:35:42.619Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/readme.html</loc>

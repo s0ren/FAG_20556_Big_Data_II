@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="smag@tec.dk">
 
 <title>Git prep – 20556 Big Data modeller og datamodellering</title>
 <style>
@@ -244,15 +245,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">På denne side</h2>
    
   <ul>
-  <li><a href="#git-repo-i-mit-home-dir" id="toc-git-repo-i-mit-home-dir" class="nav-link active" data-scroll-target="#git-repo-i-mit-home-dir">Git repo i mit home dir</a>
+  <li><a href="#git-med-mange-filer" id="toc-git-med-mange-filer" class="nav-link active" data-scroll-target="#git-med-mange-filer"><span class="header-section-number">1</span> Git med mange filer</a>
   <ul class="collapse">
-  <li><a href="#skift-til-aka-home-dir" id="toc-skift-til-aka-home-dir" class="nav-link" data-scroll-target="#skift-til-aka-home-dir">skift til <code>~</code> (aka home dir)</a></li>
-  <li><a href="#opret-.gitignore" id="toc-opret-.gitignore" class="nav-link" data-scroll-target="#opret-.gitignore">Opret <code>.gitignore</code></a></li>
-  <li><a href="#initialiser-git-repo" id="toc-initialiser-git-repo" class="nav-link" data-scroll-target="#initialiser-git-repo">Initialiser git repo</a></li>
-  <li><a href="#tilføj-.gitignoretil-repoet" id="toc-tilføj-.gitignoretil-repoet" class="nav-link" data-scroll-target="#tilføj-.gitignoretil-repoet">Tilføj <code>.gitignore</code>til repoet</a></li>
+  <li><a href="#git-repo-i-mit-home-dir" id="toc-git-repo-i-mit-home-dir" class="nav-link" data-scroll-target="#git-repo-i-mit-home-dir"><span class="header-section-number">1.1</span> Git repo i mit home dir</a>
+  <ul class="collapse">
+  <li><a href="#skift-til-aka-home-dir" id="toc-skift-til-aka-home-dir" class="nav-link" data-scroll-target="#skift-til-aka-home-dir"><span class="header-section-number">1.1.1</span> skift til <code>~</code> (aka home dir)</a></li>
+  <li><a href="#opret-.gitignore" id="toc-opret-.gitignore" class="nav-link" data-scroll-target="#opret-.gitignore"><span class="header-section-number">1.1.2</span> Opret <code>.gitignore</code></a></li>
+  <li><a href="#initialiser-git-repo" id="toc-initialiser-git-repo" class="nav-link" data-scroll-target="#initialiser-git-repo"><span class="header-section-number">1.1.3</span> Initialiser git repo</a></li>
+  <li><a href="#tilføj-.gitignoretil-repoet" id="toc-tilføj-.gitignoretil-repoet" class="nav-link" data-scroll-target="#tilføj-.gitignoretil-repoet"><span class="header-section-number">1.1.4</span> Tilføj <code>.gitignore</code>til repoet</a></li>
+  </ul></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Andre formater</h2><ul><li><a href="git.playbook.slide.html"><i class="bi bi-file-slides"></i>Slides</a></li><li><a href="git.playbook.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -264,11 +268,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Forfatter</div>
+  <div class="quarto-title-meta-heading">Tilknytning</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Søren Magnusson </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            programmeringsspecialet, datateknikker
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
+    <div>
+    <div class="quarto-title-meta-heading">Udgivet</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">1. september 2026</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Ændret</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">1. september 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -277,35 +306,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="git-repo-i-mit-home-dir" class="level2">
-<h2 class="anchored" data-anchor-id="git-repo-i-mit-home-dir">Git repo i mit home dir</h2>
+<section id="git-med-mange-filer" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Git med mange filer</h1>
+<p>Her er et projekt hvor der er mange filer, men kun nogle få jeg ændrer, og som det giver mening at køre versionskontrol på.</p>
+<p>Her i viser jeg form for løsning på den udfordring.<br>
+Det går mest ud på at <strong>ignorere</strong>.</p>
+<section id="git-repo-i-mit-home-dir" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="git-repo-i-mit-home-dir"><span class="header-section-number">1.1</span> Git repo i mit home dir</h2>
 <p>Jeg laver et git repo i mit hjemme dir, så alle ændinger kan gemmes. <strong>Men</strong> der kommer hurtigt for mange filer, derfor laver jeg også en <code>.gitignore</code></p>
-<section id="skift-til-aka-home-dir" class="level3">
-<h3 class="anchored" data-anchor-id="skift-til-aka-home-dir">skift til <code>~</code> (aka home dir)</h3>
+<section id="skift-til-aka-home-dir" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="skift-til-aka-home-dir"><span class="header-section-number">1.1.1</span> skift til <code>~</code> (aka home dir)</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="opret-.gitignore" class="level3">
-<h3 class="anchored" data-anchor-id="opret-.gitignore">Opret <code>.gitignore</code></h3>
+<section id="opret-.gitignore" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="opret-.gitignore"><span class="header-section-number">1.1.2</span> Opret <code>.gitignore</code></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"*"</span> <span class="op">&gt;&gt;</span> .gitignore</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Så skal der gerne være en <code>.gitignore</code> med bare</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="initialiser-git-repo" class="level3">
-<h3 class="anchored" data-anchor-id="initialiser-git-repo">Initialiser git repo</h3>
+<section id="initialiser-git-repo" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="initialiser-git-repo"><span class="header-section-number">1.1.3</span> Initialiser git repo</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-m</span> main</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Konfig navn og email</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"John Doe"</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email johndoe@example.com</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="tilføj-.gitignoretil-repoet" class="level3">
-<h3 class="anchored" data-anchor-id="tilføj-.gitignoretil-repoet">Tilføj <code>.gitignore</code>til repoet</h3>
+<section id="tilføj-.gitignoretil-repoet" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="tilføj-.gitignoretil-repoet"><span class="header-section-number">1.1.4</span> Tilføj <code>.gitignore</code>til repoet</h3>
 <p>Nu kan man tilfæje filer til git repoet, en ad gangen, uden at få overfyldt <code>git status</code>, eller git panelet i VSCode.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-f</span> .gitignore</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Så kan man lave commits på den fil, enten i VSCode git panel eller i shell:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> first .gitignore</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
 </section>
 </section>
 

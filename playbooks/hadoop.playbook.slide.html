@@ -11,7 +11,7 @@
 
   <meta name="author" content="smag@tec.dk">
   <meta name="dcterms.date" content="2026-09-01">
-  <title>20556 Big Data modeller og datamodellering – Spark setup</title>
+  <title>20556 Big Data modeller og datamodellering – Hadoop setup</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -195,8 +195,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Spark setup</h1>
-  <p class="subtitle">Opsætning af Spark til brug i BagData 2, under wsl</p>
+  <h1 class="title">Hadoop setup</h1>
+  <p class="subtitle">Opsætning af hadoop til brug i BagData 2, under wsl</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -210,131 +210,170 @@ Søren Magnusson
 </div>
 
   <p class="date">2026-09-01</p>
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Indholdsfortegnelse</h2>
-<ul>
-<li><a href="#/playbook" id="/toc-playbook"><span class="header-section-number">1</span> Playbook</a>
-<ul>
-<li><a href="#/start-med-at-skifte-til" id="/toc-start-med-at-skifte-til"><span class="header-section-number">1.1</span> Start med at skifte til ~</a></li>
-<li><a href="#/spark-download" id="/toc-spark-download"><span class="header-section-number">1.2</span> Spark download</a></li>
-<li><a href="#/udpak" id="/toc-udpak"><span class="header-section-number">1.3</span> Udpak</a></li>
-<li><a href="#/rediger-.bashrc" id="/toc-rediger-.bashrc"><span class="header-section-number">1.4</span> Rediger <code>.bashrc</code></a></li>
-<li><a href="#/kopier-spark-env.sh" id="/toc-kopier-spark-env.sh"><span class="header-section-number">1.5</span> Kopier <code>spark-env.sh</code></a></li>
-<li><a href="#/rediger-spark-env.sh" id="/toc-rediger-spark-env.sh"><span class="header-section-number">1.6</span> Rediger <code>spark-env.sh</code></a></li>
-<li><a href="#/start-spark" id="/toc-start-spark"><span class="header-section-number">1.7</span> Start Spark</a></li>
-</ul></li>
-<li><a href="#/start-og-stop-all" id="/toc-start-og-stop-all"><span class="header-section-number">2</span> Start og stop all</a></li>
-</ul>
-</nav>
 </section>
 <section>
-<section id="playbook" class="title-slide slide level2 center" data-number="1">
-<h2><span class="header-section-number">1</span> Playbook</h2>
-
-</section>
-<section id="start-med-at-skifte-til" class="slide level3" data-number="1.1">
-<h3><span class="header-section-number">1.1</span> Start med at skifte til ~</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="bu">cd</span> ~</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p>check</p>
-<pre><code>***:~$ cd ~
-***:~$ pwd
-/home/[user]</code></pre>
-</section>
-<section id="spark-download" class="slide level3" data-number="1.2">
-<h3><span class="header-section-number">1.2</span> Spark download</h3>
+<section id="download-hadoop" class="title-slide slide level2 center" data-number="1">
+<h2><span class="header-section-number">1</span> Download hadoop</h2>
 <ul>
-<li>Åben en browser og søg på “spark download”.</li>
-<li>vælg den nyeste udgave af spark</li>
-<li>vælg “Prebuilt with user-provided Apache Hadoop”</li>
-<li>klick på linket “xxx.tgz”, neden for</li>
-<li>på linket “xxx.tgz” filen, højre klik og “kopier link adresse”</li>
+<li>Åben en browser og søg på “hadoop download”.</li>
+<li>find den nyeste udgave af hadoop</li>
+<li>åbn linket “binary”</li>
+<li>på linket til “x.tar.gz” filen, højre klik og “kopier link adresse”</li>
 </ul>
-<p>I konsollen, brug <code>wget</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a></a><span class="fu">wget</span> https://dlcdn.apache.org/spark/spark-z.z.z/spark-z.z.z-bin-without-hadoop.tgz</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Check sparkfilens størrelse og dato</p>
+<p>Nu kan du paste linket i din command shell, så du giver linket som parameter til <code>wget</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="fu">wget</span> https://dlcdn.apache.org/hadoop/common/hadoop-x.x.x/hadoop-x.x.x.tar.gz</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Når den er færdig, kør</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>$ ls -l
-total 1027928
-drwxr-xr-x 4 smag smag      4096 Aug 31 17:25 BigData
--rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz
--rw-r--r-- 1 smag smag 471301088 Jul 11 18:36 spark-4.2.0-bin-without-hadoop.tgz</code></pre>
+total 567660
+-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz</code></pre>
 </section>
-<section id="udpak" class="slide level3" data-number="1.3">
-<h3><span class="header-section-number">1.3</span> Udpak</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a></a><span class="fu">tar</span> xvzf spark-z.z.z-bin-without-hadoop.tgz <span class="at">-C</span> BigData/</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p>check</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a></a><span class="ex">$</span> ls <span class="at">-l</span> BigData/</span>
-<span id="cb6-2"><a></a><span class="ex">total</span> 8</span>
-<span id="cb6-3"><a></a><span class="ex">drwxr-xr-x</span> 13 smag smag 4096 Aug 31 16:39 hadoop-3.5.0</span>
-<span id="cb6-4"><a></a><span class="ex">drwxr-xr-x</span> 13 smag smag 4096 Jul 11 18:25 spark-4.2.0-bin-without-hadoop</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="rediger-.bashrc" class="slide level3" data-number="1.4">
-<h3><span class="header-section-number">1.4</span> Rediger <code>.bashrc</code></h3>
-<p>Tilføj nederst:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a></a><span class="co"># Spark</span></span>
-<span id="cb7-2"><a></a><span class="bu">export</span> <span class="va">SPARK_DIST_CLASSPATH</span><span class="op">=</span><span class="va">$(</span><span class="ex">hadoop</span> classpath<span class="va">)</span></span>
-<span id="cb7-3"><a></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>/BigData/spark-z.z.z-bin-without-hadoop</span>
-<span id="cb7-4"><a></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span>
-<span id="cb7-5"><a></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/sbin:<span class="va">$PATH</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Husk at opdatere environment ved at køre <code>source ~/.bashrc</code>!</p>
-</section>
-<section id="kopier-spark-env.sh" class="slide level3" data-number="1.5">
-<h3><span class="header-section-number">1.5</span> Kopier <code>spark-env.sh</code></h3>
-<p>I <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf</code> skal <code>spark-env.sh.template</code> kopieres til <code>spark-env.sh</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a></a><span class="fu">cp</span> BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh.template BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="rediger-spark-env.sh" class="slide level3" data-number="1.6">
-<h3><span class="header-section-number">1.6</span> Rediger <code>spark-env.sh</code></h3>
-<p>Åben filen <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</code> Tilføj nederst:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a></a><span class="va">SPARK_MASTER_HOST</span><span class="op">=</span>0.0.0.0</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="start-spark" class="slide level3" data-number="1.7">
-<h3><span class="header-section-number">1.7</span> Start Spark</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a></a><span class="ex">start-master.sh</span> </span>
-<span id="cb10-2"><a></a><span class="ex">start-worker.sh</span> spark://localhost:7077</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Check ved at køre et job:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a></a><span class="ex">spark-submit</span> <span class="at">--master</span> spark://localhost:7077 BigData/spark-z.z.z-bin-without-hadoop/examples/src/main/python/wordcount.py /user/smag/README.txt</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Hvis <em>wordcount</em> kører og viser en liste, så er du færdig!</strong></p>
-</div>
-<div class="callout-content">
-<p>Med mindre du vil lidt mere…</p>
-</div>
-</div>
-</div>
-<p>Wordcount regnes for at være “hello world” i Big Data. Det tæller hyppigheden af de ord der i en tekstfil.</p>
-<p>I mappen <code>spark-z.z.z-bin-without-hadoop/examples/src/main/python</code> kan man finde nogle eksempler.<br>
-</p>
+<section id="udpak-hadoop" class="slide level3" data-number="1.1">
+<h3><span class="header-section-number">1.1</span> Udpak hadoop</h3>
+<p>Først skal vi have en mappe (folder, directory etc) til alle BigData-tingene:</p>
+<pre><code>mkdir ~/BigData</code></pre>
+<pre><code>$ ls -l
+total 567668
+drwxr-xr-x 2 smag smag      4096 Aug 31 16:02 BigData
+-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz</code></pre>
+<p>Så udpakker vi:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a></a><span class="fu">tar</span> xvzf hadoop-3.5.0.tar.gz <span class="at">-C</span> ~/BigData/</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>check:</p>
+<pre><code>$ ls -l BigData/
+total 4
+drwxr-xr-x 11 smag smag 4096 Mar 24 18:31 hadoop-3.5.0</code></pre>
 </section></section>
-<section id="start-og-stop-all" class="title-slide slide level2 center" data-number="2">
-<h2><span class="header-section-number">2</span> Start og stop all</h2>
-<p>Spark har to medfølgende scripts, der starter og stopper spark master og worker mv; , <code>start-all.sh</code> og <code>stop-all.sh</code>. De kører udenfor brugerens miljø, som vi har opsat i <code>.bashrc</code>.</p>
-<p>Derfor skal man duplikere de relevante linjer fra <code>.bashrc</code> over i bunden af <code>~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a></a><span class="va">HADOOP_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>]/BigData/hadoop-x.x.x</span>
-<span id="cb12-2"><a></a><span class="va">HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="op">=</span><span class="va">$HADOOP_HOME</span>/lib/native</span>
-<span id="cb12-3"><a></a><span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$HADOOP_HOME</span>/sbin:<span class="va">$HADOOP_HOME</span>/bin</span>
-<span id="cb12-4"><a></a><span class="va">HADOOP_OPTS</span><span class="op">=</span><span class="st">"-Djava.library.path=</span><span class="va">$HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="st">"</span></span>
-<span id="cb12-5"><a></a></span>
-<span id="cb12-6"><a></a><span class="va">SPARK_DIST_CLASSPATH</span><span class="op">=</span><span class="va">$(</span><span class="ex">hadoop</span> classpath<span class="va">)</span></span>
-<span id="cb12-7"><a></a><span class="va">SPARK_HOME</span><span class="op">=</span>/home/smag/BigData/spark-z.z.z-bin-without-hadoop</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Bemærk</strong>: <code>[user]</code> og <code>x.x.x</code> skal erstattes med din bruger og hadoop-versionen, du har downloaded.<br>
-Desuden behøver der ikke stå <code>export</code> foran variablerne, da de <em>kun</em> skal bruges i det script, der starter og stopper spark.</p>
-<p>Desværre er der navnesammenfald mellem <em>hadoops</em> og <em>sparks</em> udgaver af <code>start-all.sh</code>og <code>stop-all.sh</code>. Så de skal kaldes med fuld sti, hvis man vil være sikker.<br>
-Man sikkert lave et nyt script der starter og stopper både hadoop og spark…</p>
-<p>Start og stop hadoop</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a></a><span class="ex">BigData/hadoop-x.x.x/sbin/start-all.sh</span></span>
-<span id="cb13-2"><a></a><span class="ex">BigData/hadoop-x.x.x/sbin/stop-all.sh</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Start og stop spark</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a></a><span class="ex">BigData/spark-z.z.z-bin-without-hadoop/sbin/start-all.sh</span></span>
-<span id="cb14-2"><a></a><span class="ex">BigData/spark-z.z.z-bin-without-hadoop/sbin/stop-all.sh</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
-
+<section>
+<section id="opsæt-hadoop" class="title-slide slide level2 center" data-number="2">
+<h2><span class="header-section-number">2</span> Opsæt Hadoop</h2>
 
 </section>
+<section id="mere-env-i-.bashrc" class="slide level3" data-number="2.1">
+<h3><span class="header-section-number">2.1</span> Mere env i <code>.bashrc</code></h3>
+<p>Genbesøg <code>~/.bashrc</code> og tijføj i bunden:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a></a></span>
+<span id="cb8-2"><a></a><span class="co">## Hadoop</span></span>
+<span id="cb8-3"><a></a><span class="bu">export</span> <span class="va">HADOOP_HOME</span><span class="op">=</span>/home/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>/BigData/hadoop-x.x.x</span>
+<span id="cb8-4"><a></a><span class="bu">export</span> <span class="va">HADOOP_INSTALL</span><span class="op">=</span><span class="va">$HADOOP_HOME</span></span>
+<span id="cb8-5"><a></a><span class="bu">export</span> <span class="va">HADOOP_MAPRED_HOME</span><span class="op">=</span><span class="va">$HADOOP_HOME</span></span>
+<span id="cb8-6"><a></a><span class="bu">export</span> <span class="va">HADOOP_COMMON_HOME</span><span class="op">=</span><span class="va">$HADOOP_HOME</span></span>
+<span id="cb8-7"><a></a><span class="bu">export</span> <span class="va">HADOOP_HDFS_HOME</span><span class="op">=</span><span class="va">$HADOOP_HOME</span></span>
+<span id="cb8-8"><a></a><span class="bu">export</span> <span class="va">HADOOP_YARN_HOME</span><span class="op">=</span><span class="va">$HADOOP_HOME</span></span>
+<span id="cb8-9"><a></a><span class="bu">export</span> <span class="va">HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="op">=</span><span class="va">$HADOOP_HOME</span>/lib/native</span>
+<span id="cb8-10"><a></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$HADOOP_HOME</span>/sbin:<span class="va">$HADOOP_HOME</span>/bin</span>
+<span id="cb8-11"><a></a><span class="bu">export</span> <span class="va">HADOOP_OPTS</span><span class="op">=</span><span class="st">"-Djava.library.path=</span><span class="va">$HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="st">"</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Hvor <code>[user]</code> erstattes med din wsl-linux-bruger, og <code>x.x.x</code> med hadoop-versionen, du har downloaded.</p>
+<p><strong>Husk:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="hadoop-env.sh" class="slide level3" data-number="2.2">
+<h3><span class="header-section-number">2.2</span> <code>hadoop-env.sh</code></h3>
+<p>Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/hadoop-env.sh</code> Åben filen i VSCode og søg efter <code># export JAVA_HOME=</code> f.eks med søge-funktionen <strong>Ctrl</strong>-f ca linje 54. Lav en ny linje under den og tilføj</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a></a><span class="bu">export</span> <span class="va">JAVA_HOME</span><span class="op">=</span>/usr/lib/jvm/java-21-openjdk-amd64</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="opret-mapper-til-filsystemet-hdfs" class="slide level3" data-number="2.3">
+<h3><span class="header-section-number">2.3</span> Opret mapper til filsystemet hdfs</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a></a><span class="fu">mkdir</span> <span class="at">-p</span> BigData/hadoop-x.x.x/hdfs/<span class="dt">{namenode</span><span class="op">,</span><span class="dt">datanode}</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>check:</p>
+<pre><code>$ ls -l $HADOOP_HOME/hdfs
+total 8
+drwxr-xr-x 2 smag smag 4096 Aug 31 16:21 datanode
+drwxr-xr-x 2 smag smag 4096 Aug 31 16:21 namenode</code></pre>
+</section>
+<section id="formater-namenode" class="slide level3" data-number="2.4">
+<h3><span class="header-section-number">2.4</span> Formater namenode</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a></a><span class="ex">hdfs</span> namenode <span class="at">-format</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Der kommer en masse output. Det meste er af typen <em>INFO</em> som:</p>
+<pre><code>2026-08-31 16:43:19,714 INFO namenode.NameNode: registered UNIX signal handlers for [TERM, HUP, INT]
+2026-08-31 16:43:19,795 INFO namenode.NameNode: createNameNode [-format]</code></pre>
+<p>Kig efter <em>WARNING</em> og <em>ERROR</em> SKal slutte med</p>
+<pre><code>2026-08-31 16:43:20,709 INFO namenode.NameNode: SHUTDOWN_MSG: 
+/************************************************************
+SHUTDOWN_MSG: Shutting down NameNode at TEC-8230-LA0037/127.0.1.1
+************************************************************/</code></pre>
+<p>Det er “normalt”.</p>
+</section>
+<section id="rediger-bigdatahadoop-x.x.xetchadoopcore-site.xml" class="slide level3" data-number="2.5">
+<h3><span class="header-section-number">2.5</span> Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/core-site.xml</code></h3>
+<p>Tilføj inde i <code>&lt;configuration&gt;...&lt;/configuration&gt;</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource xml number-lines code-with-copy"><code class="sourceCode xml"><span id="cb16-1"><a></a>    &lt;<span class="kw">property</span>&gt;</span>
+<span id="cb16-2"><a></a>        &lt;<span class="kw">name</span>&gt;fs.defaultFS&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb16-3"><a></a>        &lt;<span class="kw">value</span>&gt;hdfs://localhost:9000&lt;/<span class="kw">value</span>&gt;</span>
+<span id="cb16-4"><a></a>        &lt;<span class="kw">description</span>&gt;The default file system URI&lt;/<span class="kw">description</span>&gt;</span>
+<span id="cb16-5"><a></a>    &lt;/<span class="kw">property</span>&gt;</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rediger-bigdatahadoop-x.x.xetchadoophdfs-site.xml" class="slide level3" data-number="2.6">
+<h3><span class="header-section-number">2.6</span> Rediger <code>~/BigData/hadoop-x.x.x/etc/hadoop/hdfs-site.xml</code></h3>
+<p>Tilføj inde i <code>&lt;configuration&gt;...&lt;/configuration&gt;</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource xml number-lines code-with-copy"><code class="sourceCode xml"><span id="cb17-1"><a></a>   &lt;<span class="kw">property</span>&gt;</span>
+<span id="cb17-2"><a></a>    &lt;<span class="kw">name</span>&gt;dfs.replication&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb17-3"><a></a>    &lt;<span class="kw">value</span>&gt;1&lt;/<span class="kw">value</span>&gt;</span>
+<span id="cb17-4"><a></a>  &lt;/<span class="kw">property</span>&gt;</span>
+<span id="cb17-5"><a></a></span>
+<span id="cb17-6"><a></a>  &lt;<span class="kw">property</span>&gt;</span>
+<span id="cb17-7"><a></a>    &lt;<span class="kw">name</span>&gt;dfs.namenode.name.dir&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb17-8"><a></a>    &lt;<span class="kw">value</span>&gt;file:///home/smag/BigData/hadoop-x.x.x/hdfs/namenode&lt;/<span class="kw">value</span>&gt;</span>
+<span id="cb17-9"><a></a>  &lt;/<span class="kw">property</span>&gt;</span>
+<span id="cb17-10"><a></a></span>
+<span id="cb17-11"><a></a>  &lt;<span class="kw">property</span>&gt;</span>
+<span id="cb17-12"><a></a>    &lt;<span class="kw">name</span>&gt;dfs.datanode.data.dir&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb17-13"><a></a>    &lt;<span class="kw">value</span>&gt;file:///home/smag/BigData/hadoop-x.x.x/hdfs/datanode&lt;/<span class="kw">value</span>&gt;</span>
+<span id="cb17-14"><a></a>  &lt;/<span class="kw">property</span>&gt;</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Husk</strong> at <code>x.x.x</code> skal ændres!</p>
+</section>
+<section id="start-hdfs" class="slide level3" data-number="2.7">
+<h3><span class="header-section-number">2.7</span> Start HDFS</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a></a><span class="ex">start-all.sh</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Der skulle være path til scriptet, ellers ligger det i <code>/home/[user]/BigData/hadoop-x.x.x/sbin/start-all.sh</code>, men så er der enten noget galt med <code>.bashrc</code> eller du har glemt at genindlæse den.<br>
+<strong>Husk</strong>: <code>[user]</code> og <code>x.x.x</code>skal ændres</p>
+</section>
+<section id="check-hvilke-hadoop-daemons-som-startede" class="slide level3" data-number="2.8">
+<h3><span class="header-section-number">2.8</span> Check hvilke Hadoop daemons som startede</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a></a><span class="ex">jps</span></span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a></a><span class="ex">$</span> jps</span>
+<span id="cb20-2"><a></a><span class="ex">40594</span> NodeManager</span>
+<span id="cb20-3"><a></a><span class="ex">40162</span> SecondaryNameNode</span>
+<span id="cb20-4"><a></a><span class="ex">39906</span> DataNode</span>
+<span id="cb20-5"><a></a><span class="ex">40436</span> ResourceManager</span>
+<span id="cb20-6"><a></a><span class="ex">39736</span> NameNode</span>
+<span id="cb20-7"><a></a><span class="ex">41038</span> Jps</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Alle 5 (fem) daemons (+Jps) skal køre, hvis <em>ikke</em> er der en fejl et sted i konfigurationerne ovenfor.</p>
+</section>
+<section id="afprøv-hfs-funtioner" class="slide level3" data-number="2.9">
+<h3><span class="header-section-number">2.9</span> Afprøv HFS funtioner</h3>
+<p>Man skal kunne se indhold i mapper på HDFS (men der er ikke noget endnu, så mere neden for)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a></a><span class="ex">hdfs</span> dfs <span class="at">-ls</span> /</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Lav nogen mapper.<br>
+Man skal af en eller anden grund oprette <code>/user</code>, og derunder en til brugeren, for at det virker “godt”.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a></a>       <span class="ex">hdfs</span> dfs <span class="at">-mkdir</span> /user</span>
+<span id="cb22-2"><a></a>       <span class="ex">hdfs</span> dfs <span class="at">-mkdir</span> /user/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span> <span class="co">#([user] DIT brugernavn)</span></span>
+<span id="cb22-3"><a></a></span>
+<span id="cb22-4"><a></a>       <span class="ex">hdfs</span> dfs <span class="at">-ls</span> /user/ </span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>$ hdfs dfs -ls /user/ 
+Found 1 items
+drwxr-xr-x   - smag supergroup          0 2026-08-31 16:54 /user/smag</code></pre>
+<p>Put en fil op i HDFS:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a></a><span class="ex">hdfs</span> dfs <span class="at">-put</span> BigData/hadoop-x.x.x/README.txt /user/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>    </span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a></a><span class="ex">$</span> hdfs dfs <span class="at">-ls</span> /user/smag</span>
+<span id="cb25-2"><a></a><span class="ex">Found</span> 1 items</span>
+<span id="cb25-3"><a></a><span class="ex">-rw-r--r--</span>   1 smag supergroup        175 2026-04-19 21:11 /user/smag/README.txt</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>List hele filen med <code>-cat</code></p>
+<pre><code>$ hdfs dfs -cat /user/smag/README.txt
+For the latest information about Hadoop, please visit our website at:
+
+   http://hadoop.apache.org/
+
+and our wiki, at:
+
+   https://cwiki.apache.org/confluence/display/HADOOP/</code></pre>
+<p>Hvis du kan se indholdet filen, <strong>så virker det</strong>! Prøv også lige at genstarte <em>wsl</em> og genstarte <em>hadoop</em></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a></a><span class="fu">sudo</span> reboot now</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>og lidt senere …</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a></a><span class="ex">start-all.sh</span></span>
+<span id="cb28-2"><a></a><span class="ex">hdfs</span> dfs <span class="at">-cat</span> /user/<span class="pp">[</span><span class="ss">user</span><span class="pp">]</span>/README.txt</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

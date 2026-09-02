@@ -72,15 +72,15 @@
     ]
   },
   {
-    "objectID": "playbooks/Spark_setup_slide.html#playbook",
-    "href": "playbooks/Spark_setup_slide.html#playbook",
+    "objectID": "playbooks/spark.playbook.slide.html#playbook",
+    "href": "playbooks/spark.playbook.slide.html#playbook",
     "title": "Spark setup",
     "section": "1 Playbook",
     "text": "1 Playbook"
   },
   {
-    "objectID": "playbooks/Spark_setup_slide.html#start-og-stop-all",
-    "href": "playbooks/Spark_setup_slide.html#start-og-stop-all",
+    "objectID": "playbooks/spark.playbook.slide.html#start-og-stop-all",
+    "href": "playbooks/spark.playbook.slide.html#start-og-stop-all",
     "title": "Spark setup",
     "section": "2 Start og stop all",
     "text": "2 Start og stop all\nSpark har to medfølgende scripts, der starter og stopper spark master og worker mv; , start-all.sh og stop-all.sh. De kører udenfor brugerens miljø, som vi har opsat i .bashrc.\nDerfor skal man duplikere de relevante linjer fra .bashrc over i bunden af ~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh:\nHADOOP_HOME=/home/[user]]/BigData/hadoop-x.x.x\nHADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native\nPATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin\nHADOOP_OPTS=\"-Djava.library.path=$HADOOP_COMMON_LIB_NATIVE_DIR\"\n\nSPARK_DIST_CLASSPATH=$(hadoop classpath)\nSPARK_HOME=/home/smag/BigData/spark-z.z.z-bin-without-hadoop\nBemærk: [user] og x.x.x skal erstattes med din bruger og hadoop-versionen, du har downloaded.\nDesuden behøver der ikke stå export foran variablerne, da de kun skal bruges i det script, der starter og stopper spark.\nDesværre er der navnesammenfald mellem hadoops og sparks udgaver af start-all.shog stop-all.sh. Så de skal kaldes med fuld sti, hvis man vil være sikker.\nMan sikkert lave et nyt script der starter og stopper både hadoop og spark…\nStart og stop hadoop\nBigData/hadoop-x.x.x/sbin/start-all.sh\nBigData/hadoop-x.x.x/sbin/stop-all.sh\nStart og stop spark\nBigData/spark-z.z.z-bin-without-hadoop/sbin/start-all.sh\nBigData/spark-z.z.z-bin-without-hadoop/sbin/stop-all.sh"
@@ -90,7 +90,7 @@
     "href": "playbooks/hive.playbook.html",
     "title": "Hive setup",
     "section": "",
-    "text": "0.1 Download Hive\nI en browser, søg efter “hive download”. Naviger frem til den nyeste, find de binære filer.\nNetop nu er version 4.2.1 den seneste.\nDownload med wget\nwget https://dlcdn.apache.org/hive/hive-q.q.q/apache-hive-q.q.q-bin.tar.gz\n\n\n0.2 udpak\ntar xvzf apache-hive-q.q.q-bin.tar.gz -C BigData\n\n\n0.3 Redier hive-miljø i .bashrc\nexport HIVE_HOME=\"/home/[user]/BigData/apache-hive-q.q.q-bin\"\nexport PATH=$PATH:$HIVE_HOME/bin\nexport HADOOP_CONF_DIR=$HADOOP_HOME/etc/Hadoop\nBemærk [user] er din user, q.q.q er den version du har downloaded. Husk: source .bashrc\n\n\n0.4 Kopier hive konfigurationsfil\ncp BigData/apache-hive-4.2.1-bin/conf/hive-default.xml.template BigData/apache-hive-4.2.1-bin/conf/hive-site.xml\nq.q.q bla bla\n\n\n0.5 Gør Hive til proxy for hadoop\nRediger $HadoopHome/etc/Hadoop/core-site.xml\nTilføj:\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.[user].groups&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.[user].hosts&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.server.hosts&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.server.groups&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n\n\n0.6 Genstart hadoop\n$HADOOP_HOME/sbin/stop-all.sh \n$HADOOP_HOME/sbin/start-all.sh \n\n\n0.7 Opret mapper og set rettighedder INDE i HDFS\nhdfs dfs -mkdir /tmp\nhdfs dfs -mkdir /user\nhdfs dfs -mkdir /user/hive\nhdfs dfs -mkdir /user/hive/warehouse\nhdfs dfs -chmod g+w /tmp\nhdfs dfs -chmod g+w /user/hive/warehouse\n\n\n0.8 Opdater hives mappe indstillinger i hive-site.xml\nRediger $HIVE_HOME/conf/hive-site.xml Find disse propperties og opdater deres værdier:\n&lt;property&gt;\n      &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;\n      &lt;value&gt;/user/hive/warehouse&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n      &lt;name&gt;hive.downloaded.resources.dir&lt;/name&gt;\n      &lt;value&gt;/tmp/${user.name}_resources&lt;/value&gt;\n      &lt;description&gt;&lt;/description&gt;\n&lt;/property&gt;\n&lt;property&gt;\n      &lt;name&gt;hive.exec.local.scratchdir&lt;/name&gt;\n      &lt;value&gt;/tmp/${user.name}&lt;/value&gt;\n      &lt;description&gt;Local scratch space for Hive jobs&lt;/description&gt;\n&lt;/property&gt;",
+    "text": "I en browser, søg efter “hive download”. Naviger frem til den nyeste, find de binære filer.\nNetop nu er version 4.2.1 den seneste.\nDownload med wget\nwget https://dlcdn.apache.org/hive/hive-q.q.q/apache-hive-q.q.q-bin.tar.gz\n\n\ntar xvzf apache-hive-q.q.q-bin.tar.gz -C BigData",
     "crumbs": [
       "Home",
       "Playbooks",
@@ -98,11 +98,49 @@
     ]
   },
   {
+    "objectID": "playbooks/hive.playbook.html#download-hive",
+    "href": "playbooks/hive.playbook.html#download-hive",
+    "title": "Hive setup",
+    "section": "",
+    "text": "I en browser, søg efter “hive download”. Naviger frem til den nyeste, find de binære filer.\nNetop nu er version 4.2.1 den seneste.\nDownload med wget\nwget https://dlcdn.apache.org/hive/hive-q.q.q/apache-hive-q.q.q-bin.tar.gz\n\n\ntar xvzf apache-hive-q.q.q-bin.tar.gz -C BigData",
+    "crumbs": [
+      "Home",
+      "Playbooks",
+      "Hive setup"
+    ]
+  },
+  {
+    "objectID": "playbooks/hive.playbook.html#opsætning",
+    "href": "playbooks/hive.playbook.html#opsætning",
+    "title": "Hive setup",
+    "section": "2 Opsætning",
+    "text": "2 Opsætning\n\n2.1 Redier hive-miljø i .bashrc\nexport HIVE_HOME=\"/home/[user]/BigData/apache-hive-q.q.q-bin\"\nexport PATH=$PATH:$HIVE_HOME/bin\nexport HADOOP_CONF_DIR=$HADOOP_HOME/etc/Hadoop\nBemærk [user] er din user, q.q.q er den version du har downloaded. Husk: source .bashrc\n\n\n2.2 Kopier hive konfigurationsfil\ncp BigData/apache-hive-4.2.1-bin/conf/hive-default.xml.template BigData/apache-hive-4.2.1-bin/conf/hive-site.xml\nq.q.q bla bla\n\n\n2.3 Gør Hive til proxy for hadoop\nRediger $HadoopHome/etc/Hadoop/core-site.xml\nTilføj:\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.[user].groups&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.[user].hosts&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.server.hosts&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n    &lt;name&gt;hadoop.proxyuser.server.groups&lt;/name&gt;\n    &lt;value&gt;*&lt;/value&gt;\n&lt;/property&gt;\n\n\n2.4 Genstart hadoop\n$HADOOP_HOME/sbin/stop-all.sh \n$HADOOP_HOME/sbin/start-all.sh \n\n\n2.5 Opret mapper og set rettighedder INDE i HDFS\nhdfs dfs -mkdir /tmp\nhdfs dfs -mkdir /user\nhdfs dfs -mkdir /user/hive\nhdfs dfs -mkdir /user/hive/warehouse\nhdfs dfs -chmod g+w /tmp\nhdfs dfs -chmod g+w /user/hive/warehouse\n\n\n2.6 Opdater hives mappe indstillinger i hive-site.xml\nRediger $HIVE_HOME/conf/hive-site.xml Find disse propperties og opdater deres værdier:\n&lt;property&gt;\n      &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;\n      &lt;value&gt;/user/hive/warehouse&lt;/value&gt;\n&lt;/property&gt;\n&lt;property&gt;\n      &lt;name&gt;hive.downloaded.resources.dir&lt;/name&gt;\n      &lt;value&gt;/tmp/${user.name}_resources&lt;/value&gt;\n      &lt;description&gt;&lt;/description&gt;\n&lt;/property&gt;\n&lt;property&gt;\n      &lt;name&gt;hive.exec.local.scratchdir&lt;/name&gt;\n      &lt;value&gt;/tmp/${user.name}&lt;/value&gt;\n      &lt;description&gt;Local scratch space for Hive jobs&lt;/description&gt;\n&lt;/property&gt;",
+    "crumbs": [
+      "Home",
+      "Playbooks",
+      "Hive setup"
+    ]
+  },
+  {
+    "objectID": "playbooks/hive.playbook.slide.html#download-hive",
+    "href": "playbooks/hive.playbook.slide.html#download-hive",
+    "title": "Hive setup",
+    "section": "1 Download Hive",
+    "text": "1 Download Hive\nI en browser, søg efter “hive download”. Naviger frem til den nyeste, find de binære filer.\nNetop nu er version 4.2.1 den seneste.\nDownload med wget\nwget https://dlcdn.apache.org/hive/hive-q.q.q/apache-hive-q.q.q-bin.tar.gz"
+  },
+  {
+    "objectID": "playbooks/hive.playbook.slide.html#opsætning",
+    "href": "playbooks/hive.playbook.slide.html#opsætning",
+    "title": "Hive setup",
+    "section": "2 Opsætning",
+    "text": "2 Opsætning"
+  },
+  {
     "objectID": "playbooks/git.playbook.html",
     "href": "playbooks/git.playbook.html",
     "title": "Git prep",
     "section": "",
-    "text": "Jeg laver et git repo i mit hjemme dir, så alle ændinger kan gemmes. Men der kommer hurtigt for mange filer, derfor laver jeg også en .gitignore\n\n\ncd ~\n\n\n\necho \"*\" &gt;&gt; .gitignore\nSå skal der gerne være en .gitignore med bare\n*\n\n\n\ngit init\ngit branch -m main\nKonfig navn og email\ngit config --global user.name \"John Doe\"\ngit config --global user.email johndoe@example.com\n\n\n\nNu kan man tilfæje filer til git repoet, en ad gangen, uden at få overfyldt git status, eller git panelet i VSCode.\ngit add -f .gitignore\nSå kan man lave commits på den fil, enten i VSCode git panel eller i shell:\ngit commit -m first .gitignore",
+    "text": "Her er et projekt hvor der er mange filer, men kun nogle få jeg ændrer, og som det giver mening at køre versionskontrol på.\nHer i viser jeg form for løsning på den udfordring.\nDet går mest ud på at ignorere.\n\n\nJeg laver et git repo i mit hjemme dir, så alle ændinger kan gemmes. Men der kommer hurtigt for mange filer, derfor laver jeg også en .gitignore\n\n\ncd ~\n\n\n\necho \"*\" &gt;&gt; .gitignore\nSå skal der gerne være en .gitignore med bare\n*\n\n\n\ngit init\ngit branch -m main\nKonfig navn og email\ngit config --global user.name \"John Doe\"\ngit config --global user.email johndoe@example.com\n\n\n\nNu kan man tilfæje filer til git repoet, en ad gangen, uden at få overfyldt git status, eller git panelet i VSCode.\ngit add -f .gitignore\nSå kan man lave commits på den fil, enten i VSCode git panel eller i shell:\ngit commit -m first .gitignore",
     "crumbs": [
       "Home",
       "Playbooks",
@@ -120,6 +158,13 @@
       "Playbooks",
       "Git prep"
     ]
+  },
+  {
+    "objectID": "playbooks/git.playbook.slide.html#git-repo-i-mit-home-dir",
+    "href": "playbooks/git.playbook.slide.html#git-repo-i-mit-home-dir",
+    "title": "Git prep",
+    "section": "1.1 Git repo i mit home dir",
+    "text": "1.1 Git repo i mit home dir\nJeg laver et git repo i mit hjemme dir, så alle ændinger kan gemmes. Men der kommer hurtigt for mange filer, derfor laver jeg også en .gitignore"
   },
   {
     "objectID": "index.html",
@@ -184,18 +229,37 @@
     ]
   },
   {
-    "objectID": "playbooks/Hadoop_setup_slide.html#opsæt-hadoop",
-    "href": "playbooks/Hadoop_setup_slide.html#opsæt-hadoop",
+    "objectID": "playbooks/hadoop.playbook.slide.html#download-hadoop",
+    "href": "playbooks/hadoop.playbook.slide.html#download-hadoop",
     "title": "Hadoop setup",
-    "section": "1 Opsæt Hadoop",
-    "text": "1 Opsæt Hadoop"
+    "section": "1 Download hadoop",
+    "text": "1 Download hadoop\n\nÅben en browser og søg på “hadoop download”.\nfind den nyeste udgave af hadoop\nåbn linket “binary”\npå linket til “x.tar.gz” filen, højre klik og “kopier link adresse”\n\nNu kan du paste linket i din command shell, så du giver linket som parameter til wget:\nwget https://dlcdn.apache.org/hadoop/common/hadoop-x.x.x/hadoop-x.x.x.tar.gz\nNår den er færdig, kør\nls -l\n$ ls -l\ntotal 567660\n-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz"
+  },
+  {
+    "objectID": "playbooks/hadoop.playbook.slide.html#opsæt-hadoop",
+    "href": "playbooks/hadoop.playbook.slide.html#opsæt-hadoop",
+    "title": "Hadoop setup",
+    "section": "2 Opsæt Hadoop",
+    "text": "2 Opsæt Hadoop"
   },
   {
     "objectID": "playbooks/hadoop.playbook.html",
     "href": "playbooks/hadoop.playbook.html",
     "title": "Hadoop setup",
     "section": "",
-    "text": "Åben en browser og søg på “hadoop download”.\nfind den nyeste udgave af hadoop\nåbn linket “binary”\npå linket til “x.tar.gz” filen, højre klik og “kopier link adresse”\n\nNu kan du paste linket i din command shell, så du giver linket som parameter til wget:\nwget https://dlcdn.apache.org/hadoop/common/hadoop-x.x.x/hadoop-x.x.x.tar.gz\nNår den er færdig, kør\nls -l\n$ ls -l\ntotal 567660\n-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz",
+    "text": "Åben en browser og søg på “hadoop download”.\nfind den nyeste udgave af hadoop\nåbn linket “binary”\npå linket til “x.tar.gz” filen, højre klik og “kopier link adresse”\n\nNu kan du paste linket i din command shell, så du giver linket som parameter til wget:\nwget https://dlcdn.apache.org/hadoop/common/hadoop-x.x.x/hadoop-x.x.x.tar.gz\nNår den er færdig, kør\nls -l\n$ ls -l\ntotal 567660\n-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz\n\n\nFørst skal vi have en mappe (folder, directory etc) til alle BigData-tingene:\nmkdir ~/BigData\n$ ls -l\ntotal 567668\ndrwxr-xr-x 2 smag smag      4096 Aug 31 16:02 BigData\n-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz\nSå udpakker vi:\ntar xvzf hadoop-3.5.0.tar.gz -C ~/BigData/\ncheck:\n$ ls -l BigData/\ntotal 4\ndrwxr-xr-x 11 smag smag 4096 Mar 24 18:31 hadoop-3.5.0",
+    "crumbs": [
+      "Home",
+      "Playbooks",
+      "Hadoop setup"
+    ]
+  },
+  {
+    "objectID": "playbooks/hadoop.playbook.html#download-hadoop",
+    "href": "playbooks/hadoop.playbook.html#download-hadoop",
+    "title": "Hadoop setup",
+    "section": "",
+    "text": "Åben en browser og søg på “hadoop download”.\nfind den nyeste udgave af hadoop\nåbn linket “binary”\npå linket til “x.tar.gz” filen, højre klik og “kopier link adresse”\n\nNu kan du paste linket i din command shell, så du giver linket som parameter til wget:\nwget https://dlcdn.apache.org/hadoop/common/hadoop-x.x.x/hadoop-x.x.x.tar.gz\nNår den er færdig, kør\nls -l\n$ ls -l\ntotal 567660\n-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz\n\n\nFørst skal vi have en mappe (folder, directory etc) til alle BigData-tingene:\nmkdir ~/BigData\n$ ls -l\ntotal 567668\ndrwxr-xr-x 2 smag smag      4096 Aug 31 16:02 BigData\n-rw-r--r-- 1 smag smag 581280703 Apr  1 22:43 hadoop-3.5.0.tar.gz\nSå udpakker vi:\ntar xvzf hadoop-3.5.0.tar.gz -C ~/BigData/\ncheck:\n$ ls -l BigData/\ntotal 4\ndrwxr-xr-x 11 smag smag 4096 Mar 24 18:31 hadoop-3.5.0",
     "crumbs": [
       "Home",
       "Playbooks",
@@ -206,8 +270,8 @@
     "objectID": "playbooks/hadoop.playbook.html#opsæt-hadoop",
     "href": "playbooks/hadoop.playbook.html#opsæt-hadoop",
     "title": "Hadoop setup",
-    "section": "1 Opsæt Hadoop",
-    "text": "1 Opsæt Hadoop\n\n1.1 Mere env i .bashrc\nGenbesøg ~/.bashrc og tijføj i bunden:\n\n## Hadoop\nexport HADOOP_HOME=/home/[user]/BigData/hadoop-x.x.x\nexport HADOOP_INSTALL=$HADOOP_HOME\nexport HADOOP_MAPRED_HOME=$HADOOP_HOME\nexport HADOOP_COMMON_HOME=$HADOOP_HOME\nexport HADOOP_HDFS_HOME=$HADOOP_HOME\nexport HADOOP_YARN_HOME=$HADOOP_HOME\nexport HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native\nexport PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin\nexport HADOOP_OPTS=\"-Djava.library.path=$HADOOP_COMMON_LIB_NATIVE_DIR\"\nHvor [user] erstattes med din wsl-linux-bruger, og x.x.x med hadoop-versionen, du har downloaded.\nHusk:\nsource ~/.bashrc\n\n\n1.2 hadoop-env.sh\nRediger ~/BigData/hadoop-x.x.x/etc/hadoop/hadoop-env.sh Åben filen i VSCode og søg efter # export JAVA_HOME= f.eks med søge-funktionen Ctrl-f ca linje 54. Lav en ny linje under den og tilføj\nexport JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64\n\n\n1.3 Opret mapper til filsystemet hdfs\nmkdir -p BigData/hadoop-x.x.x/hdfs/{namenode,datanode}\ncheck:\n$ ls -l $HADOOP_HOME/hdfs\ntotal 8\ndrwxr-xr-x 2 smag smag 4096 Aug 31 16:21 datanode\ndrwxr-xr-x 2 smag smag 4096 Aug 31 16:21 namenode\n\n\n1.4 Formater namenode\nhdfs namenode -format\nDer kommer en masse output. Det meste er af typen INFO som:\n2026-08-31 16:43:19,714 INFO namenode.NameNode: registered UNIX signal handlers for [TERM, HUP, INT]\n2026-08-31 16:43:19,795 INFO namenode.NameNode: createNameNode [-format]\nKig efter WARNING og ERROR SKal slutte med\n2026-08-31 16:43:20,709 INFO namenode.NameNode: SHUTDOWN_MSG: \n/************************************************************\nSHUTDOWN_MSG: Shutting down NameNode at TEC-8230-LA0037/127.0.1.1\n************************************************************/\nDet er “normalt”.\n\n\n1.5 Rediger ~/BigData/hadoop-x.x.x/etc/hadoop/core-site.xml\nTilføj inde i &lt;configuration&gt;...&lt;/configuration&gt;:\n    &lt;property&gt;\n        &lt;name&gt;fs.defaultFS&lt;/name&gt;\n        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;\n        &lt;description&gt;The default file system URI&lt;/description&gt;\n    &lt;/property&gt;\n\n\n1.6 Rediger ~/BigData/hadoop-x.x.x/etc/hadoop/hdfs-site.xml\nTilføj inde i &lt;configuration&gt;...&lt;/configuration&gt;:\n   &lt;property&gt;\n    &lt;name&gt;dfs.replication&lt;/name&gt;\n    &lt;value&gt;1&lt;/value&gt;\n  &lt;/property&gt;\n\n  &lt;property&gt;\n    &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;\n    &lt;value&gt;file:///home/smag/BigData/hadoop-x.x.x/hdfs/namenode&lt;/value&gt;\n  &lt;/property&gt;\n\n  &lt;property&gt;\n    &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;\n    &lt;value&gt;file:///home/smag/BigData/hadoop-x.x.x/hdfs/datanode&lt;/value&gt;\n  &lt;/property&gt;\nHusk at x.x.x skal ændres!\n\n\n1.7 Start HDFS\nstart-all.sh\nDer skulle være path til scriptet, ellers ligger det i /home/[user]/BigData/hadoop-x.x.x/sbin/start-all.sh, men så er der enten noget galt med .bashrc eller du har glemt at genindlæse den.\nHusk: [user] og x.x.xskal ændres\n\n\n1.8 Check hvilke Hadoop daemons som startede\njps\n$ jps\n40594 NodeManager\n40162 SecondaryNameNode\n39906 DataNode\n40436 ResourceManager\n39736 NameNode\n41038 Jps\nAlle 5 (fem) daemons (+Jps) skal køre, hvis ikke er der en fejl et sted i konfigurationerne ovenfor.\n\n\n1.9 Afprøv HFS funtioner\nMan skal kunne se indhold i mapper på HDFS (men der er ikke noget endnu, så mere neden for)\nhdfs dfs -ls /\nLav nogen mapper.\nMan skal af en eller anden grund oprette /user, og derunder en til brugeren, for at det virker “godt”.\n       hdfs dfs -mkdir /user\n       hdfs dfs -mkdir /user/[user] #([user] DIT brugernavn)\n\n       hdfs dfs -ls /user/ \n$ hdfs dfs -ls /user/ \nFound 1 items\ndrwxr-xr-x   - smag supergroup          0 2026-08-31 16:54 /user/smag\nPut en fil op i HDFS:\nhdfs dfs -put BigData/hadoop-x.x.x/README.txt /user/[user]    \n$ hdfs dfs -ls /user/smag\nFound 1 items\n-rw-r--r--   1 smag supergroup        175 2026-04-19 21:11 /user/smag/README.txt\nList hele filen med -cat\n$ hdfs dfs -cat /user/smag/README.txt\nFor the latest information about Hadoop, please visit our website at:\n\n   http://hadoop.apache.org/\n\nand our wiki, at:\n\n   https://cwiki.apache.org/confluence/display/HADOOP/\nHvis du kan se indholdet filen, så virker det! Prøv også lige at genstarte wsl og genstarte hadoop\nsudo reboot now\nog lidt senere …\nstart-all.sh\nhdfs dfs -cat /user/[user]/README.txt",
+    "section": "2 Opsæt Hadoop",
+    "text": "2 Opsæt Hadoop\n\n2.1 Mere env i .bashrc\nGenbesøg ~/.bashrc og tijføj i bunden:\n\n## Hadoop\nexport HADOOP_HOME=/home/[user]/BigData/hadoop-x.x.x\nexport HADOOP_INSTALL=$HADOOP_HOME\nexport HADOOP_MAPRED_HOME=$HADOOP_HOME\nexport HADOOP_COMMON_HOME=$HADOOP_HOME\nexport HADOOP_HDFS_HOME=$HADOOP_HOME\nexport HADOOP_YARN_HOME=$HADOOP_HOME\nexport HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native\nexport PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin\nexport HADOOP_OPTS=\"-Djava.library.path=$HADOOP_COMMON_LIB_NATIVE_DIR\"\nHvor [user] erstattes med din wsl-linux-bruger, og x.x.x med hadoop-versionen, du har downloaded.\nHusk:\nsource ~/.bashrc\n\n\n2.2 hadoop-env.sh\nRediger ~/BigData/hadoop-x.x.x/etc/hadoop/hadoop-env.sh Åben filen i VSCode og søg efter # export JAVA_HOME= f.eks med søge-funktionen Ctrl-f ca linje 54. Lav en ny linje under den og tilføj\nexport JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64\n\n\n2.3 Opret mapper til filsystemet hdfs\nmkdir -p BigData/hadoop-x.x.x/hdfs/{namenode,datanode}\ncheck:\n$ ls -l $HADOOP_HOME/hdfs\ntotal 8\ndrwxr-xr-x 2 smag smag 4096 Aug 31 16:21 datanode\ndrwxr-xr-x 2 smag smag 4096 Aug 31 16:21 namenode\n\n\n2.4 Formater namenode\nhdfs namenode -format\nDer kommer en masse output. Det meste er af typen INFO som:\n2026-08-31 16:43:19,714 INFO namenode.NameNode: registered UNIX signal handlers for [TERM, HUP, INT]\n2026-08-31 16:43:19,795 INFO namenode.NameNode: createNameNode [-format]\nKig efter WARNING og ERROR SKal slutte med\n2026-08-31 16:43:20,709 INFO namenode.NameNode: SHUTDOWN_MSG: \n/************************************************************\nSHUTDOWN_MSG: Shutting down NameNode at TEC-8230-LA0037/127.0.1.1\n************************************************************/\nDet er “normalt”.\n\n\n2.5 Rediger ~/BigData/hadoop-x.x.x/etc/hadoop/core-site.xml\nTilføj inde i &lt;configuration&gt;...&lt;/configuration&gt;:\n    &lt;property&gt;\n        &lt;name&gt;fs.defaultFS&lt;/name&gt;\n        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;\n        &lt;description&gt;The default file system URI&lt;/description&gt;\n    &lt;/property&gt;\n\n\n2.6 Rediger ~/BigData/hadoop-x.x.x/etc/hadoop/hdfs-site.xml\nTilføj inde i &lt;configuration&gt;...&lt;/configuration&gt;:\n   &lt;property&gt;\n    &lt;name&gt;dfs.replication&lt;/name&gt;\n    &lt;value&gt;1&lt;/value&gt;\n  &lt;/property&gt;\n\n  &lt;property&gt;\n    &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;\n    &lt;value&gt;file:///home/smag/BigData/hadoop-x.x.x/hdfs/namenode&lt;/value&gt;\n  &lt;/property&gt;\n\n  &lt;property&gt;\n    &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;\n    &lt;value&gt;file:///home/smag/BigData/hadoop-x.x.x/hdfs/datanode&lt;/value&gt;\n  &lt;/property&gt;\nHusk at x.x.x skal ændres!\n\n\n2.7 Start HDFS\nstart-all.sh\nDer skulle være path til scriptet, ellers ligger det i /home/[user]/BigData/hadoop-x.x.x/sbin/start-all.sh, men så er der enten noget galt med .bashrc eller du har glemt at genindlæse den.\nHusk: [user] og x.x.xskal ændres\n\n\n2.8 Check hvilke Hadoop daemons som startede\njps\n$ jps\n40594 NodeManager\n40162 SecondaryNameNode\n39906 DataNode\n40436 ResourceManager\n39736 NameNode\n41038 Jps\nAlle 5 (fem) daemons (+Jps) skal køre, hvis ikke er der en fejl et sted i konfigurationerne ovenfor.\n\n\n2.9 Afprøv HFS funtioner\nMan skal kunne se indhold i mapper på HDFS (men der er ikke noget endnu, så mere neden for)\nhdfs dfs -ls /\nLav nogen mapper.\nMan skal af en eller anden grund oprette /user, og derunder en til brugeren, for at det virker “godt”.\n       hdfs dfs -mkdir /user\n       hdfs dfs -mkdir /user/[user] #([user] DIT brugernavn)\n\n       hdfs dfs -ls /user/ \n$ hdfs dfs -ls /user/ \nFound 1 items\ndrwxr-xr-x   - smag supergroup          0 2026-08-31 16:54 /user/smag\nPut en fil op i HDFS:\nhdfs dfs -put BigData/hadoop-x.x.x/README.txt /user/[user]    \n$ hdfs dfs -ls /user/smag\nFound 1 items\n-rw-r--r--   1 smag supergroup        175 2026-04-19 21:11 /user/smag/README.txt\nList hele filen med -cat\n$ hdfs dfs -cat /user/smag/README.txt\nFor the latest information about Hadoop, please visit our website at:\n\n   http://hadoop.apache.org/\n\nand our wiki, at:\n\n   https://cwiki.apache.org/confluence/display/HADOOP/\nHvis du kan se indholdet filen, så virker det! Prøv også lige at genstarte wsl og genstarte hadoop\nsudo reboot now\nog lidt senere …\nstart-all.sh\nhdfs dfs -cat /user/[user]/README.txt",
     "crumbs": [
       "Home",
       "Playbooks",
@@ -215,11 +279,30 @@
     ]
   },
   {
+    "objectID": "playbooks/linux_prep.playbook.slide.html#linux-distroen-skal-alid-klargøres",
+    "href": "playbooks/linux_prep.playbook.slide.html#linux-distroen-skal-alid-klargøres",
+    "title": "Linux prep",
+    "section": "1 Linux distroen skal alid klargøres",
+    "text": "1 Linux distroen skal alid klargøres"
+  },
+  {
     "objectID": "playbooks/linux_prep.playbook.html",
     "href": "playbooks/linux_prep.playbook.html",
     "title": "Linux prep",
     "section": "",
-    "text": "0.1 Start Distro’en\nPS C:\\Users\\smag&gt; wsl -d BigData_u36\nSå skulle jeg gerne se noget som:\nsmag@TEC-8230-LA0037:/mnt/c/Users/smag$\nSe også [[wsl_playbook.qmd]]\nNår WSL er startet med Ubuntu distroen, vil jeg gerne have sat de nødvendige ting op.\nSkift til den lokale wsl-brugers lokale hjemme mappe.\ncd ~\n\n\n0.2 Opdater distroens pakker:\nsudo apt update\nsudo apt upgrade -y\n\n\n0.3 Installer java\nsudo apt install openjdk-21-jdk\nHvis du vil bekræfte at den er installeret korrekt\njava --version\nopenjdk 21.0.12 2026-07-21\nOpenJDK Runtime Environment (build 21.0.12+8-1-26.04-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.12+8-1-26.04-Ubuntu, mixed mode, sharing)\nDer skal lige være sikres at java kan findes i systemts environment Rediger ~/.bashrc (hust at ~/ bare betyder i home dir) Rul ned til bunden, og tilføj dette:\n## [dit-bruger-navn]\n## Java\nexport JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64\nexport PATH=$JAVA_HOME/bin:$PATH\nHver gan du endrer i ~/.bashrc, skal den genindlæset med\nsource ~/.bashrc\n\n\n0.4 Installer ssh\nsudo apt install openssh-server openssh-client -y\nsudo systemctl enable ssh\nsudo systemctl start ssh\nGenerer certifikat (tryk enter på spøgsmålene for at godkende defaults)\nssh-keygen -t rsa\nKopier offentlige nøgle til authorized keys:\ncat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys\nTest Man skal kunne åbne en forbindelse med ssh til localhost uden password\nssh localhost\nFørste gang skal man muligvis bekræfte men ellers…\nog (hvis der konforbindelse, luk ssh forbindelsen med\nexit\nen gang!",
+    "text": "PS C:\\Users\\smag&gt; wsl -d BigData_u36\nSå skulle jeg gerne se noget som:\nsmag@TEC-8230-LA0037:/mnt/c/Users/smag$\nSe også [[wsl_playbook.qmd]]\nNår WSL er startet med Ubuntu distroen, vil jeg gerne have sat de nødvendige ting op.\nSkift til den lokale wsl-brugers lokale hjemme mappe.\ncd ~\n\n\n\nsudo apt update\nsudo apt upgrade -y\n\n\n\nsudo apt install openjdk-21-jdk\nHvis du vil bekræfte at den er installeret korrekt\njava --version\nopenjdk 21.0.12 2026-07-21\nOpenJDK Runtime Environment (build 21.0.12+8-1-26.04-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.12+8-1-26.04-Ubuntu, mixed mode, sharing)\nDer skal lige være sikres at java kan findes i systemts environment Rediger ~/.bashrc (hust at ~/ bare betyder i home dir) Rul ned til bunden, og tilføj dette:\n## [dit-bruger-navn]\n## Java\nexport JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64\nexport PATH=$JAVA_HOME/bin:$PATH\nHver gan du endrer i ~/.bashrc, skal den genindlæset med\nsource ~/.bashrc\n\n\n\nsudo apt install openssh-server openssh-client -y\nsudo systemctl enable ssh\nsudo systemctl start ssh\nGenerer certifikat (tryk enter på spøgsmålene for at godkende defaults)\nssh-keygen -t rsa\nKopier offentlige nøgle til authorized keys:\ncat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys\nTest Man skal kunne åbne en forbindelse med ssh til localhost uden password\nssh localhost\nFørste gang skal man muligvis bekræfte men ellers…\nog (hvis der konforbindelse, luk ssh forbindelsen med\nexit\nUd før kun exit én gang, for hver ssh-forbindelse!",
+    "crumbs": [
+      "Home",
+      "Playbooks",
+      "Linux prep"
+    ]
+  },
+  {
+    "objectID": "playbooks/linux_prep.playbook.html#linux-distroen-skal-alid-klargøres",
+    "href": "playbooks/linux_prep.playbook.html#linux-distroen-skal-alid-klargøres",
+    "title": "Linux prep",
+    "section": "",
+    "text": "PS C:\\Users\\smag&gt; wsl -d BigData_u36\nSå skulle jeg gerne se noget som:\nsmag@TEC-8230-LA0037:/mnt/c/Users/smag$\nSe også [[wsl_playbook.qmd]]\nNår WSL er startet med Ubuntu distroen, vil jeg gerne have sat de nødvendige ting op.\nSkift til den lokale wsl-brugers lokale hjemme mappe.\ncd ~\n\n\n\nsudo apt update\nsudo apt upgrade -y\n\n\n\nsudo apt install openjdk-21-jdk\nHvis du vil bekræfte at den er installeret korrekt\njava --version\nopenjdk 21.0.12 2026-07-21\nOpenJDK Runtime Environment (build 21.0.12+8-1-26.04-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.12+8-1-26.04-Ubuntu, mixed mode, sharing)\nDer skal lige være sikres at java kan findes i systemts environment Rediger ~/.bashrc (hust at ~/ bare betyder i home dir) Rul ned til bunden, og tilføj dette:\n## [dit-bruger-navn]\n## Java\nexport JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64\nexport PATH=$JAVA_HOME/bin:$PATH\nHver gan du endrer i ~/.bashrc, skal den genindlæset med\nsource ~/.bashrc\n\n\n\nsudo apt install openssh-server openssh-client -y\nsudo systemctl enable ssh\nsudo systemctl start ssh\nGenerer certifikat (tryk enter på spøgsmålene for at godkende defaults)\nssh-keygen -t rsa\nKopier offentlige nøgle til authorized keys:\ncat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys\nTest Man skal kunne åbne en forbindelse med ssh til localhost uden password\nssh localhost\nFørste gang skal man muligvis bekræfte men ellers…\nog (hvis der konforbindelse, luk ssh forbindelsen med\nexit\nUd før kun exit én gang, for hver ssh-forbindelse!",
     "crumbs": [
       "Home",
       "Playbooks",
