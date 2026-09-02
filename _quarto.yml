@@ -1,9 +1,8 @@
 project:
   title: "20556 Big Data modeller og datamodellering"
-  # subtitle: "Andet fag af to"
+  # subtitle: "Andet fag-modul af to"
   output-dir: output
   type: website
-  
   
 
 website:

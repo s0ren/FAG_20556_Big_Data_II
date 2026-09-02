@@ -1,13 +1,41 @@
 ---
 title: "Spark setup"
-subtitle: "Opsætning af hadoop til brug i BagData 2, under wsl"
-Institute: TEC
-lang: da-DK
+subtitle: "Opsætning af Spark til brug i BagData 2, under wsl"
 
 order: 3
 
+format: 
+    html:
+        default
+        # title: Hest
+    typst:
+        # title: Spark setup 
+        toc: true
+        output-file: Spark_setup.pdf
+    revealjs: 
+        toc: true
+        output-file: Spark_setup_slide.html
+        slide-level: 3
+        smaller: true
+        scrollable: true
+
+# bibliography: ../bib/IoT 1 nov 25/IoT 1 nov 25.bib
+number-sections: true
+
+date: 2026-09-1
+date-modified: 2026-09-1
+
+author: Søren Magnusson
+author-meta: smag@tec.dk
+
+institute: programmeringsspecialet, datateknikker
+affiliation: TEC
+
+lang: da-DK
 # draft: true
 ---
+
+## Playbook
 
 ### Start med at skifte til \~
 
@@ -118,7 +146,10 @@ I mappen `spark-z.z.z-bin-without-hadoop/examples/src/main/python` kan man finde
 
 ## Start og stop all
 
-Hvis man vil starte og stoppe spark med de medfølgende `start-all.sh`og `stop-all.sh` skal man duplikere følgende (bare uden `export`) fra `.bashrc` over i bunden af `~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh`:
+Spark har to medfølgende scripts, der starter og stopper spark master og worker mv; , `start-all.sh` og `stop-all.sh`.
+De kører udenfor brugerens miljø, som vi har opsat i `.bashrc`. 
+
+Derfor skal man duplikere de relevante linjer fra `.bashrc` over i bunden af `~/BigData/spark-z.z.z-bin-without-hadoop/conf/spark-env.sh`:
 
 ```bash
 HADOOP_HOME=/home/[user]]/BigData/hadoop-x.x.x
@@ -129,8 +160,11 @@ HADOOP_OPTS="-Djava.library.path=$HADOOP_COMMON_LIB_NATIVE_DIR"
 SPARK_DIST_CLASSPATH=$(hadoop classpath)
 SPARK_HOME=/home/smag/BigData/spark-z.z.z-bin-without-hadoop
 ```
+__Bemærk__: `[user]` og `x.x.x` skal erstattes med din bruger og hadoop-versionen, du har downloaded.  \
+Desuden behøver der ikke stå `export` foran variablerne, da de _kun_ skal bruges i det script, der starter og stopper spark.
 
-Desværre er der navnesammenfald mellem *hadoops* og *sparks* udgaver af `start-all.sh`og `stop-all.sh`. Så de skal kaldes med 3fuld sti, hvis man vil være sikker.
+Desværre er der navnesammenfald mellem *hadoops* og *sparks* udgaver af `start-all.sh`og `stop-all.sh`. Så de skal kaldes med fuld sti, hvis man vil være sikker. \
+Man sikkert lave et nyt script der starter og stopper både hadoop og spark...
 
 Start og stop hadoop
 

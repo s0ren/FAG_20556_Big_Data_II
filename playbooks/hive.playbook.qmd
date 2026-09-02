@@ -1,7 +1,34 @@
 ---
 title: "Hive setup"
 subtitle: "Opsætning af hive til brug i BagData 2, under wsl"
-Institute: TEC
+
+format: 
+    html:
+        default
+        # title: Hest
+    typst:
+        # title: Hive setup 
+        toc: true
+        output-file: Hive_setup.pdf
+    revealjs: 
+        toc: true
+        output-file: Hive_setup_slide.html
+        slide-level: 3
+        smaller: true
+        scrollable: true
+
+# bibliography: ../bib/IoT 1 nov 25/IoT 1 nov 25.bib
+number-sections: true
+
+date: 2026-09-1
+date-modified: 2026-09-1
+
+author: Søren Magnusson
+author-meta: smag@tec.dk
+
+institute: programmeringsspecialet, datateknikker
+affiliation: TEC
+
 lang: da-DK
 
 order: 4

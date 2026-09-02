@@ -1,0 +1,33 @@
+---
+title: "Programmering med PySpark"
+format: 
+    html:
+        default
+        # title: Hest
+    typst:
+        # title: Programmering med PySpark 
+        toc: true
+        output-file: Programmering med PySpark.pdf
+  
+order: 500
+# bibliography: ../bib/IoT 1 nov 25/IoT 1 nov 25.bib
+number-sections: true
+
+date: 2026-09-1
+date-modified: 2026-09-1
+
+author: Søren Magnusson
+author-meta: smag@tec.dk
+
+institute: programmeringsspecialet, datateknikker
+affiliation: TEC
+
+lang: da-DK
+---
+
+## Kør på spark serveren med `spark-submit`
+### Brug SparkSession
+### Skriv og læs filer på HDFS
+## Spark DataFrames
+## Indlæsning af datafiler
+## Udlæsning af datafiler
