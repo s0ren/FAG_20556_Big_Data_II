@@ -372,11 +372,6 @@ Bemærk der hvor linierne som ligesom knækker. Det er der hvor chunksne skifter
 </section>
 <section id="eksempel-med-urllib" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="eksempel-med-urllib"><span class="header-section-number">2.2</span> Eksempel med urllib</h3>
-<p>[kladde]</p>
-<ul>
-<li><a href="https://webscraping.ai/blog/python-requests-guide" class="uri">https://webscraping.ai/blog/python-requests-guide</a></li>
-<li><a href="https://medium.com/@harshgolu82/streamline-big-data-requesting-data-in-chunks-with-pythons-requests-library-ddc0796b24ff" class="uri">https://medium.com/@harshgolu82/streamline-big-data-requesting-data-in-chunks-with-pythons-requests-library-ddc0796b24ff</a></li>
-</ul>
 <p>Vi har lagt op til en diskussion om hvilket library og metode der er bedst til at hente og flytte store datafiler, fra en net kilde til HDFS.<br>
 Det er oplagt at bruge requests, som en del af løsningen, men det skulle være eleverne konklusion.</p>
 <p>Her er et eksempel på en simpel løsning med et andet library, nemlig urllib.<br>
@@ -399,6 +394,11 @@ Det er oplagt at bruge requests, som en del af løsningen, men det skulle være 
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                hdfs_file.write(chunk)        </span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hdfs_path</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Et par links til hvordan man “chunker” med requests:</p>
+<ul>
+<li><a href="https://webscraping.ai/blog/python-requests-guide" class="uri">https://webscraping.ai/blog/python-requests-guide</a></li>
+<li><a href="https://medium.com/@harshgolu82/streamline-big-data-requesting-data-in-chunks-with-pythons-requests-library-ddc0796b24ff" class="uri">https://medium.com/@harshgolu82/streamline-big-data-requesting-data-in-chunks-with-pythons-requests-library-ddc0796b24ff</a></li>
+</ul>
 </section>
 <section id="skriv-og-læs-filer-på-hdfs" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="skriv-og-læs-filer-på-hdfs"><span class="header-section-number">2.3</span> Skriv og læs filer på HDFS</h3>
