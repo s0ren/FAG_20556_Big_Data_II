@@ -2,31 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/Vejledninger/Programmering med pyspark.html</loc>
-    <lastmod>2026-09-02T07:10:36.880Z</lastmod>
+    <lastmod>2026-09-03T06:37:14.379Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/Vejledninger/Programmering med pyspark.slide.html</loc>
+    <lastmod>2026-09-03T06:37:41.333Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/spark.playbook.html</loc>
-    <lastmod>2026-09-02T11:39:36.450Z</lastmod>
+    <lastmod>2026-09-02T11:46:38.055Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/spark.playbook.slide.html</loc>
-    <lastmod>2026-09-02T11:43:45.047Z</lastmod>
+    <lastmod>2026-09-03T06:37:38.655Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hive.playbook.html</loc>
-    <lastmod>2026-09-02T11:33:03.970Z</lastmod>
+    <lastmod>2026-09-02T11:46:38.054Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hive.playbook.slide.html</loc>
-    <lastmod>2026-09-02T11:43:40.334Z</lastmod>
+    <lastmod>2026-09-03T06:37:33.917Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/git.playbook.html</loc>
-    <lastmod>2026-09-02T11:30:15.861Z</lastmod>
+    <lastmod>2026-09-02T11:46:38.052Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/git.playbook.slide.html</loc>
-    <lastmod>2026-09-02T11:43:36.169Z</lastmod>
+    <lastmod>2026-09-03T06:37:29.834Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/index.html</loc>
@@ -42,19 +46,19 @@
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hadoop.playbook.slide.html</loc>
-    <lastmod>2026-09-02T11:43:38.312Z</lastmod>
+    <lastmod>2026-09-03T06:37:31.942Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/hadoop.playbook.html</loc>
-    <lastmod>2026-09-02T11:31:41.624Z</lastmod>
+    <lastmod>2026-09-02T11:46:38.053Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/linux_prep.playbook.slide.html</loc>
-    <lastmod>2026-09-02T11:43:43.029Z</lastmod>
+    <lastmod>2026-09-03T06:37:36.600Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/playbooks/linux_prep.playbook.html</loc>
-    <lastmod>2026-09-02T11:35:42.619Z</lastmod>
+    <lastmod>2026-09-02T11:46:38.054Z</lastmod>
   </url>
   <url>
     <loc>https://s0ren.github.io/FAG_20556_Big_Data_II/readme.html</loc>

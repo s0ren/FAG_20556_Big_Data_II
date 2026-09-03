@@ -1,10 +1,22 @@
 [
   {
+    "objectID": "Vejledninger/Programmering med pyspark.html#hentning-af-datafiler",
+    "href": "Vejledninger/Programmering med pyspark.html#hentning-af-datafiler",
+    "title": "Programmering med PySpark",
+    "section": "2 Hentning af datafiler",
+    "text": "2 Hentning af datafiler\nDatafiler kan hentes fra internettet med flere biblioteker. F.eks. urllib.request, requests eller wget.\nUanset hvilket library du bruger, er det en udfordring hvis data filerne er store. Man kan ikke bare hente det hele ind ram. Datafilerne kan måske ikke få plads på den lokale disk. Derfor er det nødvendigt at hente datafilerne direkte ind i HDFS.\n\n2.1 Chunkning på lokal disk\nEt af midlerne til at håndtere store data-filer er at dele problemet op i mindre dele. Altså at læse filen(e) en mindre del ad gangen, og skrive den lille del, og næste. Osv.\nDet er klart langsommere på den måde, men når filerne er større end RAM, så er det nødvedigt.\nMan kan vælge en større eller minde størrelse af den bid, som man læser og skriver ad gangen. Det er nok realistisk at bruge 1 Megabyte eller mere. Måske 10 MB, eller måske endda mere. Hvis det så er filer som er mindre end det, bliver de snuppet i en bid!\nI eksemplet herunder har jeg chunk_sizetil 1 kb, for at man kan se at selv en mindre fil bliver det i chunks. Men 1 kb er altså en meget lille (nok for lille) størrelse.\n[https://bluebirz.net/posts/make-it-chunks/] viser hvordan man kan hente store datafiler, der er for store til RAM, i chunks og skrive dem til disk:\nwith open(\"BigData/src/demo/input_data/iris.csv\", 'r') as src:\n  with open(\"BigData/src/demo/input_data/iris_extracted.csv\", 'w') as sink:\n    chunk_size = 1024 # 1 kb\n    while True:\n        chunk = src.read(chunk_size)\n        if not chunk:\n          break\n        sink.write(chunk)  \n        print(chunk)\n$ /home/smag/BigData/src/demo/.venv/bin/python /home/smag/BigData/src/demo/chunks1.py\n5.1,3.5,1.4,0.2,Iris-setosa\n4.9,3.0,1.4,0.2,Iris-setosa\n...\n4.9,3.1,1.5,0.1,Iris-setosa\n5.0,3.2,1.2,0.2,Iris-setosa\n5.5,3.5,1.3,0.2,\nIris-setosa\n4.9,3.1,1.5,0.1,Iris-setosa\n4.4,3.0,1.3,0.2,Iris-setosa\n...\n5.6,2.5,3.9,1.1,Iris-versicolor\n5.9,3.2,\n4.8,1.8,Iris-versicolor\n6.1,2.8,4.0,1.3,Iris-versicolor\n6.3,2.5,4.9,1.5,Iris-versicolor\n...\n5.7,2.8,4.1,1.3,Iris-versicolor\n6.3,3.3,6.0,2.5,Iris-virginica\n5.8,2.7,5.1,1.9,Iris-virginica\n7.1,3.0,5.\n9,2.1,Iris-virginica\n6.3,2.9,5.6,1.8,Iris-virginica\n6.5,3.0,5.8,2.2,Iris-virginica\n...\n6.3,2.8,5.1,1.5,Iris-virginica\n6.1,2.6,5.6,1.4,Iris-virginica\n7.7,3.0,6.1\n,2.3,Iris-virginica\n6.3,3.4,5.6,2.4,Iris-virginica\n6.4,3.1,5.5,1.8,Iris-virginica\n...\n6.2,3.4,5.4,2.3,Iris-virginica\n5.9,3.0,5.1,1.8,Iris-virginica\nHer har jeg forkortet outputet med ... for det ikke skal fylde alt for meget.\nBemærk der hvor linierne som ligesom knækker. Det er der hvor chunksne skifter.\n\n\n2.2 Eksempel med requsts\n[kladde]\n\nhttps://webscraping.ai/blog/python-requests-guide\nhttps://medium.com/@harshgolu82/streamline-big-data-requesting-data-in-chunks-with-pythons-requests-library-ddc0796b24ff\n\n\n\n2.3 Skriv og læs filer på HDFS\nDer flere metoder til at skrive fra python til hdfs.\n\nfra python kan man udføre hdfs dfs -put ... ved at udføre dette som shell kommando.\nman kan bruge et af flere libraries\n\nhttps://hdfscli.readthedocs.io/en/latest/quickstart.html",
+    "crumbs": [
+      "Home",
+      "Vejledninger",
+      "Programmering med PySpark"
+    ]
+  },
+  {
     "objectID": "Vejledninger/Programmering med pyspark.html#spark-dataframes",
     "href": "Vejledninger/Programmering med pyspark.html#spark-dataframes",
     "title": "Programmering med PySpark",
-    "section": "2 Spark DataFrames",
-    "text": "2 Spark DataFrames",
+    "section": "3 Spark DataFrames",
+    "text": "3 Spark DataFrames\n\n3.1 Brug SparkSession\n\n\n3.2 Indlæsning af datafiler\n\n\n3.3 Udlæsning af datafiler",
     "crumbs": [
       "Home",
       "Vejledninger",
@@ -12,11 +24,11 @@
     ]
   },
   {
-    "objectID": "Vejledninger/Programmering med pyspark.html#indlæsning-af-datafiler",
-    "href": "Vejledninger/Programmering med pyspark.html#indlæsning-af-datafiler",
+    "objectID": "Vejledninger/Programmering med pyspark.html#kør-på-spark-serveren-med-spark-submit",
+    "href": "Vejledninger/Programmering med pyspark.html#kør-på-spark-serveren-med-spark-submit",
     "title": "Programmering med PySpark",
-    "section": "3 Indlæsning af datafiler",
-    "text": "3 Indlæsning af datafiler",
+    "section": "4 Kør på spark serveren med spark-submit",
+    "text": "4 Kør på spark serveren med spark-submit",
     "crumbs": [
       "Home",
       "Vejledninger",
@@ -24,16 +36,32 @@
     ]
   },
   {
-    "objectID": "Vejledninger/Programmering med pyspark.html#udlæsning-af-datafiler",
-    "href": "Vejledninger/Programmering med pyspark.html#udlæsning-af-datafiler",
+    "objectID": "Vejledninger/Programmering med pyspark.slide.html#indledning",
+    "href": "Vejledninger/Programmering med pyspark.slide.html#indledning",
     "title": "Programmering med PySpark",
-    "section": "4 Udlæsning af datafiler",
-    "text": "4 Udlæsning af datafiler",
-    "crumbs": [
-      "Home",
-      "Vejledninger",
-      "Programmering med PySpark"
-    ]
+    "section": "1 Indledning",
+    "text": "1 Indledning"
+  },
+  {
+    "objectID": "Vejledninger/Programmering med pyspark.slide.html#hentning-af-datafiler",
+    "href": "Vejledninger/Programmering med pyspark.slide.html#hentning-af-datafiler",
+    "title": "Programmering med PySpark",
+    "section": "2 Hentning af datafiler",
+    "text": "2 Hentning af datafiler\nDatafiler kan hentes fra internettet med flere biblioteker. F.eks. urllib.request, requests eller wget.\nUanset hvilket library du bruger, er det en udfordring hvis data filerne er store. Man kan ikke bare hente det hele ind ram. Datafilerne kan måske ikke få plads på den lokale disk. Derfor er det nødvendigt at hente datafilerne direkte ind i HDFS."
+  },
+  {
+    "objectID": "Vejledninger/Programmering med pyspark.slide.html#spark-dataframes",
+    "href": "Vejledninger/Programmering med pyspark.slide.html#spark-dataframes",
+    "title": "Programmering med PySpark",
+    "section": "3 Spark DataFrames",
+    "text": "3 Spark DataFrames"
+  },
+  {
+    "objectID": "Vejledninger/Programmering med pyspark.slide.html#kør-på-spark-serveren-med-spark-submit",
+    "href": "Vejledninger/Programmering med pyspark.slide.html#kør-på-spark-serveren-med-spark-submit",
+    "title": "Programmering med PySpark",
+    "section": "4 Kør på spark serveren med spark-submit",
+    "text": "4 Kør på spark serveren med spark-submit"
   },
   {
     "objectID": "playbooks/spark.playbook.html",
