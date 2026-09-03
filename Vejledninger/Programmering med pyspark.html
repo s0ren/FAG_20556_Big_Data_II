@@ -250,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#hentning-af-datafiler" id="toc-hentning-af-datafiler" class="nav-link" data-scroll-target="#hentning-af-datafiler"><span class="header-section-number">2</span> Hentning af datafiler</a>
   <ul class="collapse">
   <li><a href="#chunkning-på-lokal-disk" id="toc-chunkning-på-lokal-disk" class="nav-link" data-scroll-target="#chunkning-på-lokal-disk"><span class="header-section-number">2.1</span> Chunkning på lokal disk</a></li>
-  <li><a href="#eksempel-med-requsts" id="toc-eksempel-med-requsts" class="nav-link" data-scroll-target="#eksempel-med-requsts"><span class="header-section-number">2.2</span> Eksempel med requsts</a></li>
+  <li><a href="#eksempel-med-urllib" id="toc-eksempel-med-urllib" class="nav-link" data-scroll-target="#eksempel-med-urllib"><span class="header-section-number">2.2</span> Eksempel med urllib</a></li>
   <li><a href="#skriv-og-læs-filer-på-hdfs" id="toc-skriv-og-læs-filer-på-hdfs" class="nav-link" data-scroll-target="#skriv-og-læs-filer-på-hdfs"><span class="header-section-number">2.3</span> Skriv og læs filer på HDFS</a></li>
   </ul></li>
   <li><a href="#spark-dataframes" id="toc-spark-dataframes" class="nav-link" data-scroll-target="#spark-dataframes"><span class="header-section-number">3</span> Spark DataFrames</a>
@@ -370,13 +370,35 @@ Man kan vælge en større eller minde størrelse af den bid, som man læser og s
 <p>Her har jeg forkortet outputet med <code>...</code> for det ikke skal fylde alt for meget.<br>
 Bemærk der hvor linierne som ligesom knækker. Det er der hvor chunksne skifter.</p>
 </section>
-<section id="eksempel-med-requsts" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="eksempel-med-requsts"><span class="header-section-number">2.2</span> Eksempel med requsts</h3>
+<section id="eksempel-med-urllib" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="eksempel-med-urllib"><span class="header-section-number">2.2</span> Eksempel med urllib</h3>
 <p>[kladde]</p>
 <ul>
 <li><a href="https://webscraping.ai/blog/python-requests-guide" class="uri">https://webscraping.ai/blog/python-requests-guide</a></li>
 <li><a href="https://medium.com/@harshgolu82/streamline-big-data-requesting-data-in-chunks-with-pythons-requests-library-ddc0796b24ff" class="uri">https://medium.com/@harshgolu82/streamline-big-data-requesting-data-in-chunks-with-pythons-requests-library-ddc0796b24ff</a></li>
 </ul>
+<p>Vi har lagt op til en diskussion om hvilket library og metode der er bedst til at hente og flytte store datafiler, fra en net kilde til HDFS.<br>
+Det er oplagt at bruge requests, som en del af løsningen, men det skulle være eleverne konklusion.</p>
+<p>Her er et eksempel på en simpel løsning med et andet library, nemlig urllib.<br>
+</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hdfs <span class="im">import</span> InsecureClient </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> urllib.request <span class="im">import</span> urlopen</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
+<p>…</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_and_upload_hdfs(download_url, hdfs_path, hdfs_namenode<span class="op">=</span><span class="st">'http://localhost:9870'</span>, chunk_size<span class="op">=</span><span class="dv">1024</span><span class="op">*</span><span class="dv">1024</span>):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    filename <span class="op">=</span> os.path.basename(download_url)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    hdfs_client <span class="op">=</span> InsecureClient(hdfs_namenode)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> urlopen(download_url) <span class="im">as</span> response:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> hdfs_client.write(<span class="ss">f"</span><span class="sc">{</span>hdfs_path<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">"</span>, overwrite<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> hdfs_file:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                chunk <span class="op">=</span> response.read(chunk_size)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> chunk:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                hdfs_file.write(chunk)        </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hdfs_path</span></code></pre></div><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="skriv-og-læs-filer-på-hdfs" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="skriv-og-læs-filer-på-hdfs"><span class="header-section-number">2.3</span> Skriv og læs filer på HDFS</h3>
